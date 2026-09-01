@@ -24,6 +24,46 @@ Benjamin does **not** own market intelligence, execution, stewardship truth, or 
 
 For the concrete operating questions, example inputs/outputs, prohibitions, and the complete morning-to-evening lifecycle for each role, see **[`docs/OPERATING_ROLES.md`](docs/OPERATING_ROLES.md)**. That document is the canonical human-readable role guide.
 
+## ACM-07 consoles
+
+Benjamin now has two deliberately separate frontend applications:
+
+```text
+apps/manager-console
+apps/client-console
+```
+
+The **Manager Console** is the internal operating surface for research, portfolio state, Steward decisions, Watchman results, authorization/execution status, evidence health, reporting, and Covenant health.
+
+The **Client Console** is a participant-scoped surface for that participant's own capital account, authorized performance view, activity, documents, notices, and proofs.
+
+The Client Console is **not** a filtered Manager Console. It has a separate build and must eventually receive a separate server-side participant read model so manager-only information never enters the client payload merely to be hidden in the browser.
+
+The current ACM-07.0 implementation uses synthetic shadow fixtures only and displays that status prominently. It does not represent accepted subscriptions, live client assets, live performance, or production investor records.
+
+See **[`docs/ACM-07_CONSOLES.md`](docs/ACM-07_CONSOLES.md)** and **[`contracts/console-view-policy.json`](contracts/console-view-policy.json)** for the information architecture and privacy invariants.
+
+Run locally after installing Node dependencies:
+
+```bash
+npm install
+npm run dev:manager
+```
+
+or in a second terminal:
+
+```bash
+npm run dev:client
+```
+
+Build both independently with:
+
+```bash
+npm run build:consoles
+```
+
+Console builds are part of Constitutional CI alongside the Python kernel tests.
+
 ## Privacy principle
 
 > **Everything material must be provable. Benjamin does not publish everything it knows.**
@@ -75,14 +115,14 @@ The Little Book must never become sufficient to reconstruct Benjamin's private p
 
 `src/benjamin/evidence.py` defines the producer-side **Big Book** gateway contract. It classifies proof drafts and visibility before publication. The Book owns proof verification, private append-only history, least-privilege reads, Merkle/state commitments, and the public Little Book disclosure surface.
 
-See `PRIVACY.md`, `docs/EVIDENCE_BOUNDARY.md`, `docs/OPERATING_ROLES.md`, and `contracts/privacy-defaults.json`.
+See `PRIVACY.md`, `docs/EVIDENCE_BOUNDARY.md`, `docs/OPERATING_ROLES.md`, `docs/ACM-07_CONSOLES.md`, `contracts/privacy-defaults.json`, and `contracts/console-view-policy.json`.
 
 ## Current milestone
 
-**B1.1 — Privacy-scoped evidence-aware control plane.**
+**B1.1 + ACM-07.0 — Privacy-scoped evidence-aware control plane with separately built Manager and Client console shells.**
 
-No live broker, investor onboarding, tokenized fund ownership, production private chain, or public-chain writer exists here yet.
+No live broker, investor onboarding, tokenized fund ownership, production private chain, public-chain writer, or live client capital exists here yet.
 
 ## Status
 
-**FOUNDATION — NO LIVE MONEY OR EXECUTION.**
+**FOUNDATION / SHADOW UI — NO LIVE MONEY OR EXECUTION.**

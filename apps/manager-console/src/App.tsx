@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react';
 
-type Health = 'VALID' | 'DEGRADED' | 'BLOCKED' | 'PENDING';
-
 type NavItem = {
   key: string;
   label: string;
   eyebrow: string;
 };
+
+type MetricRows = Array<[string, string]>;
 
 const navItems: NavItem[] = [
   { key: 'overview', label: 'Overview', eyebrow: 'NOW' },
@@ -28,25 +28,25 @@ const snapshot = {
     ['Cash', '$31,492'],
     ['Deployable', '$21,492'],
     ['Required reserves', '$10,000'],
-  ],
+  ] as MetricRows,
   risk: [
     ['Current drawdown', '-1.8%'],
     ['Max shadow drawdown', '-4.3%'],
     ['Largest position', '4.1%'],
     ['Watchman blocks', '1'],
-  ],
+  ] as MetricRows,
   research: [
     ['Observed assets', '42'],
     ['Active cases', '8'],
     ['Recommendations', '3'],
     ['Awaiting decision', '1'],
-  ],
+  ] as MetricRows,
   evidence: [
-    ['Market data', 'VALID' as Health],
-    ['Big Book integrity', 'VALID' as Health],
+    ['Market data', 'VALID'],
+    ['Big Book integrity', 'VALID'],
     ['Missing lineage', '0'],
     ['Unreviewed decisions', '2'],
-  ],
+  ] as MetricRows,
   cases: [
     { asset: 'XYZ', thesis: 'Normalized earnings mispricing', confidence: '0.71', action: 'ACCUMULATE', state: 'Awaiting Steward' },
     { asset: 'ABC', thesis: 'Balance-sheet recovery', confidence: '0.63', action: 'WATCH', state: 'Research active' },
@@ -64,7 +64,7 @@ function StatusPill({ value }: { value: string }) {
   return <span className={`pill pill-${normalized}`}>{value}</span>;
 }
 
-function MetricGroup({ title, subtitle, values }: { title: string; subtitle: string; values: Array<[string, string]> }) {
+function MetricGroup({ title, subtitle, values }: { title: string; subtitle: string; values: MetricRows }) {
   return (
     <section className="metric-card">
       <div className="section-heading">
@@ -107,7 +107,7 @@ function Overview() {
         <MetricGroup title="Capital" subtitle="TREASURY" values={snapshot.capital} />
         <MetricGroup title="Risk" subtitle="WATCHMAN" values={snapshot.risk} />
         <MetricGroup title="Research" subtitle="EPINNOX" values={snapshot.research} />
-        <MetricGroup title="Evidence" subtitle="THE BIG BOOK" values={snapshot.evidence.map(([a, b]) => [a, String(b)])} />
+        <MetricGroup title="Evidence" subtitle="THE BIG BOOK" values={snapshot.evidence} />
       </div>
 
       <div className="content-grid">

@@ -10,14 +10,26 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  kernel:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install
+      - name: Install kernel
         run: python -m pip install -e '.[dev]'
       - name: Test covenant invariants
         run: python -m pytest -q
+
+  consoles:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install console dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build manager and client consoles
+        run: npm run build:consoles

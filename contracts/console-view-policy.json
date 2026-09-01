@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "status": "ACM-07.0_DEMO_SHADOW_ONLY",
+  "surfaces": {
+    "manager_console": {
+      "build_boundary": "SEPARATE_APPLICATION",
+      "may_render": [
+        "shadow_capital_summary",
+        "treasury_state",
+        "portfolio_state",
+        "epinnox_case_summary",
+        "steward_decisions",
+        "watchman_results",
+        "authorization_status",
+        "hand_execution_status",
+        "big_book_proof_health",
+        "internal_attribution",
+        "participant_administration_when_authorized",
+        "covenant_and_mandate_health"
+      ],
+      "must_not_render": [
+        "secret_regulated_source_payloads",
+        "private_keys",
+        "raw_identity_documents",
+        "bank_credentials"
+      ]
+    },
+    "client_console": {
+      "build_boundary": "SEPARATE_APPLICATION",
+      "scope": "ONE_AUTHORIZED_PARTICIPANT",
+      "may_render": [
+        "participant_account_summary",
+        "participant_contributions",
+        "participant_entitlements",
+        "participant_distributions",
+        "participant_authorized_performance",
+        "participant_documents",
+        "participant_notices",
+        "participant_proofs",
+        "approved_public_attestations"
+      ],
+      "must_not_render": [
+        "other_participant_data",
+        "epinnox_private_theses",
+        "epinnox_recommendation_queue",
+        "unreleased_opportunities",
+        "private_portfolio_holdings_without_explicit_reporting_policy",
+        "watchman_private_thresholds",
+        "internal_decision_rationale",
+        "hand_authorization_payloads",
+        "unrestricted_big_book_history",
+        "secret_regulated_source_payloads",
+        "private_keys",
+        "raw_identity_documents",
+        "bank_credentials"
+      ]
+    }
+  },
+  "invariants": [
+    "CLIENT_DTO_IS_NOT_MANAGER_DTO_MINUS_FIELDS",
+    "CLIENT_SCOPE_ENFORCED_BEFORE_SERIALIZATION",
+    "DEMO_SHADOW_AUTHORITATIVE_STATUS_ALWAYS_VISIBLE",
+    "NO_BROWSER_ONLY_AUTHORIZATION",
+    "NO_SECRET_REGULATED_DATA_IN_FRONTEND_PAYLOAD",
+    "NO_LITTLE_BOOK_AUTO_PROJECTION"
+  ]
+}

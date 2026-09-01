@@ -1,41 +1,53 @@
 # Benjamin
 
-> **Epinnox sees. Benjamin decides. The Watchman guards. The Hand executes. The Book remembers. The spoil is accounted for before it is divided.**
+> **Epinnox sees. Benjamin decides. The Watchman guards. The Hand executes. The Big Book proves. The Little Book testifies. The spoil is accounted for before it is divided.**
 
-Benjamin is the capital-management control plane. It owns investment authority, portfolio intent, deterministic risk gates, Treasury policy, and future fund operations. It does **not** own market intelligence, execution, or the sovereign evidence ledger.
+Benjamin is the capital-management control plane. It owns capital truth: investment authority, portfolio intent, deterministic risk gates, Treasury policy, fund operations, and eventually the accounting of spoil and portion.
+
+Benjamin does **not** own market intelligence, execution, stewardship truth, or public disclosure infrastructure.
 
 ## The body
 
-- **Epinnox / The Eyes** — observes and analyzes; publishes its own analytical evidence to The Book.
+- **Epinnox / The Eyes** — observes markets, researches, and recommends.
 - **The Steward / The Mind** — accepts, modifies, or rejects recommendations.
 - **The Watchman / The Guard** — deterministic risk, mandate, compliance, and jurisdiction controls.
 - **Benjamin Authority** — creates a bounded execution authorization only after Steward approval and Watchman PASS.
-- **The Hand** — separate repository; executes exact authorized instructions.
-- **The Book / Memory** — separate repository `Geo222222/the-book`; verifies signed evidence from every organ and anchors proofs to blockchain infrastructure.
-- **Treasury** — future deployable-capital and reserve authority.
-- **The Spoil** — future realized-value accounting domain. Principal is never spoil.
-- **The Portion** — future entitlement and distribution policy.
+- **The Hand** — separate repository; performs exact authorized execution.
+- **The Big Book** — private authoritative proof history in `Geo222222/the-book`.
+- **The Little Book** — public verification surface operated by The Book; never an automatic export of Benjamin state.
+- **The Vault** — governed storage for source evidence that should not become ledger payloads.
+- **Treasury** — deployable capital, cash, liquidity, and reserves.
+- **The Spoil** — realized economic value after losses, fees, obligations, and required reserves. Principal is never spoil.
+- **The Portion** — entitlement and distribution policy.
 - **The Covenant** — rules every Benjamin component must obey.
 - **Firstfruits** — first fund configuration; not a separate software system.
 
-## Evidence-required lifecycle
+## Privacy principle
+
+> **Everything material must be provable. Benjamin does not publish everything it knows.**
+
+Portfolio positions, strategies, opportunities, acquisition targets, valuations, counterparties, tax information, banking information, risk state, and internal deliberations are private by default.
+
+Current decision, risk, and authorization evidence is classified `CONFIDENTIAL_EVIDENCE` and is published only to the **Big Book** with scoped readers. There is no automatic path to the Little Book.
+
+## Private evidence-required lifecycle
 
 ```text
 Epinnox analysis
       |
       v
-EPINNOX.RECOMMENDATION -----> The Book receipt
+EPINNOX.RECOMMENDATION -----> private Big Book receipt
       |
       v
-Benjamin Steward Decision --> BENJAMIN.DECISION ------> The Book
+Benjamin Steward Decision --> BENJAMIN.DECISION ------> Big Book
       |
       v
-Watchman Evaluation --------> BENJAMIN.RISK ----------> The Book
+Watchman Evaluation --------> BENJAMIN.RISK ----------> Big Book
       |
  PASS | BLOCK
       |
       v
-Benjamin Authorization -----> BENJAMIN.AUTHORIZATION -> The Book
+Benjamin Authorization -----> BENJAMIN.AUTHORIZATION -> Big Book
       |
       v
 AuthorizedExecutionRequest
@@ -44,18 +56,30 @@ AuthorizedExecutionRequest
 The Hand
       |
       v
-HAND.EXECUTION --------------> The Book
+HAND.EXECUTION --------------> Big Book
 ```
 
-A recommendation without an Epinnox Book receipt is not eligible for the evidence-required control-plane path. An authorization is not handed to The Hand until Benjamin's decision, risk result, and authorization have each produced Book evidence lineage.
+A recommendation without required Epinnox provenance is not eligible for the evidence-required control-plane path. An authorization is not handed to The Hand until Benjamin's decision, risk result, and authorization have each produced private Big Book lineage.
+
+## Public verification is separate
+
+When the outside world needs to verify a legitimate claim, Benjamin does not expose its private records. A separate disclosure decision may produce a minimum-necessary Little Book attestation derived from a Big Book commitment.
+
+Examples include a public authority credential, intentionally disclosed asset claim, or institutional state commitment.
+
+The Little Book must never become sufficient to reconstruct Benjamin's private portfolio or institutional wealth.
 
 ## Repository boundary
 
-Benjamin no longer contains an internal `Book` ledger. `src/benjamin/evidence.py` defines only the producer-side gateway contract to the sovereign Book repository. The Book owns signature verification, append-only history, lineage, Merkle roots, and blockchain anchoring.
+`src/benjamin/evidence.py` defines the producer-side **Big Book** gateway contract. It classifies proof drafts and visibility before publication. The Book owns proof verification, private append-only history, least-privilege reads, Merkle/state commitments, and the public Little Book disclosure surface.
 
-## Current milestone: B1 — Evidence-aware Control Plane
+See `PRIVACY.md`, `docs/EVIDENCE_BOUNDARY.md`, and `contracts/privacy-defaults.json`.
 
-B1 adds an evidence-required orchestration path while preserving the B0 pure domain functions for deterministic testing. No live broker, investor onboarding, fund token, or public blockchain writer exists here.
+## Current milestone
+
+**B1.1 — Privacy-scoped evidence-aware control plane.**
+
+No live broker, investor onboarding, tokenized fund ownership, production private chain, or public-chain writer exists here yet.
 
 ## Status
 

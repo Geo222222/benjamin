@@ -9,10 +9,17 @@ from .domain import AuthorizedExecutionRequest, InvestmentDecision, RiskDecision
 
 @dataclass(frozen=True, slots=True)
 class EvidenceDraft:
-    """Producer-side draft for The Book Evidence Protocol v1.0."""
+    """Producer-side draft for the private Big Book evidence gateway.
+
+    `payload` is producer-side source material used by the publisher to create or
+    verify a digest. The Big Book must not persist these raw bytes merely because
+    they were supplied to the gateway.
+    """
 
     event_type: str
     evidence_class: str
+    privacy_class: str
+    visibility_scope: tuple[str, ...]
     subject_id: str
     payload: bytes
     payload_ref: str | None
@@ -21,7 +28,7 @@ class EvidenceDraft:
 
 
 class EvidencePublisher(Protocol):
-    """Adapter boundary implemented by a signer/client for Geo222222/the-book."""
+    """Private Big Book producer gateway implemented by a signer/vault adapter."""
 
     def publish(self, draft: EvidenceDraft) -> str: ...
 
@@ -52,6 +59,8 @@ def decision_draft(
     return EvidenceDraft(
         event_type="BENJAMIN.DECISION",
         evidence_class="ECONOMIC",
+        privacy_class="CONFIDENTIAL_EVIDENCE",
+        visibility_scope=("BENJAMIN_STEWARD", "BENJAMIN_WATCHMAN", "BENJAMIN_AUDITOR"),
         subject_id=decision.decision_id,
         payload=payload,
         payload_ref=None,
@@ -78,6 +87,8 @@ def risk_draft(
     return EvidenceDraft(
         event_type="BENJAMIN.RISK",
         evidence_class="ECONOMIC",
+        privacy_class="CONFIDENTIAL_EVIDENCE",
+        visibility_scope=("BENJAMIN_WATCHMAN", "BENJAMIN_AUTHORITY", "BENJAMIN_AUDITOR"),
         subject_id=risk.risk_id,
         payload=payload,
         payload_ref=None,
@@ -95,6 +106,8 @@ def authorization_draft(
     return EvidenceDraft(
         event_type="BENJAMIN.AUTHORIZATION",
         evidence_class="ECONOMIC",
+        privacy_class="CONFIDENTIAL_EVIDENCE",
+        visibility_scope=("BENJAMIN_AUTHORITY", "HAND_VERIFIER", "BENJAMIN_AUDITOR"),
         subject_id=request.authorization_id,
         payload=_canonical(request.to_wire()),
         payload_ref=None,

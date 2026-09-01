@@ -22,6 +22,8 @@ Benjamin does **not** own market intelligence, execution, stewardship truth, or 
 - **The Covenant** — rules every Benjamin component must obey.
 - **Firstfruits** — first fund configuration; not a separate software system.
 
+For the concrete operating questions, example inputs/outputs, prohibitions, and the complete morning-to-evening lifecycle for each role, see **[`docs/OPERATING_ROLES.md`](docs/OPERATING_ROLES.md)**. That document is the canonical human-readable role guide.
+
 ## Privacy principle
 
 > **Everything material must be provable. Benjamin does not publish everything it knows.**
@@ -73,7 +75,7 @@ The Little Book must never become sufficient to reconstruct Benjamin's private p
 
 `src/benjamin/evidence.py` defines the producer-side **Big Book** gateway contract. It classifies proof drafts and visibility before publication. The Book owns proof verification, private append-only history, least-privilege reads, Merkle/state commitments, and the public Little Book disclosure surface.
 
-See `PRIVACY.md`, `docs/EVIDENCE_BOUNDARY.md`, and `contracts/privacy-defaults.json`.
+See `PRIVACY.md`, `docs/EVIDENCE_BOUNDARY.md`, `docs/OPERATING_ROLES.md`, and `contracts/privacy-defaults.json`.
 
 ## Current milestone
 

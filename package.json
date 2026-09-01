@@ -1,0 +1,16 @@
+{
+  "name": "benjamin-capital-console-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/manager-console",
+    "apps/client-console"
+  ],
+  "scripts": {
+    "build:manager": "npm run build --workspace @benjamin/manager-console",
+    "build:client": "npm run build --workspace @benjamin/client-console",
+    "build:consoles": "npm run build:manager && npm run build:client",
+    "dev:manager": "npm run dev --workspace @benjamin/manager-console",
+    "dev:client": "npm run dev --workspace @benjamin/client-console"
+  }
+}

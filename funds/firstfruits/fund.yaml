@@ -1,0 +1,24 @@
+fund_id: FIRSTFRUITS
+name: Firstfruits
+status: DESIGN_ONLY
+
+# Institutional constraint chosen for the first operating generation.
+max_beneficial_owners: 5
+
+investor_admission:
+  status: CLOSED
+  public_solicitation: PROHIBITED
+  jurisdiction_policy: NOT_CONFIGURED
+  legal_review_required_before_open: true
+
+execution:
+  live_enabled: false
+  paper_enabled: false
+
+ledger:
+  material_actions_require_receipt: true
+  destructive_history_edits: false
+
+notes:
+  - This file is an engineering configuration, not legal advice or offering documentation.
+  - Investor eligibility, offering exemptions, filings, custody, tax, and state requirements must be counsel-reviewed before capital is accepted.

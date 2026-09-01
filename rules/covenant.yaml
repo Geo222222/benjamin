@@ -1,0 +1,16 @@
+version: 1
+rules:
+  - id: COV-001
+    statement: Epinnox cannot authorize or execute.
+  - id: COV-003
+    statement: Watchman BLOCK prevents authorization.
+  - id: COV-004
+    statement: Benjamin cannot call broker or exchange order endpoints.
+  - id: COV-005
+    statement: The Hand cannot originate or modify investment intent.
+  - id: COV-006
+    statement: The Book is append-only; corrections are new records.
+  - id: COV-007
+    statement: Investor principal is not spoil.
+  - id: COV-009
+    statement: Live execution is disabled in B0.

@@ -1,7 +1,7 @@
 """Benjamin constitutional capital-management kernel."""
 
 from .authority import AuthorizationError, authorize
-from .book import Book, BookEntry
+from .control_plane import BenjaminControlPlane, ControlPlaneResult, EvidenceLineage
 from .domain import (
     AuthorizedExecutionRequest,
     DecisionStatus,
@@ -11,15 +11,19 @@ from .domain import (
     RiskDecision,
     RiskStatus,
 )
+from .evidence import EvidenceDraft, EvidencePublisher
 from .steward import decide
 from .watchman import RiskPolicy, evaluate
 
 __all__ = [
     "AuthorizationError",
     "AuthorizedExecutionRequest",
-    "Book",
-    "BookEntry",
+    "BenjaminControlPlane",
+    "ControlPlaneResult",
     "DecisionStatus",
+    "EvidenceDraft",
+    "EvidenceLineage",
+    "EvidencePublisher",
     "InvestmentDecision",
     "OrderSide",
     "Recommendation",

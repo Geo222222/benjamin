@@ -5,7 +5,7 @@ import pytest
 
 from benjamin import (
     AuthorizationError,
-    Book,
+    BenjaminControlPlane,
     DecisionStatus,
     OrderSide,
     Recommendation,
@@ -27,6 +27,15 @@ def rec(quantity: str = "2") -> Recommendation:
         thesis_ref="EVIDENCE-001",
         created_at=datetime.now(timezone.utc),
     )
+
+
+class RecordingPublisher:
+    def __init__(self) -> None:
+        self.drafts = []
+
+    def publish(self, draft):
+        self.drafts.append(draft)
+        return f"BOOK-{len(self.drafts):03d}"
 
 
 def test_rejected_steward_decision_cannot_be_authorized() -> None:
@@ -76,13 +85,61 @@ def test_modification_requires_explicit_changed_quantity() -> None:
     assert decision.quantity == Decimal("2")
 
 
-def test_book_corrections_append_instead_of_mutating_history() -> None:
-    book = Book()
-    original = book.append("DECISION", "DEC-1", {"status": "APPROVED"})
-    correction = book.correct(original, "operator typo", {"status": "REJECTED"})
+def test_control_plane_requires_epinnox_book_receipt() -> None:
+    publisher = RecordingPublisher()
+    plane = BenjaminControlPlane(publisher)
+    with pytest.raises(ValueError, match="Book receipt"):
+        plane.process(
+            rec(),
+            recommendation_receipt_id="",
+            correlation_id="LIFE-001",
+            decision_status=DecisionStatus.APPROVED,
+            decision_reason="approve",
+            risk_policy=RiskPolicy(allowed_instruments=frozenset({"TEST-ASSET"})),
+        )
+    assert publisher.drafts == []
 
-    assert len(book.entries) == 2
-    assert book.entries[0] == original
-    assert correction.previous_hash == original.entry_hash
-    assert correction.payload["corrects_entry_hash"] == original.entry_hash
-    assert book.verify() is True
+
+def test_control_plane_records_decision_risk_and_authorization_before_handoff() -> None:
+    publisher = RecordingPublisher()
+    plane = BenjaminControlPlane(publisher)
+    result = plane.process(
+        rec("3"),
+        recommendation_receipt_id="EPINNOX-BOOK-001",
+        correlation_id="LIFE-001",
+        decision_status=DecisionStatus.APPROVED,
+        decision_reason="within mandate",
+        risk_policy=RiskPolicy(
+            allowed_instruments=frozenset({"TEST-ASSET"}),
+            max_order_quantity=Decimal("10"),
+        ),
+    )
+
+    assert result.authorization is not None
+    assert [draft.event_type for draft in publisher.drafts] == [
+        "BENJAMIN.DECISION",
+        "BENJAMIN.RISK",
+        "BENJAMIN.AUTHORIZATION",
+    ]
+    assert publisher.drafts[0].causation_receipt_id == "EPINNOX-BOOK-001"
+    assert publisher.drafts[1].causation_receipt_id == "BOOK-001"
+    assert publisher.drafts[2].causation_receipt_id == "BOOK-002"
+    assert result.evidence.authorization_receipt_id == "BOOK-003"
+
+
+def test_watchman_block_is_recorded_but_never_authorized() -> None:
+    publisher = RecordingPublisher()
+    result = BenjaminControlPlane(publisher).process(
+        rec("11"),
+        recommendation_receipt_id="EPINNOX-BOOK-001",
+        correlation_id="LIFE-002",
+        decision_status=DecisionStatus.APPROVED,
+        decision_reason="desired",
+        risk_policy=RiskPolicy(
+            allowed_instruments=frozenset({"TEST-ASSET"}),
+            max_order_quantity=Decimal("10"),
+        ),
+    )
+    assert result.authorization is None
+    assert result.evidence.authorization_receipt_id is None
+    assert [draft.event_type for draft in publisher.drafts] == ["BENJAMIN.DECISION", "BENJAMIN.RISK"]

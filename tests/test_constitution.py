@@ -100,7 +100,7 @@ def test_control_plane_requires_epinnox_book_receipt() -> None:
     assert publisher.drafts == []
 
 
-def test_control_plane_records_decision_risk_and_authorization_before_handoff() -> None:
+def test_control_plane_records_private_decision_risk_and_authorization_before_handoff() -> None:
     publisher = RecordingPublisher()
     plane = BenjaminControlPlane(publisher)
     result = plane.process(
@@ -121,6 +121,18 @@ def test_control_plane_records_decision_risk_and_authorization_before_handoff() 
         "BENJAMIN.RISK",
         "BENJAMIN.AUTHORIZATION",
     ]
+    assert all(draft.privacy_class == "CONFIDENTIAL_EVIDENCE" for draft in publisher.drafts)
+    assert "PUBLIC" not in publisher.drafts[0].visibility_scope
+    assert publisher.drafts[0].visibility_scope == (
+        "BENJAMIN_STEWARD",
+        "BENJAMIN_WATCHMAN",
+        "BENJAMIN_AUDITOR",
+    )
+    assert publisher.drafts[2].visibility_scope == (
+        "BENJAMIN_AUTHORITY",
+        "HAND_VERIFIER",
+        "BENJAMIN_AUDITOR",
+    )
     assert publisher.drafts[0].causation_receipt_id == "EPINNOX-BOOK-001"
     assert publisher.drafts[1].causation_receipt_id == "BOOK-001"
     assert publisher.drafts[2].causation_receipt_id == "BOOK-002"
@@ -143,3 +155,4 @@ def test_watchman_block_is_recorded_but_never_authorized() -> None:
     assert result.authorization is None
     assert result.evidence.authorization_receipt_id is None
     assert [draft.event_type for draft in publisher.drafts] == ["BENJAMIN.DECISION", "BENJAMIN.RISK"]
+    assert all(draft.privacy_class == "CONFIDENTIAL_EVIDENCE" for draft in publisher.drafts)

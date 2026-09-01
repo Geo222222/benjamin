@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "defaults": {
+    "BENJAMIN.DECISION": {
+      "privacy_class": "CONFIDENTIAL_EVIDENCE",
+      "visibility_scope": ["BENJAMIN_STEWARD", "BENJAMIN_WATCHMAN", "BENJAMIN_AUDITOR"]
+    },
+    "BENJAMIN.RISK": {
+      "privacy_class": "CONFIDENTIAL_EVIDENCE",
+      "visibility_scope": ["BENJAMIN_WATCHMAN", "BENJAMIN_AUTHORITY", "BENJAMIN_AUDITOR"]
+    },
+    "BENJAMIN.AUTHORIZATION": {
+      "privacy_class": "CONFIDENTIAL_EVIDENCE",
+      "visibility_scope": ["BENJAMIN_AUTHORITY", "HAND_VERIFIER", "BENJAMIN_AUDITOR"]
+    }
+  },
+  "public_projection": "EXPLICIT_ONLY"
+}

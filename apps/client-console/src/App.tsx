@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 
 type NavItem = { key: string; label: string };
+type StatRows = Array<[string, string]>;
 
 const navItems: NavItem[] = [
   { key: 'overview', label: 'Overview' },
@@ -23,13 +24,13 @@ const participant = {
     ['Participant equity', '$25,955.25'],
     ['Ownership units', '250.000'],
     ['Distributions to date', '$0.00'],
-  ],
+  ] as StatRows,
   performance: [
     ['Since shadow inception', '+3.82%'],
     ['Current period', '+1.14%'],
     ['Latest participant NAV', '$103.821 / unit'],
     ['Valuation status', 'SHADOW'],
-  ],
+  ] as StatRows,
   activity: [
     { date: '2026-09-01', type: 'Contribution proof', amount: '$25,000.00', status: 'DEMO', proof: 'RCP-DEMO-001' },
     { date: '2026-09-01', type: 'Unit allocation', amount: '250.000 units', status: 'DEMO', proof: 'RCP-DEMO-002' },
@@ -46,7 +47,7 @@ function Badge({ children, tone = 'neutral' }: { children: string; tone?: 'neutr
   return <span className={`badge badge-${tone}`}>{children}</span>;
 }
 
-function StatGroup({ title, values }: { title: string; values: Array<[string, string]> }) {
+function StatGroup({ title, values }: { title: string; values: StatRows }) {
   return (
     <section className="card stat-card">
       <p className="eyebrow">{title}</p>

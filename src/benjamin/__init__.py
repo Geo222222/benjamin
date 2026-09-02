@@ -1,6 +1,7 @@
 """Benjamin constitutional capital-management kernel."""
 
 from .authority import AuthorizationError, authorize
+from .book_bridge import BenjaminBookSigner, BookBridgeError, BookProducerIdentity, load_benjamin_book_signer_from_env
 from .control_plane import BenjaminControlPlane, ControlPlaneResult, EvidenceLineage
 from .domain import (
     AuthorizedExecutionRequest,
@@ -18,7 +19,10 @@ from .watchman import RiskPolicy, evaluate
 __all__ = [
     "AuthorizationError",
     "AuthorizedExecutionRequest",
+    "BenjaminBookSigner",
     "BenjaminControlPlane",
+    "BookBridgeError",
+    "BookProducerIdentity",
     "ControlPlaneResult",
     "DecisionStatus",
     "EvidenceDraft",
@@ -33,4 +37,5 @@ __all__ = [
     "authorize",
     "decide",
     "evaluate",
+    "load_benjamin_book_signer_from_env",
 ]

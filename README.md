@@ -24,6 +24,24 @@ Benjamin does **not** own market intelligence, execution, stewardship truth, or 
 
 For the concrete operating questions, example inputs/outputs, prohibitions, and the complete morning-to-evening lifecycle for each role, see **[`docs/OPERATING_ROLES.md`](docs/OPERATING_ROLES.md)**. That document is the canonical human-readable role guide.
 
+## Future cognitive architecture
+
+Benjamin's long-term decision intelligence is explicitly planned as a **composable, evidence-driven cognitive system**, not a monolithic trading model and not an unconstrained LLM.
+
+The future design allows Benjamin to consume typed market, research, machine-learning, portfolio, risk, cost, and historical-memory objects; qualify their provenance and competence; reason over disagreements and competing hypotheses; and emit a typed decision proposal. Existing Watchman/Governor and authorization boundaries remain downstream.
+
+The architecture requires three distinct forms of memory:
+
+- **Semantic memory** — what Benjamin knows: durable strategy, market, research, policy, capability, and validated lesson knowledge.
+- **Episodic memory** — what happened: timestamped market cases, predictions, decisions, outcomes, errors, and reasoning trajectories.
+- **Procedural memory** — how Benjamin reasons: governed decision methods, evidence-handling procedures, abstention rules, and escalation logic.
+
+Z Look Jamaican may later provide structured market-intelligence, state, story, model, prediction, and opportunity objects to Benjamin, but those objects remain evidence inputs rather than capital authority.
+
+The plan also defines model objects, multi-outcome prediction objects, a contextual model-competence router, calibration and drift tracking, an empirical self-model, explicit disagreement records, and controlled model succession so Benjamin can learn continuously without silently mutating a qualified production brain.
+
+See **[`docs/FUTURE_COGNITIVE_ARCHITECTURE.md`](docs/FUTURE_COGNITIVE_ARCHITECTURE.md)**. This is a future architectural contract only; it does not activate live reasoning, model promotion, or execution.
+
 ## ACM-07 consoles
 
 Benjamin now has two deliberately separate frontend applications:
@@ -115,13 +133,13 @@ The Little Book must never become sufficient to reconstruct Benjamin's private p
 
 `src/benjamin/evidence.py` defines the producer-side **Big Book** gateway contract. It classifies proof drafts and visibility before publication. The Book owns proof verification, private append-only history, least-privilege reads, Merkle/state commitments, and the public Little Book disclosure surface.
 
-See `PRIVACY.md`, `docs/EVIDENCE_BOUNDARY.md`, `docs/OPERATING_ROLES.md`, `docs/ACM-07_CONSOLES.md`, `contracts/privacy-defaults.json`, and `contracts/console-view-policy.json`.
+See `PRIVACY.md`, `docs/EVIDENCE_BOUNDARY.md`, `docs/OPERATING_ROLES.md`, `docs/FUTURE_COGNITIVE_ARCHITECTURE.md`, `docs/ACM-07_CONSOLES.md`, `contracts/privacy-defaults.json`, and `contracts/console-view-policy.json`.
 
 ## Current milestone
 
 **B1.1 + ACM-07.0 — Privacy-scoped evidence-aware control plane with separately built Manager and Client console shells.**
 
-No live broker, investor onboarding, tokenized fund ownership, production private chain, public-chain writer, or live client capital exists here yet.
+No live broker, investor onboarding, tokenized fund ownership, production private chain, public-chain writer, live cognitive reasoner, continuously adapting production model, or live client capital exists here yet.
 
 ## Status
 

@@ -69,6 +69,10 @@ class BenjaminBookSigner:
     The private signing key remains inside Benjamin's secret boundary. This signer
     proves Benjamin's capital-decision evidence; it cannot produce ZLJ evidence,
     Watchman governance, Hand execution, or Book truth.
+
+    Subclasses may reuse the envelope mechanics only by replacing both PRODUCER
+    and PREFIX. A signer instance still contains exactly one private key and one
+    constitutional namespace.
     """
 
     PRODUCER = "Benjamin"
@@ -126,7 +130,9 @@ class BenjaminBookSigner:
         if not receipt_id or not subject_id:
             raise BookBridgeError("receipt_id and subject_id are required")
         if not event_type.startswith(self.PREFIX):
-            raise BookBridgeError("Benjamin signer may emit only BENJAMIN.* events")
+            raise BookBridgeError(
+                f"{self.PRODUCER} signer may emit only {self.PREFIX} events"
+            )
         if evidence_class not in {"CONSTITUTIONAL", "ECONOMIC", "ANALYTICAL"}:
             raise BookBridgeError("invalid evidence_class")
         if privacy_class not in {

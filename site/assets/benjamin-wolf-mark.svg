@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Benjamin wolf mark">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2d792"/><stop offset="1" stop-color="#b88a35"/></linearGradient></defs>
+<g fill="none" stroke="url(#g)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+<path d="M8 8l16 8 8-8 8 8 16-8-5 19 5 10-9 16-15 7-15-7-9-16 5-10z"/>
+<path d="M13 14l11 9 8-5 8 5 11-9-5 18-7 4-7-7-7 7-7-4z"/>
+<path d="M18 32l9 4-5 7m24-11l-9 4 5 7"/>
+<path d="M24 45l8 4 8-4-3 8-5 3-5-3z"/>
+<path d="M26 28l6 4 6-4M32 18v31"/>
+</g>
+<path d="M20 30l7 3-5 2zM44 30l-7 3 5 2z" fill="#24ed80"/>
+</svg>

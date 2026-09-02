@@ -2,7 +2,9 @@ name: Deploy Benjamin Public Site
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - codex/public-institution-site
     paths:
       - 'site/**'
       - '.github/workflows/pages.yml'

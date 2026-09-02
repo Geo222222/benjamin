@@ -8,30 +8,10 @@
     <title>Benjamin — Managed Account Client Experience</title>
     <script>
       (() => {
-        const key = 'benjamin-demo-theme';
-        const saved = localStorage.getItem(key);
-        document.documentElement.dataset.theme = saved === 'light' ? 'light' : 'matrix';
-        const paint = (theme) => {
-          document.documentElement.dataset.theme = theme;
-          localStorage.setItem(key, theme);
-          const meta = document.querySelector('meta[name="theme-color"]');
-          if (meta) meta.setAttribute('content', theme === 'light' ? '#f4f7fb' : '#020806');
-          document.querySelectorAll('[data-theme-choice]').forEach((button) => {
-            button.classList.toggle('active', button.dataset.themeChoice === theme);
-          });
-        };
-        window.addEventListener('DOMContentLoaded', () => {
-          const control = document.createElement('div');
-          control.className = 'theme-control';
-          control.setAttribute('aria-label', 'Theme selection');
-          control.innerHTML = '<span>Theme</span><button type="button" data-theme-choice="matrix">Matrix</button><button type="button" data-theme-choice="light">Blue / White</button>';
-          control.addEventListener('click', (event) => {
-            const button = event.target.closest('[data-theme-choice]');
-            if (button) paint(button.dataset.themeChoice);
-          });
-          document.body.appendChild(control);
-          paint(document.documentElement.dataset.theme === 'light' ? 'light' : 'matrix');
-        });
+        const saved = localStorage.getItem('benjamin-demo-theme');
+        const theme = saved === 'light' ? 'light' : 'matrix';
+        document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#eef3fa' : '#020806');
       })();
     </script>
   </head>

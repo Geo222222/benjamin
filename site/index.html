@@ -3,31 +3,34 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#06100b" />
-  <meta name="description" content="Benjamin is Epinnox's capital decision intelligence for individually managed client accounts, with account-specific mandates, external custody, governed execution, and verifiable history." />
-  <title>Benjamin — Capital intelligence under disciplined authority</title>
+  <meta name="theme-color" content="#050b07" />
+  <meta name="description" content="Benjamin is an invitation-only, technology-driven investment adviser experience for individually managed accounts." />
+  <title>Benjamin — Put your capital to work</title>
+  <link rel="icon" href="./assets/benjamin-wolf-mark.svg" type="image/svg+xml" data-benjamin-icon />
   <link rel="preload" href="./assets/styles.css" as="style" />
   <link rel="stylesheet" href="./assets/styles.css" />
+  <link rel="stylesheet" href="./assets/brand.css" data-benjamin-brand />
+  <link rel="stylesheet" href="./assets/public-v2.css" />
   <script src="./assets/app.js" defer></script>
 </head>
-<body>
+<body class="public-v2">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header" data-header>
-    <a class="brand" href="./" aria-label="Benjamin home">
-      <span class="brand-mark" aria-hidden="true">B</span>
-      <span class="brand-copy"><strong>BENJAMIN</strong><small>AN EPINNOX SYSTEM</small></span>
+  <header class="site-header v2-header" data-header>
+    <a class="brand v2-brand" href="./" aria-label="Benjamin home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-copy"><strong>BENJAMIN</strong><small>A CODEREIGN COMPANY</small></span>
     </a>
     <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="#philosophy">Client model</a>
-      <a href="#system">How it works</a>
-      <a href="#governance">Governance</a>
+      <a href="#why">Why Benjamin</a>
+      <a href="#capital">Your capital</a>
+      <a href="#discipline">Discipline</a>
+      <a href="#history">Transparency</a>
       <a href="#private-clients">Private clients</a>
-      <a href="#institution">Institution</a>
     </nav>
     <div class="header-actions">
       <a class="text-link" href="./sign-in/">Client sign in</a>
-      <a class="button button-compact button-outline" href="./invitation/">Private invitation</a>
+      <a class="button button-compact gold-button" href="./invitation/">Private invitation</a>
       <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-toggle>
         <span></span><span></span>
       </button>
@@ -35,219 +38,156 @@
   </header>
 
   <nav class="mobile-nav" aria-label="Mobile navigation" data-mobile-nav hidden>
-    <a href="#philosophy">Client model</a>
-    <a href="#system">How it works</a>
-    <a href="#governance">Governance</a>
+    <a href="#why">Why Benjamin</a>
+    <a href="#capital">Your capital</a>
+    <a href="#discipline">Discipline</a>
+    <a href="#history">Transparency</a>
     <a href="#private-clients">Private clients</a>
-    <a href="#institution">Institution</a>
     <a href="./sign-in/">Client sign in</a>
   </nav>
 
   <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
+    <section class="hero v2-hero" aria-labelledby="hero-title">
       <div class="matrix-field" aria-hidden="true" data-matrix></div>
-      <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
-      <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
-      <div class="hero-content container">
-        <p class="eyebrow"><span class="live-dot"></span> PRIVATE CAPITAL INTELLIGENCE</p>
-        <h1 id="hero-title">Capital intelligence<br /><span>for your account.</span></h1>
-        <p class="hero-lede">Benjamin is Epinnox’s capital decision intelligence for individually managed accounts. ZLJ sees the market. Benjamin decides for the correct account and mandate. Watchman governs. The Hand executes authorized external actions. The Book preserves what matters.</p>
-        <div class="hero-actions">
-          <a class="button" href="#system">Understand Benjamin <span aria-hidden="true">↘</span></a>
-          <a class="button button-ghost" href="./sign-in/">Client sign in</a>
+      <div class="v2-hero-grid container">
+        <div class="v2-hero-copy">
+          <p class="v2-kicker">AUTOMATED · INTELLIGENT · DISCIPLINED</p>
+          <h1 id="hero-title">Put your capital<br /><em>to work.</em></h1>
+          <p class="v2-lede">Benjamin continuously evaluates qualified opportunities and manages each client account inside a defined mandate—without emotion, fatigue, or the need to approve every trade.</p>
+          <p class="ownership-line">Your account. Your capital. Benjamin manages within the authority you choose.</p>
+          <div class="v2-actions">
+            <a class="button gold-button" href="./invitation/">Private invitation <span aria-hidden="true">→</span></a>
+            <a class="button button-ghost" href="./sign-in/">Client sign in</a>
+          </div>
+          <p class="v2-fine">Private access by invitation only. Investing involves risk; returns are not guaranteed.</p>
         </div>
-        <div class="hero-access">
-          <span>Invitation only</span>
-          <span class="divider-dot">•</span>
-          <a href="./invitation/">Enter a private invitation</a>
+
+        <div class="wolf-stage" aria-label="Benjamin robotic wolf representing automated capital intelligence">
+          <div class="wolf-glow" aria-hidden="true"></div>
+          <img src="./assets/benjamin-wolf-runner.webp" width="710" height="650" alt="A focused cybernetic wolf moving through a financial market environment." decoding="async" fetchpriority="high" />
+          <div class="wolf-tag wolf-tag-top"><small>BENJAMIN</small><strong>Opportunity seeking</strong></div>
+          <div class="wolf-tag wolf-tag-bottom"><small>OPERATING MODE</small><strong>Systematic · mandate-bound</strong></div>
         </div>
       </div>
-      <div class="hero-status container" aria-label="Benjamin operating principles">
-        <div><small>ACCOUNT MODEL</small><strong>One client · one account</strong></div>
-        <div><small>CAPITAL CUSTODY</small><strong>External custodian</strong></div>
-        <div><small>AUTHORITY</small><strong>Account-specific mandate</strong></div>
-        <div><small>RECORD</small><strong>Account-specific history</strong></div>
+      <div class="benefit-rail container" id="why">
+        <div><span>01</span><strong>Automated attention</strong><small>Observes authorized markets continuously during active trading windows.</small></div>
+        <div><span>02</span><strong>Selective action</strong><small>Designed to act on qualified opportunities—not simply to stay busy.</small></div>
+        <div><span>03</span><strong>Disciplined risk</strong><small>Every account operates inside explicit limits and permissions.</small></div>
+        <div><span>04</span><strong>Start-to-present truth</strong><small>Your capital, decisions, activity, fees, and outcomes remain attributable.</small></div>
       </div>
     </section>
 
-    <section class="section section-light" id="philosophy">
-      <div class="container editorial-grid">
-        <div class="section-index">01 / CLIENT MODEL</div>
+    <section class="v2-section capital-section" id="capital">
+      <div class="container split-story">
+        <div class="story-copy">
+          <p class="v2-kicker gold">YOUR CAPITAL STAYS YOURS</p>
+          <h2>Individually managed.<br />Individually yours.</h2>
+          <p>Benjamin is designed around individually managed accounts—not a single blended pool. Your relationship, mandate, account history, and capital remain separately attributable to you.</p>
+          <div class="story-points">
+            <div><strong>Your account</strong><span>Separate ownership and history.</span></div>
+            <div><strong>Your mandate</strong><span>Defined authority, risk, and permissions.</span></div>
+            <div><strong>Your custodian</strong><span>Assets remain externally held and independently observable.</span></div>
+          </div>
+        </div>
+        <div class="ownership-visual" aria-label="Client owns the account, Benjamin manages it, and an external custodian holds the assets">
+          <div class="ownership-node owner-node"><span>YOU</span><strong>Own the account</strong><small>Your name · your capital</small></div>
+          <div class="ownership-link"><i></i><b>DEFINED MANDATE</b><i></i></div>
+          <div class="ownership-node ben-node"><span>BENJAMIN</span><strong>Manages the decisions</strong><small>Only within your authority</small></div>
+          <div class="ownership-link"><i></i><b>TRADING AUTHORITY</b><i></i></div>
+          <div class="ownership-node custody-node"><span>CUSTODIAN</span><strong>Holds the assets</strong><small>External custody</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-section intelligence-section">
+      <div class="container intelligence-grid">
+        <div class="signal-field" aria-hidden="true">
+          <svg viewBox="0 0 800 360" role="img" aria-label="Illustrative rising opportunity path">
+            <defs><linearGradient id="signalFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23ef81" stop-opacity=".28"/><stop offset="1" stop-color="#23ef81" stop-opacity="0"/></linearGradient></defs>
+            <path class="signal-area" d="M10 320 L72 295 L122 306 L180 255 L230 270 L290 216 L350 232 L418 169 L478 190 L535 129 L600 148 L666 82 L790 32 L790 350 L10 350 Z"/>
+            <path class="signal-line" d="M10 320 L72 295 L122 306 L180 255 L230 270 L290 216 L350 232 L418 169 L478 190 L535 129 L600 148 L666 82 L790 32"/>
+            <g class="signal-dots"><circle cx="180" cy="255" r="7"/><circle cx="418" cy="169" r="7"/><circle cx="666" cy="82" r="7"/></g>
+          </svg>
+          <div class="signal-caption"><span>SCAN</span><span>QUALIFY</span><span>ACT</span><span>LEARN</span></div>
+        </div>
+        <div class="story-copy dark-copy">
+          <p class="v2-kicker">INTELLIGENCE WITHOUT IMPULSE</p>
+          <h2>Built to hunt opportunity—not excitement.</h2>
+          <p>Benjamin’s objective is capital growth through repeatable decision quality. It can evaluate markets, wait when conditions are poor, act when a qualified opportunity satisfies the account mandate, and learn from what happened afterward.</p>
+          <div class="statement-grid">
+            <div><strong>Patient</strong><span>No requirement to trade.</span></div>
+            <div><strong>Systematic</strong><span>Same rules when pressure rises.</span></div>
+            <div><strong>Adaptive</strong><span>Outcomes feed future qualification.</span></div>
+            <div><strong>Account-aware</strong><span>Every decision belongs to the correct mandate.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-section discipline-section" id="discipline">
+      <div class="container split-story reverse">
+        <div class="risk-console" aria-label="Illustrative Benjamin mandate controls">
+          <header><span>ACCOUNT MANDATE</span><strong>BM-SCALP-01</strong><em>ACTIVE</em></header>
+          <div class="risk-row"><span>Maximum deployed</span><b>40%</b><i style="--risk:40%"></i></div>
+          <div class="risk-row"><span>Maximum position</span><b>5%</b><i style="--risk:18%"></i></div>
+          <div class="risk-row"><span>Daily loss limit</span><b>1.00%</b><i style="--risk:12%"></i></div>
+          <div class="risk-row"><span>Drawdown ceiling</span><b>8.00%</b><i style="--risk:24%"></i></div>
+          <div class="risk-permissions"><span>LEVERAGE <b>NO</b></span><span>OVERNIGHT <b>NO</b></span><span>WATCHMAN <b>REQUIRED</b></span></div>
+        </div>
+        <div class="story-copy">
+          <p class="v2-kicker gold">DISCIPLINE IS BUILT IN</p>
+          <h2>Autonomy without unlimited authority.</h2>
+          <p>You should not have to approve every scalp. You should know the boundaries Benjamin is allowed to operate inside. The mandate defines those boundaries; governance enforces them before external action proceeds.</p>
+          <blockquote>“Give it to Benjamin” means delegating defined decision authority—not surrendering custody or unlimited control.</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="v2-section history-section" id="history">
+      <div class="container history-grid">
+        <div class="story-copy dark-copy">
+          <p class="v2-kicker">SEE WHAT YOUR MONEY HAS DONE</p>
+          <h2>From starting capital to the present.</h2>
+          <p>Deposits are not performance. Withdrawals are not losses. Fees are not invisible. Benjamin’s client experience is designed to separate money movement from investment result and preserve the historical record behind the account.</p>
+        </div>
+        <div class="history-ledger">
+          <div class="history-head"><span>ACCOUNT BEN-000184</span><b>START → PRESENT</b></div>
+          <div><span>Starting capital</span><strong>$25,000.00</strong></div>
+          <div><span>Net deposits</span><strong>+$2,000.00</strong></div>
+          <div><span>Net withdrawals</span><strong>−$500.00</strong></div>
+          <div><span>Trading result</span><strong class="positive">+$2,341.72</strong></div>
+          <div><span>Fees + costs</span><strong>−$350.00</strong></div>
+          <div class="history-total"><span>Current equity</span><strong>$28,491.72</strong></div>
+          <small>Illustrative values only. Not a representation of actual or guaranteed performance.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="private-v2" id="private-clients">
+      <div class="container private-v2-inner">
         <div>
-          <p class="eyebrow dark">THE RELATIONSHIP</p>
-          <h2>Your capital remains your account.</h2>
-          <p class="section-lede dark-lede">The intended Benjamin client model is not a pooled fund. Each relationship is separately attributable to a client account, an account-specific mandate, an external custody connection, its own performance history, and its own evidence lineage. Benjamin principal capital and another client’s capital remain distinct.</p>
+          <p class="v2-kicker gold">PRIVATE BY DESIGN</p>
+          <h2>No public signup funnel.</h2>
+          <p>A Benjamin relationship begins with a private invitation, then identity, suitability, mandate review, agreements, custody connection, funding, and activation.</p>
         </div>
-      </div>
-      <div class="container account-model">
-        <article class="model-panel model-panel-client">
-          <span class="panel-kicker">YOUR MANAGED ACCOUNT</span>
-          <strong class="money-value">$28,491.72</strong>
-          <p>Separately attributable client capital and account history.</p>
-          <ul class="clean-list">
-            <li>Starting capital <b>$25,000</b></li>
-            <li>Net deposits <b>$2,000</b></li>
-            <li>Net investment result <b>+$1,491.72</b></li>
-          </ul>
-        </article>
-        <div class="model-bridge" aria-label="Mandate relationship">
-          <span>ACCOUNT MANDATE</span>
-          <div class="bridge-line"></div>
-          <small>Bounded discretionary authority</small>
+        <div class="private-steps" aria-label="Private invitation onboarding sequence">
+          <span>Invitation</span><i></i><span>Identity</span><i></i><span>Mandate</span><i></i><span>Agreements</span><i></i><span>Custody</span><i></i><span>Activation</span>
         </div>
-        <article class="model-panel model-panel-benjamin">
-          <span class="panel-kicker">BENJAMIN</span>
-          <div class="seal"><span>B</span></div>
-          <p>Epinnox’s capital decision intelligence operating only inside this account’s authority.</p>
-          <div class="status-pill"><span></span> GOVERNED AUTONOMY</div>
-        </article>
-        <div class="model-bridge" aria-label="Trading authority relationship">
-          <span>TRADING AUTHORITY</span>
-          <div class="bridge-line"></div>
-          <small>Not withdrawal authority</small>
+        <div class="v2-actions">
+          <a class="button gold-button" href="./invitation/">Review private invitation <span aria-hidden="true">→</span></a>
+          <a class="button button-ghost" href="./sign-in/">Existing client sign in</a>
         </div>
-        <article class="model-panel model-panel-custodian">
-          <span class="panel-kicker">YOUR CUSTODIAN / BROKER</span>
-          <strong>External custody</strong>
-          <p>Cash, positions, fills, statements, and settlement remain independently observable for the account.</p>
-          <div class="custody-tags"><span>CASH</span><span>POSITIONS</span><span>FILLS</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section section-dark" id="system">
-      <div class="container editorial-grid">
-        <div class="section-index">02 / EPINNOX SYSTEM</div>
-        <div>
-          <p class="eyebrow">THE BODY</p>
-          <h2>Inside Epinnox, five responsibilities stay separate.</h2>
-          <p class="section-lede">The market observer does not move capital. The decision intelligence does not authorize itself. The governor does not invent the trade. The executor does not change economic intent. The record does not rewrite history.</p>
-        </div>
-      </div>
-      <div class="container system-river" role="list" aria-label="Epinnox system responsibilities">
-        <article class="system-node" role="listitem" data-system-node="zlj">
-          <span class="node-number">01</span><div class="node-glyph">Z</div><h3>ZLJ</h3><strong>SEES</strong><p>Qualifies observations, microstructure, market state, models, forecasts, calibration, and opportunity evidence.</p>
-        </article>
-        <div class="system-arrow" aria-hidden="true">→</div>
-        <article class="system-node featured" role="listitem" data-system-node="benjamin">
-          <span class="node-number">02</span><div class="node-glyph">B</div><h3>Benjamin</h3><strong>DECIDES</strong><p>Forms trade or no-trade, size, invalidation, hold, reduce, and exit intent for the correct account and horizon.</p>
-        </article>
-        <div class="system-arrow" aria-hidden="true">→</div>
-        <article class="system-node" role="listitem" data-system-node="watchman">
-          <span class="node-number">03</span><div class="node-glyph">W</div><h3>Watchman</h3><strong>GOVERNS</strong><p>Evaluates the exact account mandate, limits, exposure, authority, and policy before an external action may proceed.</p>
-        </article>
-        <div class="system-arrow" aria-hidden="true">→</div>
-        <article class="system-node" role="listitem" data-system-node="hand">
-          <span class="node-number">04</span><div class="node-glyph">H</div><h3>The Hand</h3><strong>EXECUTES</strong><p>Routes the authorized action through approved broker, exchange, custody, banking, or settlement capabilities.</p>
-        </article>
-        <div class="system-arrow" aria-hidden="true">→</div>
-        <article class="system-node" role="listitem" data-system-node="book">
-          <span class="node-number">05</span><div class="node-glyph">▤</div><h3>The Book</h3><strong>REMEMBERS + PROVES</strong><p>Preserves account-scoped lineage from evidence through decision, governance, execution, outcome, and learning.</p>
-        </article>
-      </div>
-      <div class="container system-principle"><span>ZLJ SEES</span><i></i><span>BENJAMIN DECIDES</span><i></i><span>WATCHMAN GOVERNS</span><i></i><span>THE HAND EXECUTES</span><i></i><span>THE BOOK REMEMBERS + PROVES</span></div>
-    </section>
-
-    <section class="section mandate-section" id="governance">
-      <div class="container mandate-layout">
-        <div class="mandate-copy">
-          <div class="section-index">03 / GOVERNANCE</div>
-          <p class="eyebrow dark">ACCOUNT-BOUNDED AUTONOMY</p>
-          <h2>Autonomy exists inside your mandate.</h2>
-          <p class="section-lede dark-lede">A Benjamin client does not approve each scalp or intraday action. The client establishes the account relationship and grants a defined mandate. Benjamin may decide only inside that account’s scope, while Watchman evaluates each proposed external action against that account’s current authority and controls.</p>
-          <div class="quote-line">“Give it to Benjamin” means delegating defined decision authority over designated capital—not surrendering the account, custody, or unlimited control.</div>
-        </div>
-        <article class="mandate-card" aria-label="Sample Benjamin client account mandate">
-          <header><div><small>CLIENT ACCOUNT MANDATE</small><strong>BM-SCALP-01</strong></div><span class="status-pill"><span></span> DEMO</span></header>
-          <dl class="mandate-grid">
-            <div><dt>Managed capital</dt><dd>$25,000</dd></div>
-            <div><dt>Maximum deployed</dt><dd>40%</dd></div>
-            <div><dt>Maximum position</dt><dd>5%</dd></div>
-            <div><dt>Daily loss limit</dt><dd>1.00%</dd></div>
-            <div><dt>Maximum drawdown</dt><dd>8.00%</dd></div>
-            <div><dt>Watchman</dt><dd>Required</dd></div>
-          </dl>
-          <div class="permission-row"><span>LEVERAGE</span><b>NO</b><span>OVERNIGHT</span><b>NO</b><span>SHORT SELLING</span><b>NO</b></div>
-          <footer><span>V1 qualification scope</span><strong>SCALP → INTRADAY → SHORT SWING</strong></footer>
-        </article>
-      </div>
-    </section>
-
-    <section class="section book-section">
-      <div class="container editorial-grid">
-        <div class="section-index">04 / ACCOUNTABILITY</div>
-        <div>
-          <p class="eyebrow">THE BOOK</p>
-          <h2>Your account’s decision should be reconstructable after the money moves.</h2>
-          <p class="section-lede">The record is not an afterthought. Material history should preserve what ZLJ knew, what Benjamin decided for the account, what Watchman authorized or blocked, what The Hand actually did externally, and what happened afterward.</p>
-        </div>
-      </div>
-      <div class="container ledger-shell">
-        <div class="ledger-top"><span>BOOK RECORD · IMA-DEMO-014 · BEN-D-084921</span><span class="verified">● VERIFIED / RECONCILED</span></div>
-        <div class="ledger-line"><time>10:31:04.918</time><span class="ledger-source epinnox">ZLJ</span><p>Qualified opportunity · AMD · market state current · spread acceptable</p></div>
-        <div class="ledger-line"><time>10:31:05.021</time><span class="ledger-source benjamin">BENJAMIN</span><p>Decision BUY · account IMA-DEMO-014 · confidence 0.81</p></div>
-        <div class="ledger-line"><time>10:31:05.024</time><span class="ledger-source watchman">WATCHMAN</span><p>AUTHORIZED · account mandate satisfied · risk utilization 31%</p></div>
-        <div class="ledger-line"><time>10:31:05.061</time><span class="ledger-source hand">THE HAND</span><p>Authorized broker action submitted · acknowledgement 28 ms later</p></div>
-        <div class="ledger-line"><time>10:34:08.282</time><span class="ledger-source book">THE BOOK</span><p>Account outcome reconciled · net result +$18.42 · learning lineage recorded</p></div>
-        <div class="ledger-proof"><div><small>RECORD HASH</small><code>8f3a:9d17:84c1:0e22</code></div><div><small>LINEAGE</small><strong>Observation → Decision → Governance → Execution → Outcome</strong></div></div>
-      </div>
-    </section>
-
-    <section class="section private-section" id="private-clients">
-      <div class="container private-grid">
-        <div>
-          <div class="section-index">05 / PRIVATE CLIENTS</div>
-          <p class="eyebrow">RELATIONSHIP FIRST</p>
-          <h2>There is no public “sign up.”</h2>
-          <p class="section-lede">Benjamin serves private client relationships one account at a time. An invitation begins a controlled process to establish identity, financial profile and suitability, an account-specific mandate, agreements, an external broker or custodian connection, and funding. The invitation itself opens nothing and grants no authority.</p>
-          <a class="button" href="./invitation/">Review invitation experience <span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="invitation-preview">
-          <div class="invitation-glow" aria-hidden="true"></div>
-          <div class="invite-seal">B</div>
-          <small>PRIVATE INVITATION</small>
-          <h3>Benjamin has invited you to consider an individually managed client relationship.</h3>
-          <div class="invite-meta"><div><span>Relationship</span><strong>Individually Managed Client Account</strong></div><div><span>Proposed mandate</span><strong>BM-SCALP-01</strong></div><div><span>Custody model</span><strong>External broker / custodian</strong></div></div>
-          <p>No account has been opened. No capital has been accepted. No trading authority has been granted.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section institution-section" id="institution">
-      <div class="container institution-grid">
-        <div>
-          <div class="section-index">06 / INSTITUTION</div>
-          <p class="eyebrow dark">BUILT TO BE ACCOUNTABLE</p>
-          <h2>The machine can be fast.<br />The institution cannot be careless.</h2>
-        </div>
-        <div class="principles-grid">
-          <article><span>01</span><h3>Account separation</h3><p>A client account is not pooled with Benjamin principal capital or another client’s account. Mandate, custody, performance, and history remain attributable.</p></article>
-          <article><span>02</span><h3>Independent custody</h3><p>Benjamin’s intended trading authority is intentionally distinct from possession or unrestricted withdrawal authority.</p></article>
-          <article><span>03</span><h3>Governed execution</h3><p>Benjamin can decide quickly, but an external financial effect occurs only after Watchman governs and The Hand executes within the exact authorization.</p></article>
-          <article><span>04</span><h3>Evidence before narrative</h3><p>The Book preserves material lineage so decisions and outcomes can be evaluated without rewriting the past after results are known.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="closing-section">
-      <div class="matrix-field closing-matrix" aria-hidden="true"></div>
-      <div class="container closing-copy">
-        <div class="seal seal-large"><span>B</span></div>
-        <p class="eyebrow">BENJAMIN · AN EPINNOX SYSTEM</p>
-        <h2>ZLJ sees.<br />Benjamin decides.<br />Watchman governs.<br />The Hand executes.<br /><span>The Book remembers and proves.</span></h2>
-        <div class="hero-actions closing-actions"><a class="button" href="./sign-in/">Client sign in</a><a class="button button-outline" href="./invitation/">Private invitation</a></div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="brand footer-brand"><span class="brand-mark">B</span><span class="brand-copy"><strong>BENJAMIN</strong><small>AN EPINNOX SYSTEM</small></span></div>
-      <div><strong>Institution</strong><a href="#philosophy">Client model</a><a href="#system">How it works</a><a href="#governance">Governance</a></div>
-      <div><strong>Private access</strong><a href="./sign-in/">Client sign in</a><a href="./invitation/">Private invitation</a></div>
-      <div><strong>Important</strong><p>This design prototype does not constitute an offer, investment advice, an active managed-account service, or a verified performance presentation.</p></div>
+  <footer class="v2-footer">
+    <div class="container footer-v2-grid">
+      <a class="brand v2-brand" href="./"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>BENJAMIN</strong><small>A CODEREIGN COMPANY</small></span></a>
+      <p>Technology-driven investment management for individually managed accounts.</p>
+      <div><a href="./sign-in/">Client sign in</a><a href="./invitation/">Private invitation</a></div>
     </div>
-    <div class="container footer-bottom"><span>© <span data-year></span> Benjamin. All rights reserved.</span><span>Invitation-only individually managed account architecture.</span></div>
+    <div class="container legal-line">© <span data-year></span> Benjamin. Investing involves risk, including possible loss of principal. Illustrative interface content is not a guarantee of future results.</div>
   </footer>
 </body>
 </html>

@@ -7,6 +7,10 @@ on:
       - codex/public-institution-site
     paths:
       - 'site/**'
+      - 'apps/manager-console/**'
+      - 'apps/client-console/**'
+      - 'package.json'
+      - 'package-lock.json'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -28,14 +32,36 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install console dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build Benjamin Command and client demo
+        run: npm run build:consoles
+
+      - name: Assemble Pages artifact
+        run: |
+          rm -rf _site
+          mkdir -p _site/demo/command _site/demo/client
+          cp -R site/. _site/
+          cp -R apps/manager-console/dist/. _site/demo/command/
+          cp -R apps/client-console/dist/. _site/demo/client/
+
       - name: Configure and enable Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Upload static site
+
+      - name: Upload Benjamin Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site
+          path: ./_site
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

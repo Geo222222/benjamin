@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" role="img" aria-label="Benjamin robotic wolf in a financial market environment">
+<defs>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4dda1"/><stop offset=".5" stop-color="#d3aa55"/><stop offset="1" stop-color="#79521f"/></linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#26352d"/><stop offset=".48" stop-color="#0a120d"/><stop offset="1" stop-color="#31443a"/></linearGradient>
+  <linearGradient id="emerald" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#22ed7e"/><stop offset="1" stop-color="#83ffc0"/></linearGradient>
+  <radialGradient id="halo"><stop stop-color="#23ef81" stop-opacity=".16"/><stop offset=".58" stop-color="#23ef81" stop-opacity=".035"/><stop offset="1" stop-color="#23ef81" stop-opacity="0"/></radialGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<ellipse cx="490" cy="340" rx="340" ry="330" fill="url(#halo)"/>
+<g opacity=".28" fill="none" stroke="#4cff98" stroke-width="1">
+  <path d="M40 610L160 560 245 580 330 500 420 525 500 430 585 462 670 350 760 386 860 250"/>
+  <path d="M60 650H860M100 585H840M150 510H810M215 435H785" opacity=".3"/>
+  <path d="M190 120V640M300 100V650M410 80V660M520 70V650M630 90V630M740 110V600" opacity=".12"/>
+</g>
+<g transform="translate(160 48)">
+  <path d="M93 129L151 23l92 73 72-67 101 96 73-61 60 141-44 61 32 87-54 75 24 102-91 72-122-6-115 3-93-73 26-99-56-72 37-86-44-61z" fill="#060b08" stroke="url(#gold)" stroke-width="3"/>
+  <path d="M152 24l-9 143 102-72zM416 94l111-30-65 151z" fill="#111c15" stroke="#d8b35e" stroke-width="2"/>
+  <path d="M143 167l102-72 72 53 99-54 46 121-77 34-49-44-61 55-66-47-82 26z" fill="url(#metal)" stroke="#53655a" stroke-width="2"/>
+  <path d="M128 241l81-28 66 47 61-55 49 44 77-34 26 88-76 30-65-42-68 49-71-43-89 33z" fill="#111a15" stroke="#405047" stroke-width="2"/>
+  <path d="M119 330l89-33 71 43 68-49 65 42 76-30-5 76-84 54-63-13-56 27-67-21-74 4z" fill="#0a110d" stroke="#2d3d34" stroke-width="2"/>
+  <path d="M192 260l67 16-25 38-73-17zM400 259l-67 16 25 38 72-17z" fill="#03110a" stroke="#2bef83" stroke-width="2.5" filter="url(#glow)"/>
+  <path d="M213 269l38 9-18 18-34-8zM379 269l-38 9 18 18 34-8z" fill="url(#emerald)"/>
+  <path d="M279 340l67-49 65 42-34 95-63 42-77-42-29-88z" fill="#070d09" stroke="#8a6a31" stroke-width="2"/>
+  <path d="M247 429l67 41 63-42-20 79-45 32-44-33z" fill="#111913" stroke="#d1a94f" stroke-width="2"/>
+  <path d="M285 499l27 15 27-15-8 27-19 13-19-13z" fill="#050906" stroke="#e0bd70" stroke-width="2"/>
+  <path d="M312 148v386M244 95l68 53 72-54M208 213l104 55 103-55" fill="none" stroke="#d7b262" stroke-width="1.8" opacity=".75"/>
+  <path d="M106 383l74 34-45 113-90 65 19-118zM489 380l-76 47 44 109 92 54-20-116z" fill="url(#metal)" stroke="#b78c3b" stroke-width="2.2"/>
+  <path d="M135 530l78-104 99 44-66 114-116 63-85-52zM457 536l-80-108-65 42 66 116 110 61 61-57z" fill="#0b120e" stroke="#526158" stroke-width="2"/>
+  <path d="M246 584l66-114 66 116-29 74h-75z" fill="#07100b" stroke="#d8b15a" stroke-width="2"/>
+  <g stroke="#24ed80" stroke-width="2" opacity=".75"><path d="M105 385l51 32-23 61"/><path d="M491 383l-50 34 21 63"/><path d="M174 437l45 19-31 54"/><path d="M421 438l-42 20 29 52"/></g>
+</g>
+<g transform="translate(620 458)">
+  <path d="M0 98L54 76l42 8 50-34 48 12 52-44 58 13 55-45" fill="none" stroke="#f1cf80" stroke-width="4"/>
+  <circle cx="54" cy="76" r="5" fill="#25ed7e"/><circle cx="146" cy="50" r="5" fill="#25ed7e"/><circle cx="246" cy="18" r="5" fill="#25ed7e"/>
+</g>
+</svg>

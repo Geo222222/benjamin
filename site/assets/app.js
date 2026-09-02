@@ -2,11 +2,31 @@
   'use strict';
   const scriptUrl = document.currentScript?.src || new URL('./assets/app.js', window.location.href).href;
   const asset = (name) => new URL(name, scriptUrl).href;
+  const demoHref = new URL('../demo/', scriptUrl).href;
 
   document.querySelectorAll('[data-year]').forEach((node) => { node.textContent = String(new Date().getFullYear()); });
 
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const mobileNav = document.querySelector('[data-mobile-nav]');
+  const headerActions = document.querySelector('.site-header .header-actions');
+
+  if (headerActions && !headerActions.querySelector('[data-demo-link]')) {
+    const demoLink = document.createElement('a');
+    demoLink.className = 'text-link';
+    demoLink.href = demoHref;
+    demoLink.textContent = 'Demo consoles';
+    demoLink.dataset.demoLink = 'true';
+    headerActions.prepend(demoLink);
+  }
+
+  if (mobileNav && !mobileNav.querySelector('[data-demo-link]')) {
+    const demoLink = document.createElement('a');
+    demoLink.href = demoHref;
+    demoLink.textContent = 'Demo consoles';
+    demoLink.dataset.demoLink = 'true';
+    mobileNav.appendChild(demoLink);
+  }
+
   if (menuToggle && mobileNav) {
     menuToggle.addEventListener('click', () => {
       const expanded = menuToggle.getAttribute('aria-expanded') === 'true';

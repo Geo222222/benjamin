@@ -1,146 +1,205 @@
 # Benjamin
 
-> **Epinnox sees. Benjamin decides. The Watchman guards. The Hand executes. The Big Book proves. The Little Book testifies. The spoil is accounted for before it is divided.**
+> **ZLJ sees. Benjamin decides. Watchman governs. The Hand executes. The Book remembers and proves.**
 
-Benjamin is the capital-management control plane. It owns capital truth: investment authority, portfolio intent, deterministic risk gates, Treasury policy, fund operations, and eventually the accounting of spoil and portion.
+Benjamin is **Epinnox's capital decision intelligence**. Benjamin serves Epinnox as the money mind: it consumes qualified market intelligence and authoritative financial context, reasons about what Epinnox should do, and emits bounded decision intent.
 
-Benjamin does **not** own market intelligence, execution, stewardship truth, or public disclosure infrastructure.
+Benjamin does **not** own market perception, final governance/authorization, external execution, custody, or institutional proof infrastructure.
 
-## The body
+## V1 mandate
 
-- **Epinnox / The Eyes** — observes markets, researches, and recommends.
-- **The Steward / The Mind** — accepts, modifies, or rejects recommendations.
-- **The Watchman / The Guard** — deterministic risk, mandate, compliance, and jurisdiction controls.
-- **Benjamin Authority** — creates a bounded execution authorization only after Steward approval and Watchman PASS.
-- **The Hand** — separate repository; performs exact authorized execution.
-- **The Big Book** — private authoritative proof history in `Geo222222/the-book`.
-- **The Little Book** — public verification surface operated by The Book; never an automatic export of Benjamin state.
-- **The Vault** — governed storage for source evidence that should not become ledger payloads.
-- **Treasury** — deployable capital, cash, liquidity, and reserves.
-- **The Spoil** — realized economic value after losses, fees, obligations, and required reserves. Principal is never spoil.
-- **The Portion** — entitlement and distribution policy.
-- **The Covenant** — rules every Benjamin component must obey.
-- **Firstfruits** — first fund configuration; not a separate software system.
+Benjamin v1 is deliberately narrow:
 
-For the concrete operating questions, example inputs/outputs, prohibitions, and the complete morning-to-evening lifecycle for each role, see **[`docs/OPERATING_ROLES.md`](docs/OPERATING_ROLES.md)**. That document is the canonical human-readable role guide.
+> **Master short-horizon trading decisions first: scalping / micro trades -> intraday -> short swing trading.**
 
-## Future cognitive architecture
+Long-horizon investment planning, strategic portfolio construction, capital allocation across external portfolios, and broader treasury intelligence come later.
 
-Benjamin's long-term decision intelligence is explicitly planned as a **composable, evidence-driven cognitive system**, not a monolithic trading model and not an unconstrained LLM.
+For v1 Benjamin must answer questions such as:
 
-The future design allows Benjamin to consume typed market, research, machine-learning, portfolio, risk, cost, and historical-memory objects; qualify their provenance and competence; reason over disagreements and competing hypotheses; and emit a typed decision proposal. Existing Watchman/Governor and authorization boundaries remain downstream.
+- Is there a real trade here or should we abstain?
+- What evidence matters for this horizon?
+- Is the expected edge still positive after fees, spread, slippage, and latency?
+- Which models are competent in this instrument/regime/horizon?
+- Are apparently independent signals actually derived from the same evidence?
+- What is the thesis and what invalidates it?
+- What size is justified by the current capital/position context?
+- Should an open trade be held, reduced, or closed?
+- How confident should Benjamin be, given its own measured competence?
 
-The architecture requires three distinct forms of memory:
+`NO TRADE` is a first-class decision.
 
-- **Semantic memory** — what Benjamin knows: durable strategy, market, research, policy, capability, and validated lesson knowledge.
-- **Episodic memory** — what happened: timestamped market cases, predictions, decisions, outcomes, errors, and reasoning trajectories.
-- **Procedural memory** — how Benjamin reasons: governed decision methods, evidence-handling procedures, abstention rules, and escalation logic.
+## Epinnox organs
 
-Z Look Jamaican may later provide structured market-intelligence, state, story, model, prediction, and opportunity objects to Benjamin, but those objects remain evidence inputs rather than capital authority.
+### ZLJ — seeing
 
-The plan also defines model objects, multi-outcome prediction objects, a contextual model-competence router, calibration and drift tracking, an empirical self-model, explicit disagreement records, and controlled model succession so Benjamin can learn continuously without silently mutating a qualified production brain.
+`Geo222222/z-look-jamaican` owns market perception and intelligence production: observations, features, market state, microstructure, regimes, forecasts, model predictions, calibration, drift, and model-competence evidence.
 
-See **[`docs/FUTURE_COGNITIVE_ARCHITECTURE.md`](docs/FUTURE_COGNITIVE_ARCHITECTURE.md)**. This is a future architectural contract only; it does not activate live reasoning, model promotion, or execution.
+ZLJ output is evidence. It is not capital authority.
+
+### Benjamin — deciding
+
+Benjamin owns capital judgment: decision context, evidence qualification, thesis, alternatives, trade/no-trade, sizing judgment, invalidation, trade-management intent, confidence, and decision learning.
+
+Benjamin may use deterministic services, statistical/ML models, local models, frontier models, and other qualified cognitive operators. Those models are organs inside the cognition system; **Benjamin is not reducible to one model**.
+
+### Watchman — governing
+
+Watchman is downstream of Benjamin and owns policy, mandate, limits, compliance, exposure rules, jurisdiction, authority, and the final permission or block required before an external financial action.
+
+Benjamin does not authorize itself.
+
+### The Hand — executing
+
+`Geo222222/the-hand` is the authorized external-action capability plane. It owns the tools/adapters that can change external financial state: exchange/broker orders, wallet/custody signing, transfers, settlement, banking/payment/treasury rails, and future approved financial integrations.
+
+The Hand may implement many capabilities, but it may not originate or materially alter Benjamin's economic intent.
+
+### The Book — remembering and proving
+
+`Geo222222/the-book` owns authoritative cross-system evidence, memory lineage, private proof history, and public testimony policy. It preserves the material chain from ZLJ evidence through Benjamin decision, Watchman governance, Hand execution, and later outcome.
+
+The Book is not Benjamin's brain and Benjamin is not The Book's writer of all truth.
+
+## Target lifecycle
+
+```text
+MARKET / WORLD
+      |
+      v
+     ZLJ
+qualified observations / state / predictions
+      |
+      +--------------------------+
+      |                          |
+      v                          v
+  THE BOOK -----------------> BENJAMIN
+ evidence/history             decision cognition
+                                 |
+                                 v
+                         BENJAMIN.DECISION
+                                 |
+                                 v
+                             WATCHMAN
+                         authorize / block
+                                 |
+                       authorized action
+                                 |
+                                 v
+                            THE HAND
+                    external capability/adaptor
+                                 |
+                                 v
+                              WORLD
+                                 |
+                                 v
+                            THE BOOK
+                      outcome / proof lineage
+                                 |
+                       learning feedback
+                                 |
+                 +---------------+---------------+
+                 v                               v
+                ZLJ                           BENJAMIN
+```
+
+## Benjamin cognitive architecture
+
+Benjamin's intended intelligence is a composable, evidence-driven cognitive system rather than a monolithic trading model or unconstrained LLM.
+
+For v1, cognition is organized at different speeds:
+
+```text
+                    BENJAMIN
+                       |
+        +--------------+--------------+
+        |              |              |
+        v              v              v
+     Reflex         Tactical       Reflective
+ deterministic     decision        learning /
+ fast truth        cognition       metacognition
+```
+
+### Reflex
+
+Deterministic/canonical values that should not depend on generated reasoning: spread, position state, fees, slippage bounds, freshness, order constraints, hard limits supplied by authoritative services, and other machine-checkable facts.
+
+### Tactical
+
+The core v1 decision intelligence: evidence qualification, model disagreement, regime fit, expected edge, thesis/invalidation, trade/no-trade, sizing judgment, hold/reduce/exit intent, and uncertainty.
+
+### Reflective
+
+Slower self-evaluation: model/source degradation, calibration, recurring reasoning errors, regime-specific weakness, timing/slippage problems, and whether a model/procedure should be demoted or replaced.
+
+See [`docs/FUTURE_COGNITIVE_ARCHITECTURE.md`](docs/FUTURE_COGNITIVE_ARCHITECTURE.md).
+
+## Three forms of cognitive memory
+
+Benjamin requires three distinct forms of memory:
+
+- **Semantic memory** — durable knowledge, validated lessons, strategy definitions, market concepts, model capabilities/limitations, and policy knowledge.
+- **Episodic memory** — what happened in specific market cases: evidence, predictions, decisions, outcomes, errors, and reasoning trajectories.
+- **Procedural memory** — governed methods for how Benjamin reasons, qualifies evidence, handles disagreement, abstains, and constructs decisions.
+
+Benjamin owns the meaning and use of these cognitive memories. The Book owns authoritative evidence/proof lineage and may preserve or reference the material records needed to reconstruct them. The two responsibilities must not be collapsed.
+
+## Learning without uncontrolled self-modification
+
+Benjamin should learn continuously through outcome comparison, calibration, contextual model competence, memory updates, and explicit model succession.
+
+A production model should not silently rewrite its own neural weights while controlling capital. Candidate model changes should be replayed, evaluated, shadowed, qualified, and explicitly promoted.
+
+## The benchmark
+
+The primary v1 qualification question is not simply:
+
+> Did Benjamin make money?
+
+It is:
+
+> **Does Benjamin demonstrate repeatable positive decision quality under controlled conditions after realistic costs, with calibrated confidence and bounded drawdown?**
+
+Qualification should separate ZLJ prediction quality from Benjamin decision quality and Hand execution quality.
+
+Relevant evidence includes expected versus realized edge, fees, slippage, net P&L, win/loss distribution, profit factor, drawdown, MFE/MAE, holding period, calibration, and performance by instrument, horizon, regime, model, and strategy family.
+
+## Privacy principle
+
+> **Everything material must be provable. Benjamin does not publish everything it knows.**
+
+Portfolio state, strategies, opportunities, model competence, internal deliberation, counterparties, credentials, tax/banking information, and private reasoning are private by default.
+
+The Big Book preserves minimum-necessary private proof/evidence. The Little Book is a separate disclosure surface and is never an automatic export of Benjamin cognition or portfolio history.
 
 ## ACM-07 consoles
 
-Benjamin now has two deliberately separate frontend applications:
+Benjamin has separately built Manager and Client console shells:
 
 ```text
 apps/manager-console
 apps/client-console
 ```
 
-The **Manager Console** is the internal operating surface for research, portfolio state, Steward decisions, Watchman results, authorization/execution status, evidence health, reporting, and Covenant health.
+The Manager Console is the internal operating surface. The Client Console is participant-scoped and must never become a browser-filtered copy of manager-only state.
 
-The **Client Console** is a participant-scoped surface for that participant's own capital account, authorized performance view, activity, documents, notices, and proofs.
+The current ACM-07.0 implementation uses synthetic shadow fixtures and does not represent accepted subscriptions, live client assets, live performance, or production investor records.
 
-The Client Console is **not** a filtered Manager Console. It has a separate build and must eventually receive a separate server-side participant read model so manager-only information never enters the client payload merely to be hidden in the browser.
+See [`docs/ACM-07_CONSOLES.md`](docs/ACM-07_CONSOLES.md).
 
-The current ACM-07.0 implementation uses synthetic shadow fixtures only and displays that status prominently. It does not represent accepted subscriptions, live client assets, live performance, or production investor records.
+## Transitional implementation note
 
-See **[`docs/ACM-07_CONSOLES.md`](docs/ACM-07_CONSOLES.md)** and **[`contracts/console-view-policy.json`](contracts/console-view-policy.json)** for the information architecture and privacy invariants.
+Existing code/contracts may still contain earlier terms such as **Steward**, `BENJAMIN.RISK`, or `BENJAMIN.AUTHORIZATION`. Those names describe the current foundation and are not constitutional ownership claims for the target bridge architecture.
 
-Run locally after installing Node dependencies:
+The target semantics are:
 
-```bash
-npm install
-npm run dev:manager
-```
+- Benjamin decides;
+- Watchman governs/authorizes or blocks;
+- The Hand executes.
 
-or in a second terminal:
+Future bridge work should migrate schemas without erasing historical evidence or silently changing already-issued proof semantics.
 
-```bash
-npm run dev:client
-```
+## Current status
 
-Build both independently with:
+**FOUNDATION / SHADOW — NO LIVE MONEY OR EXECUTION.**
 
-```bash
-npm run build:consoles
-```
-
-Console builds are part of Constitutional CI alongside the Python kernel tests.
-
-## Privacy principle
-
-> **Everything material must be provable. Benjamin does not publish everything it knows.**
-
-Portfolio positions, strategies, opportunities, acquisition targets, valuations, counterparties, tax information, banking information, risk state, and internal deliberations are private by default.
-
-Current decision, risk, and authorization evidence is classified `CONFIDENTIAL_EVIDENCE` and is published only to the **Big Book** with scoped readers. There is no automatic path to the Little Book.
-
-## Private evidence-required lifecycle
-
-```text
-Epinnox analysis
-      |
-      v
-EPINNOX.RECOMMENDATION -----> private Big Book receipt
-      |
-      v
-Benjamin Steward Decision --> BENJAMIN.DECISION ------> Big Book
-      |
-      v
-Watchman Evaluation --------> BENJAMIN.RISK ----------> Big Book
-      |
- PASS | BLOCK
-      |
-      v
-Benjamin Authorization -----> BENJAMIN.AUTHORIZATION -> Big Book
-      |
-      v
-AuthorizedExecutionRequest
-      |
-      v
-The Hand
-      |
-      v
-HAND.EXECUTION --------------> Big Book
-```
-
-A recommendation without required Epinnox provenance is not eligible for the evidence-required control-plane path. An authorization is not handed to The Hand until Benjamin's decision, risk result, and authorization have each produced private Big Book lineage.
-
-## Public verification is separate
-
-When the outside world needs to verify a legitimate claim, Benjamin does not expose its private records. A separate disclosure decision may produce a minimum-necessary Little Book attestation derived from a Big Book commitment.
-
-Examples include a public authority credential, intentionally disclosed asset claim, or institutional state commitment.
-
-The Little Book must never become sufficient to reconstruct Benjamin's private portfolio or institutional wealth.
-
-## Repository boundary
-
-`src/benjamin/evidence.py` defines the producer-side **Big Book** gateway contract. It classifies proof drafts and visibility before publication. The Book owns proof verification, private append-only history, least-privilege reads, Merkle/state commitments, and the public Little Book disclosure surface.
-
-See `PRIVACY.md`, `docs/EVIDENCE_BOUNDARY.md`, `docs/OPERATING_ROLES.md`, `docs/FUTURE_COGNITIVE_ARCHITECTURE.md`, `docs/ACM-07_CONSOLES.md`, `contracts/privacy-defaults.json`, and `contracts/console-view-policy.json`.
-
-## Current milestone
-
-**B1.1 + ACM-07.0 — Privacy-scoped evidence-aware control plane with separately built Manager and Client console shells.**
-
-No live broker, investor onboarding, tokenized fund ownership, production private chain, public-chain writer, live cognitive reasoner, continuously adapting production model, or live client capital exists here yet.
-
-## Status
-
-**FOUNDATION / SHADOW UI — NO LIVE MONEY OR EXECUTION.**
+The current repository does not yet contain the complete live Benjamin v1 reasoner, the production ZLJ bridge, production Watchman bridge, live Hand capability routing, or autonomous capital deployment.

@@ -25,6 +25,15 @@ from .domain import (
 from .evidence import EvidenceDraft, EvidencePublisher
 from .steward import decide
 from .watchman import RiskPolicy, evaluate
+from .watchman_book import (
+    WatchmanBookAttachment,
+    WatchmanBookError,
+    WatchmanBookOutbox,
+    WatchmanBookSigner,
+    build_watchman_governance_payload,
+    load_watchman_book_signer_from_env,
+    prepare_watchman_book_attachment,
+)
 
 __all__ = [
     "ACKNOWLEDGED",
@@ -52,8 +61,15 @@ __all__ = [
     "RiskDecision",
     "RiskPolicy",
     "RiskStatus",
+    "WatchmanBookAttachment",
+    "WatchmanBookError",
+    "WatchmanBookOutbox",
+    "WatchmanBookSigner",
     "authorize",
+    "build_watchman_governance_payload",
     "decide",
     "evaluate",
     "load_benjamin_book_signer_from_env",
+    "load_watchman_book_signer_from_env",
+    "prepare_watchman_book_attachment",
 ]

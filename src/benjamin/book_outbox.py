@@ -205,7 +205,10 @@ class BookOutbox:
             return self.quarantine(receipt_id, "stored payload digest mismatch")
         if _sha256(_canonical(envelope)) != record["envelope_digest"]:
             return self.quarantine(receipt_id, "stored envelope digest mismatch")
-        if record.get("producer") != self.producer or record.get("event_prefix") != self.event_prefix:
+        stored_prefix = record.get("event_prefix")
+        if record.get("producer") != self.producer or (
+            stored_prefix is not None and stored_prefix != self.event_prefix
+        ):
             return self.quarantine(receipt_id, "stored outbox producer binding mismatch")
 
         record["attempt_count"] = int(record.get("attempt_count", 0)) + 1

@@ -4,7 +4,7 @@
 
 ACM-07 makes Benjamin observable and usable through two deliberately separate frontend surfaces:
 
-1. **Manager Console** — institutional operating surface for the Steward, Watchman, authorized operations, and auditors.
+1. **Manager Console** — institutional operating surface for Benjamin decision operations, Watchman governance state, Hand execution state, evidence health, and authorized auditors/operators.
 2. **Client Console** — participant-facing surface for one participant's lawful capital-account truth, documents, notices, and proofs.
 
 The two consoles are not role-switched views of the same application. They are separate build artifacts with separate view models so manager-only information cannot leak into a client bundle and merely be hidden by client-side permissions.
@@ -14,6 +14,12 @@ The two consoles are not role-switched views of the same application. They are s
 > **A client receives no more information than is necessary to exercise their rights, understand their own participation, and verify legitimate claims.**
 
 The Manager Console may inspect private institutional state according to role and authority. The Client Console receives only participant-scoped or intentionally public data.
+
+The console must preserve the Epinnox organ boundary:
+
+> **ZLJ sees. Benjamin decides. Watchman governs. The Hand executes. The Book remembers and proves.**
+
+A UI workflow may connect these organs. It does not transfer ownership among them.
 
 ## Current phase
 
@@ -32,11 +38,11 @@ The first goal is to qualify information architecture, privacy boundaries, and o
 ## Initial navigation
 
 - **Overview** — capital, risk, data/evidence health, active work, recent decisions.
-- **Research** — Epinnox cases and recommendation queue.
+- **Research** — ZLJ intelligence, market cases, model/prediction context, and opportunities awaiting Benjamin consideration.
 - **Portfolio** — positions, exposure, cash, reserves, benchmark and shadow NAV.
-- **Decisions** — Steward decisions, pending approvals, invalidation/review dates.
-- **Watchman** — policy checks, blocks, exposure limits, mandate health.
-- **Execution** — authorization state and Hand receipts; never a strategy-authoring surface.
+- **Decisions** — Benjamin decisions, abstentions, pending/revised decision work, invalidation/review conditions.
+- **Watchman** — policy checks, authorizations, blocks, exposure limits, mandate health.
+- **Execution** — Watchman authorization state and Hand receipts; never a strategy-authoring or self-authorizing surface.
 - **Evidence** — Big Book proof health, missing lineage, reconciliation state.
 - **Participants** — participant administration only for roles entitled to see it.
 - **Reports** — attribution, calibration, statements, audit exports.
@@ -53,41 +59,45 @@ Cash
 Deployable cash
 Required reserves
 
-Risk
+Risk / Governance
 Current drawdown
 Largest position
 Gross/net exposure
-Watchman blocks
+Watchman authorizations / blocks
 
-Research
-Observed assets
-Active cases
-Recommendations awaiting decision
+Market Intelligence
+ZLJ data/model health
+Active market cases
+Qualified opportunities awaiting Benjamin decision
+
+Decisions
+Recent Benjamin decisions
+No-trade / abstention decisions
+Invalidation/review state
 
 Operations
-Pending authorizations
-Execution failures
+Pending Watchman authorizations
+Hand execution failures
 Reconciliation breaks
 
 Evidence
-Data health
 Big Book integrity
-Missing proofs
-Unreviewed decisions
+Missing proofs / lineage
+Unreviewed outcomes
 ```
 
 ## Manager-only information
 
 Examples include:
 
-- private investment cases and theses;
+- private ZLJ market intelligence, model competence, and opportunity evidence;
+- private Benjamin theses and decision rationale;
 - opportunity and acquisition targets;
 - portfolio positions and exact exposures;
 - cash/reserve state;
 - Watchman reasoning and internal limits;
-- decision rationale;
-- pending authorizations;
-- execution and reconciliation detail;
+- pending Watchman authorizations;
+- Hand execution and reconciliation detail;
 - participant administration where authorized;
 - internal performance attribution;
 - private Big Book lineage.
@@ -116,12 +126,12 @@ None of these fields are eligible for the Client Console merely because they exi
 ## Client Console must never expose
 
 - other participants' balances, identities, contributions or distributions;
-- Epinnox investment theses or recommendation queue;
+- private ZLJ research, model stack, predictions, or opportunity queue;
+- private Benjamin theses or decision reasoning;
 - unreleased acquisition targets or unrealized opportunities;
 - exact portfolio holdings unless a deliberate reporting policy authorizes them;
-- internal Watchman thresholds or private risk deliberations;
-- internal decision rationale;
-- Hand authorization payloads;
+- internal Watchman thresholds or private governance/risk deliberations;
+- Hand authorization/action payloads;
 - unrestricted Big Book browsing;
 - banking credentials, SSNs, identity documents, private keys or other `SECRET_REGULATED` data.
 
@@ -169,16 +179,30 @@ This is a security invariant.
 
 After ACM-01 through ACM-06 mature, replace demo snapshots with read models sourced from:
 
-- Epinnox recommendation/state APIs;
-- Benjamin decisions and Watchman state;
+- ZLJ market-intelligence/data/model APIs;
+- Benjamin decision/context services;
+- Watchman governance/authorization state;
 - Treasury and portfolio accounting;
-- The Hand execution receipts;
+- The Hand execution/capability receipts;
 - Big Book proof/index services;
 - participant-accounting services.
 
+Each source remains authoritative only for the truth it owns.
+
 ## ACM-07.2 — governed actions
 
-Only after read models are qualified should the Manager Console gain mutation workflows such as approve, reject, authorize, reconcile, or publish a disclosure. Every mutation must route through the owning domain; the UI never mutates capital truth directly.
+Only after read models are qualified should the Manager Console gain mutation workflows.
+
+Examples include:
+
+- ask Benjamin to create/revise/reject a capital decision;
+- submit a Benjamin decision to Watchman;
+- display/request actions around a Watchman authorization or block without bypassing it;
+- invoke an authorized Hand capability through the proper server-side bridge;
+- reconcile an outcome;
+- request an explicit disclosure from The Book.
+
+Every mutation routes through the owning domain; the UI never mutates capital truth directly and never treats one organ's action as another organ's authority.
 
 Client mutations remain narrow: profile/access requests, document acknowledgements, subscription/redemption requests when legally and operationally enabled, and support workflows. Requests do not become effective state until the governing domain accepts them.
 
@@ -192,10 +216,11 @@ Client mutations remain narrow: profile/access requests, document acknowledgemen
 4. No performance display may imply live audited performance when it is simulated.
 5. No console may invent missing financial facts.
 6. Stale/degraded/unavailable data must be visibly represented as such.
-7. Manager actions must preserve Steward, Watchman, Authority, Hand, and Book boundaries.
-8. Client views may expose participant proofs without exposing institution-wide private history.
-9. Secret/regulated data is never embedded in ordinary frontend state.
-10. Public Little Book information is explicit testimony, never an automatic projection of the Manager Console.
+7. Manager actions must preserve ZLJ, Benjamin, Watchman, Hand, and Book ownership boundaries.
+8. A Benjamin decision is not a Watchman authorization; a Watchman authorization is not a Hand execution.
+9. Client views may expose participant proofs without exposing institution-wide private history.
+10. Secret/regulated data is never embedded in ordinary frontend state.
+11. Public Little Book information is explicit testimony, never an automatic projection of the Manager Console.
 
 # Definition of done for the first slice
 

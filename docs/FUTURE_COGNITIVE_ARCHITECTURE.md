@@ -1,375 +1,526 @@
 # Benjamin Future Cognitive Architecture
 
-> **Status: FUTURE PLAN / NON-OPERATIVE**
+> **Status: ARCHITECTURAL TARGET / NON-LIVE**
 >
-> This document defines intended cognitive architecture. It does not grant execution authority, change current production behavior, promote any model, or weaken the Covenant, Watchman, Governor, evidence, privacy, or authorization boundaries.
+> This document defines Benjamin's intended cognitive structure and v1 qualification direction. It does not activate live capital, promote a model, weaken Watchman, grant The Hand execution authority, or change The Book's evidence/privacy rules.
 
-## Purpose
+## Constitutional position
 
-Benjamin should become an evidence-driven decision intelligence, not a monolithic trading model.
+> **ZLJ sees. Benjamin decides. Watchman governs. The Hand executes. The Book remembers and proves.**
 
-The long-term design is to let Benjamin reason over a graph of typed, provenance-bearing objects produced by deterministic systems, research systems, machine-learning systems, market-perception systems, portfolio systems, and historical memory. Benjamin may synthesize those objects into a decision proposal, but no model may convert a proposal into capital-moving authority by itself.
+Benjamin is Epinnox's **decision intelligence**, not a monolithic trading model and not an execution system.
 
-The central architectural rule is:
+The architecture must let Benjamin consume heterogeneous evidence, reason over it according to context and measured competence, create bounded capital decisions, learn from outcomes, and remain subordinate to governance.
 
-> **Objects may inform Benjamin. Only governed authority may authorize action.**
+## V1 cognitive mandate
+
+Benjamin's first capability benchmark is intentionally narrow:
+
+1. **scalping / micro trades** — milliseconds/seconds to minutes where infrastructure allows;
+2. **intraday trading** — minutes to hours;
+3. **short swing trading** — hours to several days.
+
+Long-horizon investment planning, strategic portfolio allocation, multi-year fundamental underwriting, and broader treasury/capital-allocation intelligence are later capability families.
+
+V1 therefore prioritizes reasoning about:
+
+- spread, depth, liquidity, volume, and order flow;
+- microstructure and imbalance;
+- price action, momentum, mean reversion, and volatility;
+- market state and regime;
+- forecast distributions across explicit short horizons;
+- fees, slippage, latency, and expected executable edge;
+- position and exposure state;
+- entry, target, stop/invalidation, hold/reduce/exit;
+- confidence and measured competence;
+- trade versus abstention.
+
+`NO TRADE` is a first-class output.
 
 ## Z Look Jamaican boundary
 
-Z Look Jamaican (ZLJ) may evolve into a producer of structured market-intelligence objects that Benjamin can consume later.
+Z Look Jamaican (ZLJ) is the producer of market-perception and model-intelligence objects Benjamin consumes.
 
 ZLJ may provide, subject to contract and qualification:
 
 - raw market observation references;
-- deterministic measurements and classifications;
-- statistical and technical measurements;
-- market-structure objects;
-- microstructure objects;
-- visual/chart-perception objects;
+- source/freshness/sequence quality;
+- deterministic measurements and features;
+- market-structure and microstructure objects;
 - market-state and transition objects;
-- market-story hypotheses;
-- strategy-applicability objects;
-- machine-learning model objects and prediction objects;
-- opportunity-candidate objects;
-- prediction/outcome evaluation records;
-- model qualification, calibration, drift, and competence records.
+- regime classifications;
+- statistical/ML model objects;
+- prediction distributions and expected-move objects;
+- calibration, drift, and contextual competence records;
+- opportunity evidence;
+- prediction-versus-outcome evaluation records.
 
-ZLJ does **not** gain Benjamin decision authority by producing these objects. ZLJ output is evidence and intelligence input. Benjamin retains responsibility for capital intent, portfolio context, decision synthesis, and governed authorization. The Watchman/Governor remains downstream and cannot be bypassed.
+ZLJ does **not** gain capital authority by producing a strong forecast.
 
-## Object graph instead of one giant state
-
-Benjamin should not consume one giant JSON state blob. The intended design is a composable object graph in which each object class owns one kind of truth or inference.
+Conceptually:
 
 ```text
-Raw Evidence Objects
-        ↓
-Measurement Objects
-        ↓
-Structure / Context / Perception Objects
-        ↓
-State + Transition Objects
-        ↓
-Market Story Objects
-        ↓
-ML Model + Prediction Objects
-        ↓
-Strategy Applicability Objects
-        ↓
-Opportunity Objects
-        ↓
-Portfolio / Risk / Cost Objects
-        ↓
-Decision Context Object
-        ↓
-Benjamin Investment Reasoner
-        ↓
-Decision Proposal Object
-        ↓
-Watchman / Governor
-        ↓
-Bounded Authorization
+RAW MARKET
+    |
+    v
+ZLJ observations
+    |
+    v
+features / market state / regimes
+    |
+    v
+models / predictions / competence
+    |
+    v
+qualified intelligence objects
+    |
+    v
+BENJAMIN
 ```
 
-Each object should carry enough lineage to answer:
+Only Benjamin converts that evidence into a capital decision.
+
+## Benjamin is not one model
+
+Benjamin may use many computational systems internally:
+
+```text
+Benjamin
+  |- deterministic context compiler
+  |- EvidenceQualifier
+  |- ContradictionDetector
+  |- RegimeInterpreter
+  |- ForecastComparator
+  |- CostAndEdgeReasoner
+  |- ThesisBuilder
+  |- Scenario / counterfactual reasoner
+  |- Position / portfolio reasoner
+  |- DecisionReasoner
+  |- ConfidenceCalibrator
+  |- SelfModel / metacognition
+  `- OutcomeLearner
+```
+
+Some may be deterministic algorithms, some statistical models, some ML models, some language/reasoning models, and some retrieval systems.
+
+Models are **cognitive operators**. Benjamin is the governed system that composes them.
+
+No single model is sovereign.
+
+## Three cognitive speeds
+
+A scalp-oriented decision system should not force every computation through one large slow reasoner.
+
+### Reflex layer
+
+Fast deterministic/canonical truth and immediate validity conditions:
+
+- current spread;
+- position state;
+- available buying/capital state supplied by authoritative services;
+- fee schedule;
+- slippage bounds/estimates supplied by qualified services;
+- data freshness;
+- authorization-independent order constraints;
+- market/venue health;
+- hard invalidation conditions that can be deterministically evaluated.
+
+The reflex layer does not invent strategy. It keeps generated reasoning from replacing known machine truth.
+
+### Tactical layer
+
+The heart of Benjamin v1:
+
+- Is the setup actually valid?
+- Which evidence is relevant to this exact horizon?
+- Which models are qualified here?
+- Are the signals independent or derivatives of the same evidence?
+- Where do qualified sources disagree?
+- What is the expected move and downside distribution?
+- Does expected edge survive fees, spread, slippage, latency, and uncertainty?
+- What thesis explains the trade?
+- What invalidates the thesis?
+- What size is justified by current capital/position context?
+- Should Benjamin enter, hold, reduce, exit, or abstain?
+
+### Reflective layer
+
+Slower self-evaluation and learning:
+
+- Why is Benjamin losing in a particular regime?
+- Which ZLJ models have degraded?
+- Is a model's stated confidence miscalibrated?
+- Is Benjamin systematically entering too late?
+- Are fees/slippage destroying theoretical edge?
+- Are repeated errors coming from ZLJ, Benjamin reasoning, Watchman constraints, or Hand execution quality?
+- Should a model, feature, procedure, or confidence threshold be demoted or replaced?
+
+This layer may operate after cases, periodically, or after sessions rather than on every market event.
+
+## Object graph instead of one giant prompt
+
+Benjamin should reason over a graph of typed, provenance-bearing objects rather than one giant JSON dump or unrestricted database context.
+
+```text
+ZLJ Observation Objects
+        |
+        v
+Measurement / Feature Objects
+        |
+        v
+Market State / Regime Objects
+        |
+        v
+Model / Prediction / Competence Objects
+        |
+        v
+Opportunity Evidence
+        |
+        +-----------------------+
+        |                       |
+        v                       v
+Portfolio/Capital State    Book Memory/Evidence
+        |                       |
+        +-----------+-----------+
+                    |
+                    v
+          DecisionContextObject
+                    |
+                    v
+             Benjamin Reasoner
+                    |
+                    v
+           TradeDecisionObject
+                    |
+                    v
+                Watchman
+```
+
+Each object should preserve enough lineage to answer:
 
 - what produced it;
-- which source evidence it depends on;
-- when the underlying information became knowable;
+- which evidence it depends on;
+- when the information became knowable;
 - which software/model/rule version produced it;
-- whether it is a fact, deterministic derivation, inference, hypothesis, prediction, or policy decision;
-- what qualification status applies;
+- whether it is fact, deterministic derivation, inference, hypothesis, prediction, decision, or outcome;
+- what qualification applies;
+- what horizon it applies to;
 - what invalidates or expires it;
 - which later objects consumed it.
 
 ## Evidence classes are not equal
 
-The reasoner must see heterogeneous evidence without treating all inputs as peers.
+Benjamin must see heterogeneous evidence without treating all inputs as peers.
 
-A future evidence-qualification layer should distinguish at minimum:
+A useful distinction is:
 
 1. canonical observations;
 2. deterministic derived measurements;
 3. deterministic state classifications;
-4. qualified statistical or ML estimates;
-5. structured market-story inferences;
+4. qualified statistical/ML estimates;
+5. structured hypotheses/inferences;
 6. visual/perception interpretations;
-7. language-model hypotheses or explanations.
+7. generated explanations.
 
-This is not a universal fixed ranking. Applicability depends on the question, horizon, instrument, data quality, and model competence. However, lower-authority inference must never silently overwrite higher-authority observations.
+This is not a universal fixed ranking. Relevance depends on the exact decision question, horizon, instrument, data quality, and contextual competence.
+
+However, a lower-authority inference must never silently overwrite a higher-authority observation.
 
 ## Model objects
 
 Machine-learning systems are first-class objects, not invisible implementation details.
 
-A model object should identify at minimum:
+A model object should identify where relevant:
 
-- model ID and version;
-- model family and purpose;
+- model ID/version/family/purpose;
 - owner/provider;
 - training dataset references;
-- feature definitions and versions;
+- feature definitions/versions;
 - label definitions;
 - training and evaluation windows;
 - leakage/look-ahead controls;
 - validation method;
-- supported instruments, horizons, and regimes;
+- supported instruments/horizons/regimes;
 - known failure modes;
 - calibration state;
 - drift state;
-- qualification/graduation status;
+- qualification status;
 - artifact hash;
-- deployment status.
+- deployment state.
 
-A single model may emit a multi-outcome prediction object. For example, one qualified model may estimate return distributions, drawdown risk, breakout-failure probability, volatility, liquidity deterioration, or execution quality across multiple horizons.
+A prediction object remains separate from the model object and from the later realized outcome.
 
-The prediction object must remain separate from the model object and from realized outcome labels.
+A model may emit multiple outcomes or a distribution rather than one direction bit.
 
-## Evidence Reliability / Model Competence Router
+## Evidence reliability and model competence
 
-The future Benjamin Investment Reasoner should not simply average model outputs.
+Benjamin should not simply average model outputs.
 
-A dedicated qualification and competence layer should estimate how much trust a given expert deserves for the current question and context.
+A qualification/competence layer should determine how much trust an expert deserves for the current question.
 
 Conceptually:
 
 ```text
 Effective trust
-    = hard qualification
-    × empirical competence
-    × current applicability
-    × calibration quality
+  = hard qualification
+  x empirical competence
+  x current applicability
+  x calibration quality
 ```
 
-The exact combination need not be literal multiplication, but the decomposition should remain explicit.
+The exact implementation need not literally multiply these values, but the decomposition should remain inspectable.
 
 ### Hard qualification
 
-Deterministic and fail-closed. Examples:
+Examples:
 
-- model is allowed for this decision class;
-- feature provenance is valid;
-- data freshness passes;
-- schema is compatible;
-- current instrument/horizon is in scope;
-- artifact/version is known;
-- no quarantine or suspension applies.
+- model allowed for this decision family;
+- feature provenance valid;
+- data fresh enough;
+- schema compatible;
+- instrument/horizon in scope;
+- artifact/version known;
+- no quarantine/suspension.
 
-A hard qualification failure can force effective trust to zero regardless of model confidence.
+A hard failure can force effective trust to zero regardless of model confidence.
 
 ### Empirical competence
 
-Learned from prediction versus realized outcome, conditioned on relevant contexts such as:
+Learned from prediction versus outcome under relevant contexts such as:
 
 - instrument;
 - asset class;
 - horizon;
 - volatility regime;
 - liquidity regime;
-- market story;
 - session;
+- market state;
 - strategy family;
 - distribution-shift state.
 
-The question for the competence model is not "which way will price move?" It is:
+The competence question is:
 
 > **How reliable is expert X for question Y under context Z?**
 
 ### Current applicability
 
-The system should estimate whether the current observation resembles the model's qualified experience. Out-of-distribution conditions should reduce trust and may fail closed where policy requires.
+Out-of-distribution or unfamiliar conditions should reduce trust and may force abstention where policy requires.
 
 ## Three required forms of memory
 
-Benjamin's long-term cognitive architecture requires three distinct memory systems. They must not be collapsed into one generic vector store or one mutable prompt.
+Benjamin requires three distinct memory systems. They must not be collapsed into one generic vector store or mutable prompt.
 
-### 1. Semantic memory — what Benjamin knows
-
-Semantic memory contains durable, versioned knowledge and beliefs, for example:
-
-- strategy definitions and operator doctrine;
-- indicator and measurement definitions;
-- market-state ontology;
-- known economic mechanisms;
-- research findings and replication evidence;
-- portfolio and risk concepts;
-- policy and governance knowledge;
-- model capability and limitation knowledge;
-- validated lessons that have graduated beyond a single case.
-
-Semantic memory should distinguish externally published research, internal historical evidence, shadow evidence, and live evidence. Published research is evidence of a proposition, not proof that Benjamin can execute the edge economically.
-
-### 2. Episodic memory — what happened
-
-Episodic memory contains time-bounded cases and reasoning trajectories.
-
-A market case may preserve:
-
-- the world/decision snapshot available at the time;
-- facts and deterministic measurements;
-- state and transition objects;
-- market-story hypotheses;
-- competing interpretations;
-- model predictions and effective trust weights;
-- portfolio context;
-- the reasoner's thesis;
-- expected next states;
-- decision proposal;
-- actual later observations and outcomes;
-- prediction errors;
-- discovered contradictions;
-- post-case lessons.
-
-This enables retrieval of structurally similar prior situations without pretending that the past is identical to the present.
-
-### 3. Procedural memory — how Benjamin reasons
-
-Procedural memory contains governed decision methods rather than facts about one market case.
+### Semantic memory — what Benjamin knows
 
 Examples:
 
-- how to evaluate a breakout candidate;
-- how to resolve conflicting model evidence;
-- how to downgrade stale or out-of-distribution evidence;
-- how to distinguish fact, inference, and hypothesis;
-- how to assemble a Decision Context Object;
-- how to request missing evidence;
-- how to compare strategy candidates;
-- how to handle uncertainty and abstain;
-- how to prepare a bounded Decision Proposal Object;
-- how to escalate to Watchman/Governor without bypassing them.
+- strategy definitions and doctrine;
+- market-state ontology;
+- validated research findings;
+- model capability and limitation knowledge;
+- market mechanisms;
+- portfolio/risk concepts;
+- validated lessons that have graduated beyond one case.
 
-Procedural memory is versioned policy/skill knowledge. A model may recommend a procedural change, but it must not silently rewrite governing procedure while operating.
+### Episodic memory — what happened
+
+A short-horizon market case may preserve:
+
+- market snapshot available at the time;
+- features/state/regime;
+- competing hypotheses;
+- model predictions/effective trust;
+- capital/position context;
+- Benjamin's thesis and invalidation;
+- expected outcomes;
+- decision;
+- later price path/outcome;
+- prediction errors;
+- MFE/MAE and other case measurements where relevant;
+- execution quality references;
+- discovered contradictions;
+- post-case lessons.
+
+### Procedural memory — how Benjamin reasons
+
+Examples:
+
+- how to evaluate a scalp candidate;
+- how to compare conflicting model evidence;
+- how to downgrade stale/OOD evidence;
+- how to calculate which deterministic facts must be fetched rather than generated;
+- how to construct a bounded decision context;
+- how to abstain;
+- how to build a TradeDecisionObject;
+- how to route a decision to Watchman without bypassing governance.
+
+Procedural memory is governed/versioned skill knowledge. A model may recommend a procedural change; it does not silently rewrite procedure while operating.
+
+## Relationship with The Book
+
+Benjamin owns the **meaning and use** of its cognitive memory. The Book owns authoritative cross-organ evidence/proof lineage.
+
+The Big Book should preserve or reference the minimum material evidence needed to reconstruct decisions and outcomes without becoming a dump of every feature vector, token, prompt, private research artifact, or ephemeral thought.
+
+A useful trading learning chain is:
+
+```text
+MARKET MEMORY
+what the market looked like
+       +
+DECISION MEMORY
+what Benjamin believed/decided
+       +
+OUTCOME MEMORY
+what actually happened
+       |
+       v
+EVALUATION / LEARNING
+```
+
+The Book can preserve the authoritative lineage connecting those records while Benjamin's memory services optimize retrieval and cognition.
 
 ## Self model / metacognition
 
-Benjamin should maintain an empirical self-model rather than claim generalized intelligence.
+Benjamin should maintain an empirical self-model rather than claiming generalized intelligence.
 
-A future `SelfModelObject` may contain:
+A `SelfModelObject` may include:
 
-- current reasoner/model versions;
+- current reasoner/operator/model versions;
 - measured competence by decision family;
-- measured competence by market regime and horizon;
+- competence by instrument/regime/horizon;
 - calibration curves;
 - known weaknesses;
-- recent recurring error patterns;
+- recurring error patterns;
 - distribution-shift indicators;
 - abstention thresholds;
 - unresolved qualification gaps.
 
-The purpose is practical metacognition:
+The operational purpose is:
 
 > **Benjamin should know where evidence says Benjamin is reliable, where it is weak, and when it should reduce confidence or abstain.**
 
-The self model must be empirical and versioned. It is not a claim of consciousness or authority.
-
 ## Decision Context Object
 
-The reasoner should receive a bounded `DecisionContextObject`, not unrestricted database access or an unstructured prompt dump.
+The reasoner should receive a bounded context containing only decision-relevant authoritative or qualified material.
 
 A future context may reference:
 
 - market/world snapshot;
 - deterministic measurements;
-- structure, state, and transition objects;
-- market stories and competing hypotheses;
-- research evidence;
-- strategy applicability;
-- ML predictions;
+- microstructure/state/regime;
+- ZLJ predictions;
 - model qualification/competence/calibration;
 - similar episodic cases;
 - semantic knowledge;
 - procedural rule version;
-- portfolio state;
-- liquidity and cash state;
-- risk state;
-- costs and execution feasibility;
-- contradictions and missing evidence;
+- current position/capital/liquidity state;
+- fees/slippage/latency estimates;
+- contradictions;
+- missing evidence;
+- explicit horizon;
 - explicit decision question.
 
-The compiler that builds this context should itself be versioned and auditable.
+The context compiler itself should be versioned and auditable.
 
-## Benjamin Investment Reasoner
+## TradeDecisionObject
 
-The future reasoner is a synthesis component, not a source-of-truth calculator.
+Benjamin's v1 output should remain a **decision**, not an external execution instruction that bypasses Watchman.
 
-Its responsibilities may include:
+A decision may preserve:
 
-- compare competing hypotheses;
-- reconcile heterogeneous evidence;
-- explicitly surface disagreement;
-- use qualification and competence weights;
-- retrieve analogous historical cases;
-- evaluate strategy fit;
-- incorporate portfolio and risk context;
-- identify missing evidence;
-- define invalidation conditions;
-- estimate uncertainty;
-- recommend action, watch, research, or abstention;
-- produce a typed `DecisionProposalObject`.
-
-It should not be trusted to calculate canonical RSI, prices, P&L, accounting, limits, or execution state when deterministic services can provide those values.
-
-## Decision proposal, not execution
-
-A reasoner output should preserve at least:
-
-- recommendation;
-- decision class;
+- decision ID;
+- instrument/market;
+- decision class: `ENTER | HOLD | REDUCE | EXIT | NO_TRADE`;
+- side/direction where applicable;
+- intended size or bounded sizing request;
+- horizon;
+- entry conditions;
+- target/expected outcome;
+- stop/invalidation conditions;
 - confidence and confidence decomposition;
-- primary hypothesis;
+- primary thesis;
 - competing hypotheses;
-- supporting evidence references;
-- contradicting evidence references;
-- missing evidence;
-- relevant model predictions and effective trust;
-- analogous cases retrieved;
-- strategy candidates;
-- portfolio implications;
-- economic/cost assessment;
-- expected outcomes;
-- invalidation conditions;
-- requested authority, if any;
-- reasoner, context-compiler, and procedure versions.
+- supporting/contradicting evidence;
+- relevant model predictions/effective trust;
+- estimated fees/spread/slippage/latency;
+- expected edge after costs;
+- capital/position context reference;
+- reasoner/context/procedure versions;
+- expiration or decision-validity window.
 
-The proposal remains non-authoritative until the existing governance path permits action.
+It then goes to Watchman.
+
+## Watchman boundary
+
+Watchman owns the final policy/governance decision required before an external financial action.
+
+Watchman may consider:
+
+- mandate;
+- maximum risk/exposure;
+- available capital;
+- concentration;
+- leverage;
+- jurisdiction/compliance;
+- venue/account permissions;
+- kill switches;
+- evidence completeness;
+- decision expiry;
+- other deterministic or governed constraints.
+
+Watchman may `AUTHORIZE` or `BLOCK`. It does not need to become the investment reasoner.
+
+Benjamin may revise and resubmit a new decision when a block reveals a correctable constraint. It may not route around Watchman.
+
+## The Hand boundary
+
+The Hand receives a Watchman-authorized action envelope plus only the information required to perform the approved capability.
+
+The Hand may own many integrations:
+
+- exchanges;
+- brokers;
+- wallet/custody providers;
+- banks;
+- payment processors;
+- treasury/settlement rails;
+- other future external financial systems.
+
+The Hand is therefore best understood as Epinnox's **authorized tool/capability plane**.
+
+It may choose a technically equivalent adapter only when the authorization permits that routing. It cannot change side, size, destination, economic purpose, or other material intent on its own.
 
 ## Continuous learning without uncontrolled self-modification
 
 Benjamin should learn continuously, but the production reasoner's neural weights should not mutate invisibly while making capital decisions.
 
-Learning should occur at different speeds.
+### Fast — memory and evidence updates
 
-### Fast: memory and belief updates
-
-Continuously update evidence such as:
+Continuously update:
 
 - case outcomes;
 - prediction errors;
-- story confidence;
-- model competence records;
+- model competence;
 - calibration observations;
-- distribution-shift indicators;
 - episodic memory;
-- unresolved contradictions.
+- unresolved contradictions;
+- self-model observations.
 
-This changes what Benjamin knows without silently replacing the production model.
+### Medium — online calibration / competence
 
-### Medium: online calibration and competence estimation
+Controlled, reproducible algorithms may update contextual reliability estimates and calibration state.
 
-Model confidence may be recalibrated from live/shadow prediction performance. The competence router may update contextual reliability estimates under controlled, reproducible algorithms.
+### Slow — model succession
 
-These updates must be versioned and replayable.
-
-### Slow: candidate model succession
-
-Actual model-weight updates should create a new candidate model version rather than mutate the qualified production model in place.
+Actual weight changes create a new candidate model version:
 
 ```text
 Production Model N
       |
 new evidence
       v
-Candidate Model N+1
+Candidate N+1
       |
 historical replay / leakage controls
       v
@@ -382,155 +533,146 @@ qualification
 explicit promotion
 ```
 
-A candidate may be rejected, quarantined, rolled back, or promoted. Model succession must preserve reproducibility and permit reconstruction of any past decision.
+A candidate may be rejected, quarantined, rolled back, or promoted. Past decisions must remain reproducible from the model/version that actually produced them.
 
 ## Prediction, outcome, and learning lineage
 
-The intended learning chain is:
-
 ```text
-WorldSnapshot
-      ↓
-Feature Objects
-      ↓
-Model Prediction Object
-      ↓
-Decision Context
-      ↓
-Decision Proposal
-      ↓
-Later Outcome Object
-      ↓
+ZLJ WorldSnapshot
+      |
+      v
+ZLJ Feature/State/Prediction Objects
+      |
+      v
+Benjamin DecisionContext
+      |
+      v
+Benjamin TradeDecision
+      |
+      v
+Watchman Authorization / Block
+      |
+      v
+Hand Execution if authorized
+      |
+      v
+Later Outcome
+      |
+      v
 Prediction Evaluation
-      ↓
-Competence / Calibration Update
-      ↓
-Episodic Memory
-      ↓
-Candidate Semantic or Procedural Lesson
-      ↓
-Qualification before promotion
+      |
+      +------> ZLJ calibration/competence
+      |
+      +------> Benjamin decision/self-model learning
+      |
+      v
+The Book authoritative lineage
 ```
 
-Labels must become available only after the relevant outcome window closes. `known_at` / `available_after` semantics are mandatory to prevent outcome leakage.
+Labels become available only after the relevant outcome window closes. Timing semantics are mandatory.
 
 ## Disagreement is first-class evidence
 
-Benjamin should not hide disagreement by averaging everything into one score.
+Where material experts disagree, preserve an explicit conflict record containing:
 
-Where material experts disagree, create an explicit conflict record that captures:
-
-- which experts disagree;
+- experts/models/hypotheses in conflict;
 - their predictions;
-- their qualification and effective trust;
-- which evidence each expert relied on;
+- qualification/effective trust;
+- evidence each relied upon;
 - plausible reasons for disagreement;
-- what observation would discriminate between the hypotheses.
+- what future observation would discriminate between them.
 
-The reasoner should examine minority evidence rather than treat majority vote as truth.
+Minority evidence should not disappear merely because a majority agrees.
 
 ## Confidence decomposition
 
-Reasoner confidence should be decomposable, for example across:
+Reasoner confidence should be explainable across factors such as:
 
-- data quality;
-- freshness;
-- state certainty;
-- story certainty;
-- strategy evidence;
-- ML consensus;
-- model calibration;
+- data quality/freshness;
+- market-state certainty;
+- model qualification;
+- calibration;
+- model agreement/disagreement;
+- regime applicability;
 - historical-case similarity;
-- portfolio certainty;
-- execution/cost certainty;
-- reasoner measured competence.
+- position/capital-state certainty;
+- cost/slippage certainty;
+- Benjamin's measured competence.
 
 A single unexplained confidence scalar is insufficient for material capital decisions.
 
-## Research and ML relationship
+## V1 qualification benchmark
 
-Known research should enter as versioned evidence objects, not as unquestioned doctrine.
+The primary benchmark is not simply positive P&L.
 
-The system must distinguish:
+> **Does Benjamin demonstrate repeatable positive decision quality after realistic costs under controlled/shadow conditions?**
 
-- published/external evidence;
-- internal replication evidence;
-- historical backtest evidence;
-- out-of-sample evidence;
-- shadow evidence;
-- live evidence.
+Measure where relevant:
 
-Machine learning may classify, forecast, rank, calibrate, detect anomalies, discover recurring statistical states, evaluate strategy candidates, or estimate model competence. Unsupervised discovery may propose new clusters or regimes, but it does not automatically promote them into canonical market knowledge.
+- opportunities considered;
+- decisions accepted/rejected/abstained;
+- expected edge at decision time;
+- realized edge;
+- gross and net P&L;
+- fees/slippage;
+- win rate and win/loss distribution;
+- profit factor;
+- maximum drawdown;
+- MFE/MAE;
+- holding period;
+- confidence calibration;
+- performance by instrument;
+- performance by horizon;
+- performance by market/volatility/liquidity regime;
+- performance by ZLJ model;
+- performance by Benjamin procedure/strategy family.
 
-## Privacy and the books
+A key calibration check is:
+
+`predicted probability -> observed frequency`
+
+If Benjamin repeatedly calls a comparable class of decisions 70% likely, the observed outcome frequency must support that meaning over sufficient samples.
+
+## Attribution across organs
+
+Performance evaluation must separate:
+
+- **ZLJ prediction/perception quality**;
+- **Benjamin decision quality**;
+- **Watchman governance effects**;
+- **Hand execution/slippage quality**.
+
+Otherwise Epinnox will learn the wrong lesson from wins and losses.
+
+## Privacy
 
 Semantic, episodic, procedural, self-model, model-performance, strategy, portfolio, and internal reasoning records are private by default.
 
-The Big Book may preserve minimum necessary immutable evidence of material decisions, model versions, qualification, and governance events. It should not become a dump of all model features, prompts, private research, positions, or internal cognition.
-
-The Little Book receives no automatic export from cognitive memory.
-
-Existing privacy and minimum-necessary evidence rules continue to govern disclosure.
-
-## Future object families
-
-Potential repository contracts include:
-
-```text
-cognition/
-  context/
-  reasoner/
-  self_model/
-  conflicts/
-  confidence/
-
-memory/
-  semantic/
-  episodic/
-  procedural/
-
-models/
-  registry/
-  predictions/
-  qualification/
-  calibration/
-  competence/
-  drift/
-  evaluations/
-
-intelligence/
-  market_objects/
-  stories/
-  strategies/
-  opportunities/
-  research/
-```
-
-These directories are conceptual future boundaries, not a requirement to create empty code structure before contracts are ready.
+The Big Book preserves minimum-necessary material evidence. The Little Book receives no automatic export from cognitive memory.
 
 ## Non-negotiable invariants
 
 1. No model is sovereign.
-2. Raw observations and deterministic accounting outrank generated explanation.
-3. Fact, inference, hypothesis, prediction, and decision remain distinct types.
-4. Memory does not create authority.
-5. Learning does not bypass qualification.
-6. Production models are versioned and reproducible.
-7. Continuous learning does not mean uncontrolled in-place weight mutation.
-8. Every material prediction can eventually be compared with an outcome.
-9. Model disagreement is preserved, not hidden.
-10. Benjamin may abstain when competence or evidence is insufficient.
-11. ZLJ intelligence is input, not authorization.
-12. Watchman/Governor and existing evidence-required authorization remain downstream.
+2. ZLJ intelligence is input, not decision authority.
+3. Benjamin decides but does not authorize itself.
+4. Watchman governance is downstream and cannot be bypassed.
+5. The Hand executes authorized capabilities but does not originate economic intent.
+6. The Book preserves lineage but does not invent domain truth.
+7. Raw observations and deterministic accounting outrank generated explanation.
+8. Fact, inference, prediction, decision, authorization, execution, and outcome remain distinct types.
+9. Memory does not create authority.
+10. Learning does not bypass qualification.
+11. Production models are versioned and reproducible.
+12. Continuous learning does not mean uncontrolled in-place weight mutation.
+13. Every material prediction can eventually be compared with an outcome when the label becomes knowable.
+14. Material disagreement is preserved, not hidden.
+15. Benjamin may abstain when competence or evidence is insufficient.
+16. V1 success in scalping/intraday/swing does not automatically qualify long-horizon investment intelligence.
 
 ## Intended end state
 
-Benjamin should eventually be able to answer not only:
+Benjamin should eventually be able to answer:
 
-> "What do the current indicators say?"
+> "What is happening, which evidence actually matters for this horizon, which experts are competent here, where do they disagree, what does this opportunity mean given our current capital state, what would invalidate the thesis, is the edge positive after real costs, how confident should I be based on my own measured history, and should Epinnox act at all?"
 
-but:
-
-> "What do I know, what happened in analogous cases, which reasoning procedure applies, which experts are competent here, where do they disagree, what changed since my previous belief, how well calibrated am I in this situation, what would prove the thesis wrong, how does this affect the portfolio, and am I qualified to recommend action at all?"
-
-That is the target: a provable, self-evaluating investment decision system whose intelligence can grow while authority remains governed.
+That is the target: **a provable, self-evaluating capital decision intelligence whose knowledge can grow while authority remains separated and governed.**

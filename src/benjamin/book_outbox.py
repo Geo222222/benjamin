@@ -102,14 +102,26 @@ def _read(path: Path) -> dict[str, Any]:
 
 
 class BookOutbox:
-    """Durable producer outbox for signed Benjamin Book evidence.
+    """Durable, producer-bound outbox for signed Book evidence.
 
-    Signed evidence is persisted before delivery. Retrying uses the stored bytes
-    and envelope exactly; no decision is silently regenerated after the fact.
+    The default remains Benjamin/BENJAMIN.* for B1 and existing bridge callers.
+    Other constitutional organs must instantiate a separately bound outbox and
+    use a separately keyed signer. Signed evidence is persisted before delivery;
+    retrying uses the stored bytes and envelope exactly.
     """
 
-    def __init__(self, root: Path) -> None:
+    def __init__(
+        self,
+        root: Path,
+        *,
+        producer: str = "Benjamin",
+        event_prefix: str = "BENJAMIN.",
+    ) -> None:
+        if not producer or not event_prefix:
+            raise BookOutboxError("producer and event_prefix are required")
         self.root = Path(root)
+        self.producer = producer
+        self.event_prefix = event_prefix
         self.pending_dir = self.root / "pending"
         self.acknowledged_dir = self.root / "acknowledged"
         self.quarantined_dir = self.root / "quarantined"
@@ -133,8 +145,11 @@ class BookOutbox:
         receipt_id = str(envelope.get("receipt_id", ""))
         if not receipt_id:
             raise BookOutboxError("signed envelope requires receipt_id")
-        if envelope.get("producer") != "Benjamin" or not str(envelope.get("event_type", "")).startswith("BENJAMIN."):
-            raise BookOutboxError("Benjamin outbox accepts only BENJAMIN.* producer evidence")
+        event_type = str(envelope.get("event_type", ""))
+        if envelope.get("producer") != self.producer or not event_type.startswith(self.event_prefix):
+            raise BookOutboxError(
+                f"{self.producer} outbox accepts only {self.event_prefix} producer evidence"
+            )
         if envelope.get("privacy_class") == "SECRET_REGULATED":
             raise BookOutboxError("raw SECRET_REGULATED payload bytes may not enter the Book outbox")
         payload_digest = _sha256(payload)
@@ -152,7 +167,8 @@ class BookOutbox:
         record: dict[str, Any] = {
             "schema_version": 1,
             "receipt_id": receipt_id,
-            "producer": "Benjamin",
+            "producer": self.producer,
+            "event_prefix": self.event_prefix,
             "state": PENDING,
             "envelope": dict(envelope),
             "envelope_digest": envelope_digest,
@@ -189,6 +205,8 @@ class BookOutbox:
             return self.quarantine(receipt_id, "stored payload digest mismatch")
         if _sha256(_canonical(envelope)) != record["envelope_digest"]:
             return self.quarantine(receipt_id, "stored envelope digest mismatch")
+        if record.get("producer") != self.producer or record.get("event_prefix") != self.event_prefix:
+            return self.quarantine(receipt_id, "stored outbox producer binding mismatch")
 
         record["attempt_count"] = int(record.get("attempt_count", 0)) + 1
         record["last_attempt_at"] = _utc_now()

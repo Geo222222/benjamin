@@ -1,4 +1,5 @@
 import hashlib
+import json
 from pathlib import Path
 
 import pytest
@@ -61,3 +62,18 @@ def test_receipt_id_cannot_change_meaning(tmp_path: Path) -> None:
     second = b"two"
     with pytest.raises(OutboxConflict):
         outbox.enqueue(envelope=envelope(second), payload=second)
+
+
+def test_legacy_pending_benjamin_record_without_namespace_field_still_delivers(tmp_path: Path) -> None:
+    outbox = BookOutbox(tmp_path)
+    payload = b"legacy-decision"
+    outbox.enqueue(envelope=envelope(payload), payload=payload)
+
+    pending_path = outbox.pending_dir / "BEN-R1.json"
+    legacy = json.loads(pending_path.read_text(encoding="utf-8"))
+    legacy.pop("event_prefix")
+    pending_path.write_text(json.dumps(legacy), encoding="utf-8")
+
+    accepted = outbox.deliver_one("BEN-R1", AcceptingTransport())
+    assert accepted["state"] == ACKNOWLEDGED
+    assert accepted["producer"] == "Benjamin"

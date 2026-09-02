@@ -1,421 +1,349 @@
 # Benjamin Operating Roles
 
-> **Epinnox sees. The Steward decides. The Watchman guards. Benjamin authorizes. The Hand executes. The Big Book proves. The Little Book testifies. Treasury controls deployable strength. The Spoil measures realized value. The Portion divides what is lawfully distributable.**
+> **ZLJ sees. Benjamin decides. Watchman governs. The Hand executes. The Big Book remembers and proves. The Little Book testifies.**
 
-This document is the human-readable operating model for Benjamin. It explains what each role is responsible for, the questions it asks, the artifacts it produces, and the decisions it is forbidden to make.
+This document is the human-readable operating model for Benjamin inside Epinnox. It explains what each organ is responsible for, what it produces, and what it is forbidden to absorb from the others.
 
-The governing principle is separation of authority. No component should become a monolithic brain that observes, decides, approves itself, executes, and rewrites the evidence afterward.
+The governing principle is separation of authority. No component should become a monolithic brain that observes, decides, approves itself, executes, and rewrites evidence afterward.
 
 ---
 
-## 1. Data Plane — Observation Infrastructure
+## 1. ZLJ — Market Perception and Intelligence Production
 
-**Purpose:** collect trustworthy observations from markets, issuers, economic sources, portfolio systems, and other approved data providers.
+**Repository:** `Geo222222/z-look-jamaican`
 
-The Data Plane asks:
+**Purpose:** establish what is happening in the market and produce qualified intelligence objects for Benjamin.
+
+ZLJ asks:
 
 - What was observed?
-- From which source?
-- At what source timestamp and ingestion timestamp?
-- Is the observation fresh enough for the intended decision?
-- Is the source healthy?
-- Are multiple sources contradictory?
+- From which source and at what time?
+- Is the observation fresh and sequence-valid?
+- What deterministic features describe the current market?
+- What market state/regime appears to be present?
+- What do qualified models predict over explicit horizons?
+- How calibrated and competent are those models in comparable conditions?
+- Where do models or hypotheses disagree?
 
-A useful observation looks like:
+Example output:
 
 ```text
-Observation
-instrument: AAPL
-fact: closing_price
-value: 229.31
-source: SOURCE-X
-source_timestamp: ...
-ingested_at: ...
-quality: VALID
-staleness: 14s
-raw_ref: vault://...
-digest: sha256:...
+ForecastObject
+instrument: BTC-USD
+horizon: 30s
+proposition: price_up >= 8bps
+probability: 0.71
+expected_move: +11.4bps
+model: microstructure_model_04
+market_regime: directional_liquid
+confidence: 0.78
+valid_until: ...
+evidence_refs: [...]
+qualification: QUALIFIED
 ```
 
-**Produces:** normalized observations, source-health state, provenance, quality state, and references to retained source evidence.
+**Produces:** observations, measurements, market-state objects, regimes, model predictions, opportunity evidence, calibration/drift/competence records, and provenance.
 
-**May not:** invent missing data, silently replace stale observations with guesses, or convert raw facts into portfolio authority.
+**May not:** decide `TRADE / NO TRADE`, originate capital intent, size the final position, authorize capital, place orders, custody funds, or declare its own prediction economically successful merely because price later moved.
 
 ---
 
-## 2. The Vault — Source Evidence
+## 2. The Vault / Source Evidence
 
-**Purpose:** hold the underlying documents and sensitive source material that should not become ledger payloads.
+**Purpose:** hold underlying source artifacts and sensitive evidence that should not become raw immutable ledger payloads.
 
-Examples include filings, statements, API responses selected for retention, research documents, agreements, transaction files, identity documents, and other governed evidence.
+Examples include retained API payloads, research documents, statements, agreements, model artifacts, datasets, identity material, and other governed source evidence.
 
 The Vault answers:
 
 > What exact source artifact did the institution rely upon?
 
-The Big Book may retain a digest and governed reference such as:
+**Produces:** governed evidence locations and cryptographic digests.
 
-```text
-vault://sec/AAPL/10-K/2026.pdf
-SHA-256: 98e13b...
-```
-
-**Produces:** durable governed evidence locations and exact cryptographic digests.
-
-**May not:** make investment decisions or turn secret/regulated data into public evidence merely because it is useful internally.
+**May not:** make market predictions, capital decisions, governance decisions, or external financial actions.
 
 ---
 
-## 3. Epinnox / The Eyes — Analyst and Adviser
+## 3. Benjamin — Capital Decision Intelligence
 
-**Purpose:** understand the field and form evidence-backed recommendations.
+**Purpose:** convert qualified evidence plus authoritative capital/position context into bounded decisions.
 
-Epinnox asks:
+Benjamin v1 focuses on:
 
-> What is happening, why might it matter, and what should Benjamin consider doing?
+1. scalping / micro trades;
+2. intraday trades;
+3. short swing trades.
+
+Benjamin asks:
+
+- Is there actually a trade here?
+- Which evidence matters for this exact horizon?
+- Which models are qualified and independent enough to matter?
+- What evidence contradicts the trade?
+- What is the expected move and downside?
+- Does the edge survive spread, fees, slippage, latency, and uncertainty?
+- What is the thesis?
+- What invalidates it?
+- What size is justified by current capital/position state?
+- Should we enter, hold, reduce, exit, or abstain?
+- How confident should Benjamin be given its measured competence?
 
 Example:
 
 ```text
-INVESTMENT CASE
-Asset: XYZ
-
-Observation:
-Revenue growth accelerating.
-Margins improving.
-Debt declining.
-Valuation below modeled normalized range.
-
-Thesis:
-The market may be pricing the company below normalized earning power.
-
-Base case: +17%
-Bull case: +31%
-Bear case: -12%
-Horizon: 12-24 months
-Confidence: 0.71
-
-Recommendation: ACCUMULATE
-Suggested maximum allocation: 4.0%
+TradeDecision
+instrument: BTC-USD
+decision: ENTER
+side: BUY
+horizon: 2m
+intended_size: bounded-size-request
+expected_edge_after_costs: +6.2bps
+confidence: 0.67
+thesis: short-horizon directional continuation
+invalidation: order-flow reversal + liquidity deterioration
+expires_at: ...
+evidence_refs: [...]
 ```
 
-**Produces:** observations, investment cases, scenarios, assumptions, risks, confidence, recommendation envelopes, and analytical provenance.
+**Produces:** `ENTER`, `HOLD`, `REDUCE`, `EXIT`, or `NO_TRADE` decisions with explicit evidence, assumptions, confidence, expected edge, sizing judgment, and invalidation.
 
-**May not:** authorize capital, bypass Watchman, place orders, or declare its own recommendation successful.
+**May not:** authorize itself, bypass Watchman, place external orders, hold production signing keys, rewrite ZLJ observations, or fabricate Book history.
 
-A useful phrase is:
-
-> **Benjamin saw it, but Benjamin did not take it.**
-
-Seeing an opportunity does not require capital deployment.
+`NO_TRADE` is a valid decision.
 
 ---
 
-## 4. The Steward / The Mind — Portfolio Judgment
+## 4. Watchman — Governance and Authorization
 
-**Purpose:** convert recommendations into actual portfolio intent.
-
-The Steward asks:
-
-- Do we accept the thesis?
-- Does it fit the current portfolio?
-- How much capital should be committed?
-- What would invalidate the decision?
-- What are the entry, review, and exit conditions?
-
-Example:
-
-```text
-InvestmentDecision
-recommendation: REC-00912
-status: MODIFIED
-instrument: XYZ
-recommended_weight: 4.0%
-authorized_intent_weight: 2.5%
-reason: thesis accepted; concentration reduced
-review_date: ...
-invalidation_conditions: [...]
-```
-
-**Produces:** `APPROVED`, `MODIFIED`, or `REJECTED` portfolio decisions with explicit reasoning and bounded intent.
-
-**May not:** execute, erase Watchman results, fabricate evidence, or make a blocked decision executable.
-
----
-
-## 5. The Watchman / The Guard — Deterministic Risk and Constraint Authority
-
-**Purpose:** determine whether Benjamin is permitted to pursue the Steward's intent.
+**Purpose:** determine whether Benjamin's proposed external financial action is permitted under current law, policy, mandate, risk, authority, and operating state.
 
 Watchman asks:
 
-> Even if the thesis is good, can Benjamin lawfully and safely do this under the current mandate?
+> Even if Benjamin's trade thesis is good, is Epinnox permitted to perform this action now?
 
 Example:
 
 ```text
-Instrument allowed?        PASS
-Position concentration?    PASS
-Portfolio concentration?   PASS
-Cash available?            PASS
-Liquidity requirement?     PASS
-Jurisdiction allowed?      PASS
-Leverage limit?            PASS
-Evidence complete?         PASS
-Authority valid?           PASS
+Instrument allowed?          PASS
+Account/venue allowed?       PASS
+Position concentration?      PASS
+Capital available?           PASS
+Daily loss limit?            PASS
+Leverage rule?               PASS
+Jurisdiction/compliance?     PASS
+Decision unexpired?          PASS
+Evidence requirement?        PASS
 
-WATCHMAN: PASS
+WATCHMAN: AUTHORIZE
 ```
 
 Or:
 
 ```text
-Steward: Allocate 8%
+Benjamin intended size: 8%
 Policy maximum: 5%
 
 WATCHMAN: BLOCK
 ```
 
-**Produces:** deterministic `PASS` or `BLOCK` decisions with policy versions and reasons.
+**Produces:** `AUTHORIZE` or `BLOCK` with exact governing rules, limits, expiry, and capability constraints.
 
-**May not:** invent a substitute investment, resize the order on its own, or be bypassed merely because the Steward strongly prefers the trade.
+**May not:** invent a substitute investment thesis, become the market reasoner, silently resize the economic intent unless policy explicitly defines a bounded transformation, or be bypassed because Benjamin is highly confident.
 
 Constitutional invariant:
 
 ```text
-STEWARD_APPROVED + WATCHMAN_BLOCKED = NO AUTHORIZATION
+BENJAMIN_DECISION + WATCHMAN_BLOCK = NO HAND ACTION
 ```
 
 ---
 
-## 6. Benjamin Authority — Bounded Capital Authorization
+## 5. The Hand — Authorized External Capability Plane
 
-**Purpose:** convert approved portfolio intent plus Watchman PASS into the exact artifact The Hand is permitted to execute.
+**Repository:** `Geo222222/the-hand`
 
-Example:
+**Purpose:** perform the exact external financial action authorized by Watchman and report what actually happened.
 
-```text
-AuthorizedExecutionRequest
-fund: FIRSTFRUITS
-instrument: XYZ
-side: BUY
-quantity: 125
-decision_id: DEC-00381
-risk_id: RSK-00291
-expires_at: ...
-idempotency_key: ...
-```
+The Hand is broader than one broker adapter. It is the home for Epinnox tools/abilities that can change external financial state.
 
-**Produces:** narrow, expiring, idempotent execution authority.
+Potential capability families include:
 
-**May not:** place broker orders or expand the decision after Watchman approval.
+- exchange adapters;
+- broker adapters;
+- wallet/custody signing;
+- blockchain transaction submission;
+- bank/ACH/wire rails;
+- payment processors;
+- treasury transfers/sweeps;
+- settlement providers;
+- other future authenticated money-place integrations.
 
----
+The Hand asks:
 
-## 7. The Hand — Execution
-
-**Purpose:** perform exactly the authorized action and prove what happened.
-
-The Hand asks only:
-
-> Is this exact instruction authentic, unexpired, independently authorized, and not already executed?
-
-It should not know or care that Epinnox is bullish.
+> Is this action authentically authorized, unexpired, supported by an allowed capability, and not already executed?
 
 Example:
 
 ```text
-Authorization: AUTH-7731
-Instrument: XYZ
+WatchmanAuthorization: AUTH-7731
+Capability: exchange.order.submit
+Instrument: BTC-USD
 Side: BUY
-Quantity: 125
-
-Venue result:
-accepted -> partial fill -> filled
+Quantity: ...
+Constraints: ...
+IdempotencyKey: ...
 ```
 
-**Produces:** execution receipts, venue identifiers, fill results, failure results, and reconciliation inputs.
+**Produces:** capability invocation receipts, provider/venue identifiers, acceptance/rejection, fills, transfer/settlement results, failures, and reconciliation inputs.
 
-**May not:** originate strategy, alter side/instrument/quantity, extend authorization, or infer intent from prose.
+**May not:** originate strategy, change economic purpose, change side/instrument/destination/size outside authorization, extend authorization, infer intent from prose, or choose a different financial action merely because another adapter exists.
+
+The Hand may route among technically equivalent adapters only when Watchman authorization permits that routing.
 
 ---
 
-## 8. The Big Book — Private Institutional Proof
+## 6. The Big Book — Private Institutional Memory and Proof
 
-**Purpose:** preserve minimum necessary proof that material events occurred under valid authority.
+**Repository:** `Geo222222/the-book`
+
+**Purpose:** preserve minimum-necessary authoritative evidence that material events occurred under valid lineage and authority.
 
 The Big Book asks:
 
-- Who produced this proof?
-- Were they authorized to produce this event type?
-- What exact evidence digest supports it?
+- Who produced this record?
+- What domain truth does that producer own?
+- What evidence digest/reference supports it?
 - What prior event caused it?
-- Who is permitted to inspect it?
-- Has the history been altered?
+- Who may inspect it?
+- Has history been altered?
 
-Example lineage:
+Target lineage:
 
 ```text
-EPINNOX.RECOMMENDATION
-        -> BENJAMIN.DECISION
-        -> BENJAMIN.RISK
-        -> BENJAMIN.AUTHORIZATION
-        -> HAND.EXECUTION
-        -> BENJAMIN.RECONCILIATION
+ZLJ.INTELLIGENCE
+      -> BENJAMIN.DECISION
+      -> WATCHMAN.AUTHORIZATION | WATCHMAN.BLOCK
+      -> HAND.EXECUTION
+      -> OUTCOME / RECONCILIATION
+      -> LEARNING EVIDENCE
 ```
 
-**Produces:** private, signed, append-oriented proof history with scoped visibility and cryptographic commitments.
+**Produces:** private signed/append-oriented evidence history, scoped visibility, causal lineage, and cryptographic commitments.
 
-**May not:** become a dumping ground for all raw evidence, expose private records merely to increase verifiability, or rewrite history silently.
+**May not:** become the market reasoner, capital decision-maker, Watchman, executioner, or a dumping ground for every raw feature/prompt/private artifact.
 
-The Big Book proves what happened. The Vault holds the underlying evidence.
+The Big Book proves and remembers. The Vault holds underlying governed source evidence where appropriate.
 
 ---
 
-## 9. The Little Book — Public Testimony
+## 7. The Little Book — Public Testimony
 
-**Purpose:** let outsiders verify intentionally disclosed claims without exposing the institution.
+**Purpose:** let outsiders verify intentionally disclosed claims without exposing private institutional history.
 
-The Little Book asks:
+The Little Book is not a second copy of the Big Book.
 
-> What is the minimum public claim necessary for this external party to verify a legitimate fact?
+**Produces:** deliberately approved public attestations and state commitments.
 
-Example:
-
-```text
-AUTHORITY CLAIM
-Entity: Martin Capital LLC
-Authority: Treasury Signatory
-Valid: YES
-Expires: ...
-Evidence commitment: ...
-Big Book state root: ...
-Institution signature: ...
-```
-
-**Produces:** state commitments and deliberately approved public attestations.
-
-**May not:** automatically mirror the Big Book or contain enough information to reconstruct private portfolios, wealth, distributions, strategies, family disputes, or private relationships.
+**May not:** automatically expose private portfolio composition, strategies, model stack, wealth, exact trades, internal reasoning, private relationships, or confidential agreements.
 
 ---
 
-## 10. Treasury — Deployable Strength
+## 8. Treasury / Authoritative Capital State
 
-**Purpose:** distinguish money Benjamin has from money Benjamin is permitted to deploy.
+**Purpose:** distinguish money that exists from money currently available for a Benjamin decision and from money Watchman permits to be used.
 
-Treasury asks:
+Relevant questions include:
 
 - What cash exists?
-- What cash is encumbered?
-- What reserves are required?
-- What liquidity must remain available?
-- What is actually deployable?
+- What is settled?
+- What is encumbered?
+- What positions are open?
+- What capital is reserved?
+- What obligations exist?
+- What exposure already exists?
+- What amount is actually available for this decision?
 
-Example:
+Benjamin consumes authoritative capital state; it must not hallucinate it.
 
-```text
-Fund NAV:              $1,000,000
-Cash:                    $250,000
-Operating reserve:        $50,000
-Redemption reserve:       $30,000
-Distribution reserve:     $20,000
+Watchman applies governing limits to that state.
 
-Deployable cash:         $150,000
-```
-
-**Produces:** cash state, reserve state, liquidity state, and deployable-capital limits.
-
-**May not:** treat reserved or restricted capital as available simply because it exists in an account.
+The Hand executes against the appropriate external account/capability only after authorization.
 
 ---
 
-## 11. Firstfruits Shadow Portfolio — Decision Proving Ground
+## 9. Benjamin V1 Shadow Decision Proving Ground
 
-**Purpose:** test the complete institutional process before outside capital or autonomous live execution is allowed.
+**Purpose:** test the complete short-horizon decision process before autonomous live capital is allowed.
 
-Example:
+A shadow record should separate:
 
 ```text
-Date      Recommendation  Steward   Weight  Outcome
-Sep 2     BUY XYZ         APPROVE   3.0%    +4.2%
-Sep 3     BUY ABC         REJECT    -       +9.1%
-Sep 5     HOLD DEF        HOLD      -       -3.2%
+ZLJ prediction quality
+Benjamin decision quality
+Watchman governance effect
+Hand modeled/actual execution quality
 ```
 
-The shadow portfolio measures recommendation quality separately from portfolio quality.
+Measure where relevant:
 
-**Produces:** simulated NAV, exposures, modeled fills, P&L, drawdown, turnover, benchmark comparison, and decision outcomes.
+- opportunities considered;
+- trade/no-trade decisions;
+- expected edge;
+- realized edge;
+- fees/slippage;
+- net P&L;
+- drawdown;
+- win/loss distribution;
+- MFE/MAE;
+- holding period;
+- calibration;
+- performance by instrument/horizon/regime/model/procedure.
 
-**May not:** be represented as live investment performance or silently use hindsight information unavailable at decision time.
+**May not:** be represented as live investment performance or use hindsight information unavailable at decision time.
 
 ---
 
-## 12. Decision Journal — Institutional Calibration
+## 10. Cognitive Memory — Learning What Benjamin Knew and Did
 
-**Purpose:** preserve what was known and why the institution acted so decisions can be reviewed without hindsight rewriting.
+Benjamin requires:
 
-Example:
+### Semantic memory
+Durable knowledge, definitions, validated research, model capabilities/limitations, and graduated lessons.
 
-```text
-Decision: DEC-00381
-Input: REC-00912
-Steward: APPROVED
-Allocation: 2.5%
-Known risks: [...]
-Watchman: PASS
-Portfolio state before: ...
-Portfolio state after: ...
-Evaluation date: ...
-```
+### Episodic memory
+Specific market cases: what was known, predictions, decision, outcome, errors, and later lessons.
 
-At the evaluation date, the institution asks:
+### Procedural memory
+How Benjamin reasons: evidence qualification, conflict handling, abstention, decision construction, and escalation to Watchman.
 
-- Was the thesis right?
-- Was the sizing right?
-- Did Watchman prevent a loss or block a good opportunity?
-- Did the decision process use the evidence available at that time correctly?
+The Book provides authoritative evidence/proof lineage. Benjamin owns how cognitive memory is organized, retrieved, and used.
 
 ---
 
-## 13. Performance and Attribution — Learning What Created the Result
+## 11. Decision and Performance Attribution
 
-**Purpose:** explain why capital gained or lost value rather than merely reporting the ending number.
+The institution should not learn from raw ending P&L alone.
 
-Example:
+It should eventually distinguish:
 
-```text
-Total return:              +14.2%
-Market beta:                +8.1%
-Security selection:         +4.7%
-Allocation effect:          +2.3%
-Transaction costs:          -0.5%
-Cash drag:                  -0.4%
-```
-
-The institution should eventually distinguish:
-
-- Epinnox recommendation quality;
-- Steward decision quality;
+- ZLJ perception/prediction contribution;
+- Benjamin decision contribution;
 - Watchman value added or opportunity cost;
-- execution/slippage effects;
-- portfolio construction effects; and
-- market beta.
+- Hand execution/slippage contribution;
+- market beta/randomness;
+- cost effects.
 
-**Produces:** attribution, calibration, benchmark-relative performance, and evidence for improving the process.
+A profitable outcome does not automatically prove every upstream component was correct. A losing outcome does not automatically prove every upstream decision was irrational.
 
 ---
 
-## 14. The Spoil — Realized Economic Value
+## 12. The Spoil — Realized Economic Value
 
-**Purpose:** determine what economic value has actually been earned and is potentially available for allocation.
-
-The Spoil is calculated, not imagined.
+**Purpose:** determine what economic value has actually been earned and may become available for lawful allocation.
 
 ```text
 realized gains
-+ dividends
-+ interest
-+ other realized income
++ dividends / interest / other realized income where applicable
 - realized losses
 - fees
 - expenses
@@ -426,96 +354,94 @@ realized gains
 
 **Principal is never spoil. Unrealized appreciation is not automatically spoil.**
 
+This is later-stage capital/accounting logic; it is not part of the v1 scalp decision loop except where current realized state affects available capital.
+
 ---
 
-## 15. The Portion — Distribution and Allocation
+## 13. The Portion — Distribution and Allocation
 
 **Purpose:** divide lawfully distributable value according to predetermined entitlement and policy.
 
-Example:
-
-```text
-Net Spoil: $100,000
-
-Reinvestment:          $50,000
-Authorized distribution: $25,000
-Reserve:               $15,000
-Other permitted allocation: $10,000
-```
-
-The numbers above are illustrative only. Actual allocation rules come from governing fund, entity, contractual, tax, and Covenant rules.
-
-**May not:** improvise entitlement, distribute investor assets as family property, or distribute more than the amount lawfully available.
+The Portion is downstream institutional accounting/governance. It is not a reason for Benjamin v1 to broaden itself into long-term portfolio or distribution intelligence prematurely.
 
 ---
 
-## 16. The Covenant — Law of the Body
-
-**Purpose:** define the rules that every role must obey even when doing so is inconvenient.
+## 14. The Covenant — Law of the Body
 
 Examples:
 
 ```text
-Epinnox cannot authorize.
-Steward cannot bypass Watchman.
-Watchman BLOCK means no execution authorization.
-The Hand cannot originate investment intent.
-The Big Book does not silently mutate history.
+ZLJ cannot decide capital.
+Benjamin cannot authorize itself.
+Watchman BLOCK means no external financial action.
+The Hand cannot originate economic intent.
+The Book cannot invent another organ's truth.
 The Little Book does not automatically expose private state.
-Treasury reserves are not deployable capital.
-Principal is not spoil.
-The Portion cannot exceed lawful distributable value.
+A model's confidence does not create authority.
+Historical proof is not silently rewritten.
 ```
 
 The Covenant should increasingly become executable invariant tests rather than prose alone.
 
 ---
 
-# Complete Morning-to-Evening Cycle
+# Complete V1 Trading Cycle
 
 ```text
-MORNING — FIND AND PURSUE LAWFUL OPPORTUNITY
-
-Data Plane
-    -> Vault / provenance
-    -> Epinnox sees
-    -> Steward judges
-    -> Watchman guards
-    -> Benjamin authorizes
-    -> The Hand executes
-    -> Big Book proves
-
-EVENING — ACCOUNT AND DIVIDE
-
-Execution / holdings
-    -> reconciliation
-    -> portfolio valuation
-    -> performance attribution
-    -> realized economic value
-    -> The Spoil
-    -> The Portion
-    -> lawful reinvestment / reserve / distribution
-    -> Big Book proof
+MARKET
+   |
+   v
+ZLJ
+observe / derive / model / qualify
+   |
+   +---------------------> Big Book provenance
+   |
+   v
+BENJAMIN
+enter / hold / reduce / exit / no-trade
+   |
+   +---------------------> Big Book decision evidence
+   |
+   v
+WATCHMAN
+authorize / block
+   |
+   +---------------------> Big Book governance evidence
+   |
+   v
+THE HAND
+capability adapter / external action
+   |
+   +---------------------> Big Book execution evidence
+   |
+   v
+REALITY / OUTCOME
+   |
+   v
+THE BOOK
+outcome lineage
+   |
+   +-------------> ZLJ calibration
+   |
+   +-------------> Benjamin learning
 ```
-
-The institution is incomplete if it can identify and capture opportunity but cannot reconcile, account for, explain, and lawfully allocate the resulting value.
 
 # Core Diagnostic Questions
 
 When reviewing any new feature, ask:
 
-1. **Who sees this?** — Data Plane / Epinnox.
-2. **Who interprets it?** — Epinnox.
-3. **Who decides?** — Steward.
-4. **Who can block it?** — Watchman.
-5. **Who authorizes capital?** — Benjamin Authority.
-6. **Who performs the action?** — The Hand.
-7. **Who proves what happened?** — The Big Book.
-8. **Where is the sensitive source evidence?** — The Vault.
-9. **What may outsiders verify?** — The Little Book, only after explicit disclosure.
-10. **Was the decision actually good?** — Shadow Portfolio + Performance/Attribution.
-11. **What value was actually realized?** — The Spoil.
-12. **Who is lawfully entitled to what?** — The Portion.
+1. **Who sees this?** — ZLJ.
+2. **Who decides what it means for capital?** — Benjamin.
+3. **Who can permit or block the external financial action?** — Watchman.
+4. **Who performs the authenticated external action?** — The Hand.
+5. **Who preserves authoritative lineage?** — The Book.
+6. **Where is underlying sensitive source evidence?** — The Vault/governed storage.
+7. **What may outsiders verify?** — The Little Book, only after explicit disclosure.
+8. **Was the market prediction good?** — ZLJ evaluation.
+9. **Was the capital decision good?** — Benjamin evaluation.
+10. **Did governance improve or constrain the result?** — Watchman attribution.
+11. **Was execution faithful and economical?** — The Hand attribution.
+12. **What value was actually realized?** — accounting / Spoil.
 13. **What rule prevents shortcuts?** — The Covenant.
 
-If one component answers several incompatible questions, the architecture is beginning to collapse its authority boundaries.
+If a feature cannot answer which organ owns its truth and authority, its boundary is not yet well-defined.

@@ -1,0 +1,416 @@
+/* Benjamin console presentation layer.
+   Loaded after styles.css so it can enlarge the existing screens without changing
+   their demo-data or screen logic. Matrix is the default; Blue / White is secondary. */
+
+:root {
+  --demo-accent: #24ef68;
+  --demo-gold: #d9bd69;
+}
+
+body { font-size: 15px; }
+
+.client-app-shell {
+  grid-template-columns: 244px minmax(0, 1fr);
+  background: #f3f6fb;
+}
+
+.client-sidebar { min-width: 244px; }
+.client-brand { min-height: 86px; padding: 16px 16px; gap: 13px; }
+.crest { width: 46px; height: 52px; font-size: 22px; }
+.client-brand strong { font-size: 20px; }
+.client-brand span { font-size: 9px; }
+
+.client-sidebar nav { gap: 4px; padding: 12px 10px; }
+.client-sidebar nav button {
+  min-height: 42px;
+  grid-template-columns: 30px 1fr;
+  gap: 9px;
+  padding: 10px 11px;
+  border-radius: 7px;
+}
+.client-sidebar nav button span { text-align: left; font-size: 13px; }
+.client-sidebar nav button b { font-size: 11px; }
+.client-sidebar nav button.onboarding-link span { font-size: 11px; }
+
+.support-box { margin: auto 12px 10px; padding: 15px; }
+.support-box span, .system-health span { font-size: 10px; }
+.support-box strong { font-size: 12px; }
+.system-health { padding: 13px 15px 16px; }
+.system-health strong { font-size: 10px; }
+
+.client-topbar {
+  min-height: 72px;
+  gap: 14px;
+  padding: 0 28px;
+}
+.topbar-context { font-size: 14px; }
+.account-select { min-width: 150px; padding: 8px 11px; }
+.account-select span { font-size: 9px; }
+.account-select strong, .account-select b { font-size: 11px; }
+.bell { font-size: 18px; }
+.client-user { gap: 9px; font-size: 11px; }
+.client-user > div { width: 34px; height: 34px; font-size: 9px; }
+.prototype-banner { padding: 7px 18px; font-size: 10px; }
+
+.client-page {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 22px clamp(22px, 2.2vw, 42px) 54px;
+}
+.client-screen-stack { gap: 15px; }
+
+.white-card {
+  padding: 19px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(22,55,91,.045);
+}
+.white-card > span:first-child, .card-head > span { font-size: 11px; }
+.card-head { gap: 14px; margin-bottom: 12px; }
+.card-head button, .text-link { font-size: 10px; }
+
+.home-grid { gap: 14px; }
+.value-card > strong { margin-top: 10px; font-size: clamp(34px, 2.4vw, 48px); }
+.value-card > small { margin-top: 6px; font-size: 11px; }
+.value-breakdown { gap: 14px; margin-top: 26px; }
+.value-breakdown span { font-size: 9px; }
+.value-breakdown b { margin-top: 5px; font-size: 11px; }
+
+.small-strong { margin-top: 10px; font-size: 19px; }
+.brain-mark { right: 34px; top: 28px; width: 118px; height: 118px; font-size: 34px; }
+.benjamin-facts { gap: 8px; margin-top: 14px; max-width: 210px; }
+.benjamin-facts span { font-size: 9px; }
+.benjamin-facts b { font-size: 10px; }
+
+.health-card { gap: 11px; }
+.health-card > div { font-size: 10px; }
+
+.equity-chart { height: 300px; }
+.equity-chart.compact { height: 170px; }
+.ranges { gap: 4px; }
+.ranges b { padding: 5px 7px; font-size: 8px; }
+.axis { font-size: 8px; }
+
+.today-card > strong { margin-top: 12px; font-size: 22px; }
+.today-card > small { font-size: 10px; }
+.today-grid { gap: 16px 12px; margin-top: 20px; }
+.today-grid span { font-size: 9px; }
+.today-grid b { font-size: 12px; }
+
+.positions-card th, .positions-card td,
+.positions-large th, .positions-large td {
+  padding: 10px 8px;
+  font-size: 10px;
+}
+.positions-large th, .positions-large td { padding: 12px 9px; font-size: 11px; }
+
+.feed > div { grid-template-columns: 72px 1fr auto; gap: 12px; padding: 10px 0; }
+.feed time { font-size: 9px; }
+.feed span { font-size: 10px; }
+.client-pill { gap: 5px; padding: 5px 8px; font-size: 8px; }
+
+.strategies-card { grid-template-columns: 136px 1fr; }
+.strategy-donut, .allocation-donut { width: 118px; height: 118px; }
+.strategy-donut.large { width: 136px; height: 136px; }
+.strategy-donut strong, .allocation-donut strong { font-size: 16px; }
+.strategy-donut span, .allocation-donut small { font-size: 8px; }
+.strategy-list, .alloc-list { gap: 10px; }
+.strategy-list > div, .alloc-list > div { grid-template-columns: 9px 1fr auto auto; gap: 7px; font-size: 9px; }
+.strategy-list i, .alloc-list i { width: 8px; height: 8px; }
+
+.risk-circle { width: 124px; height: 124px; border-width: 13px; }
+.risk-circle strong { font-size: 23px; }
+.risk-circle small { font-size: 8px; }
+.risk-lines { gap: 9px; }
+.risk-lines > div { font-size: 9px; }
+
+.metric-strip { gap: 12px; }
+.client-metric {
+  min-height: 108px;
+  padding: 17px;
+  border-radius: 9px;
+}
+.client-metric span { font-size: 10px; }
+.client-metric strong { margin-top: 8px; font-size: clamp(21px, 1.5vw, 29px); }
+.client-metric small { margin-top: 5px; font-size: 9px; }
+
+.account-grid, .account-bottom-grid, .performance-grid, .performance-bottom { gap: 14px; }
+.allocation-card { grid-template-columns: 150px 1fr; }
+.timeline-list > div { grid-template-columns: 100px 1fr; gap: 12px; padding: 12px 0; }
+.timeline-list time { font-size: 9px; }
+.timeline-list span { font-size: 10px; }
+.summary-list > div { padding: 10px 0; font-size: 10px; }
+.broker-brand { margin: 18px 0; font-size: 16px; }
+.broker-brand small { font-size: 10px; }
+
+.perf-metrics { gap: 14px 9px; margin-top: 18px; }
+.perf-metrics span { font-size: 8px; }
+.perf-metrics b { font-size: 11px; }
+.month-bars { height: 190px; }
+.month-bars span, .month-bars small { font-size: 8px; }
+
+.onboarding-screen {
+  min-height: calc(100vh - 160px);
+  padding-top: 14px;
+  border-radius: 10px;
+}
+.screen-title { padding: 0 22px 13px; }
+.screen-title h1 { font-size: 21px; }
+.screen-title p { font-size: 11px; }
+.stepper { padding: 22px 34px 15px; }
+.step { gap: 7px; font-size: 9px; }
+.step b { width: 31px; height: 31px; font-size: 10px; }
+.step::after { top: 15px; }
+.onboarding-content { grid-template-columns: 1fr 380px; gap: 54px; padding: 46px 52px; }
+.welcome-copy h2 { font-size: 31px; }
+.welcome-copy > p { font-size: 13px; }
+.benefit-list { gap: 20px; margin-top: 30px; }
+.benefit-list > div, .expect-card > div { grid-template-columns: 40px 1fr; gap: 12px; }
+.benefit-list b, .expect-card > div > b { width: 36px; height: 36px; font-size: 13px; }
+.benefit-list strong, .expect-card strong { font-size: 11px; }
+.benefit-list small, .expect-card small { font-size: 10px; }
+.expect-card { padding: 22px; }
+.expect-card h3 { font-size: 12px; }
+.onboarding-footer { padding: 16px 20px; }
+.onboarding-footer button { padding: 11px 22px; font-size: 11px; }
+
+.operational-client { gap: 14px; }
+.client-surface-grid { grid-template-columns: minmax(0,1.55fr) minmax(340px,.65fr); gap: 14px; }
+.surface-items > div { gap: 16px; padding: 16px 8px; }
+.surface-items strong, .surface-items span { font-size: 11px; }
+.surface-items small { font-size: 10px; }
+.scope-card ul { gap: 11px; font-size: 11px; }
+.surface-actions { gap: 8px; }
+.surface-actions button { padding: 11px 12px; font-size: 10px; }
+.privacy-note { padding: 14px; }
+.privacy-note strong, .privacy-note p { font-size: 10px; }
+
+/* Matrix: default visual identity */
+html[data-theme="matrix"], html[data-theme="matrix"] body { background: #020806; color: #e8fff0; }
+
+html[data-theme="matrix"] .client-app-shell {
+  background:
+    radial-gradient(circle at 78% 7%, rgba(33,239,104,.08), transparent 30rem),
+    repeating-linear-gradient(90deg, rgba(38,255,101,.025) 0 1px, transparent 1px 34px),
+    #020806;
+}
+html[data-theme="matrix"] .client-sidebar {
+  background:
+    linear-gradient(180deg, rgba(4,31,16,.98), rgba(1,10,6,.99)),
+    repeating-linear-gradient(0deg, rgba(49,255,103,.04) 0 1px, transparent 1px 20px);
+  border-color: #164e29;
+}
+html[data-theme="matrix"] .client-sidebar nav button { color: #c8d6cc; }
+html[data-theme="matrix"] .client-sidebar nav button span { color: #c8d6cc; }
+html[data-theme="matrix"] .client-sidebar nav button:hover { background: rgba(28,123,54,.22); }
+html[data-theme="matrix"] .client-sidebar nav button.active {
+  background: linear-gradient(90deg, rgba(32,141,65,.58), rgba(12,59,29,.45));
+  box-shadow: inset 3px 0 0 #38eb68;
+}
+html[data-theme="matrix"] .client-brand strong { color: #34ef67; }
+html[data-theme="matrix"] .crest { color: #e1c46f; border-color: #d1b55f; }
+html[data-theme="matrix"] .support-box { background: rgba(11,55,26,.58); }
+html[data-theme="matrix"] .client-topbar {
+  color: #e8fff0;
+  border-color: #154a28;
+  background: rgba(1,9,5,.94);
+}
+html[data-theme="matrix"] .topbar-context,
+html[data-theme="matrix"] .client-user { color: #dce9df; }
+html[data-theme="matrix"] .account-select {
+  border-color: #174929;
+  background: #06120a;
+}
+html[data-theme="matrix"] .account-select span,
+html[data-theme="matrix"] .account-select b { color: #72907a; }
+html[data-theme="matrix"] .account-select strong { color: #dcecdf; }
+html[data-theme="matrix"] .bell { color: #49ef78; }
+html[data-theme="matrix"] .client-user > div { background: #123f22; color: #5df282; }
+html[data-theme="matrix"] .prototype-banner {
+  color: #d8bd69;
+  background: #151306;
+  border-color: #4f4520;
+}
+
+html[data-theme="matrix"] .white-card,
+html[data-theme="matrix"] .client-metric,
+html[data-theme="matrix"] .onboarding-screen,
+html[data-theme="matrix"] .expect-card {
+  color: #dff0e4;
+  border-color: #153f24;
+  background: rgba(2,14,7,.9);
+  box-shadow: inset 0 0 36px rgba(14,80,31,.07), 0 12px 28px rgba(0,0,0,.18);
+}
+html[data-theme="matrix"] .white-card > span:first-child,
+html[data-theme="matrix"] .card-head > span,
+html[data-theme="matrix"] .client-metric span { color: #87a18e; }
+html[data-theme="matrix"] .value-card > strong,
+html[data-theme="matrix"] .client-metric strong,
+html[data-theme="matrix"] .small-strong,
+html[data-theme="matrix"] .today-grid b,
+html[data-theme="matrix"] .strategy-donut strong,
+html[data-theme="matrix"] .allocation-donut strong,
+html[data-theme="matrix"] .risk-circle strong,
+html[data-theme="matrix"] .summary-list b,
+html[data-theme="matrix"] .perf-metrics b,
+html[data-theme="matrix"] .welcome-copy h2,
+html[data-theme="matrix"] .benefit-list strong,
+html[data-theme="matrix"] .expect-card strong,
+html[data-theme="matrix"] .screen-title h1,
+html[data-theme="matrix"] .surface-items strong { color: #e9fff0; }
+html[data-theme="matrix"] .welcome-copy h2 span,
+html[data-theme="matrix"] .surface-items span,
+html[data-theme="matrix"] .card-head button,
+html[data-theme="matrix"] .text-link,
+html[data-theme="matrix"] .scope-card li::marker { color: #41ed70; }
+
+html[data-theme="matrix"] .value-breakdown span,
+html[data-theme="matrix"] .benjamin-facts span,
+html[data-theme="matrix"] .health-card > div,
+html[data-theme="matrix"] .today-grid span,
+html[data-theme="matrix"] .positions-card th,
+html[data-theme="matrix"] .positions-large th,
+html[data-theme="matrix"] .feed time,
+html[data-theme="matrix"] .strategy-list > div,
+html[data-theme="matrix"] .alloc-list > div,
+html[data-theme="matrix"] .risk-lines > div,
+html[data-theme="matrix"] .timeline-list time,
+html[data-theme="matrix"] .summary-list > div,
+html[data-theme="matrix"] .perf-metrics span,
+html[data-theme="matrix"] .welcome-copy > p,
+html[data-theme="matrix"] .benefit-list small,
+html[data-theme="matrix"] .expect-card small,
+html[data-theme="matrix"] .surface-items small,
+html[data-theme="matrix"] .scope-card ul,
+html[data-theme="matrix"] .privacy-note p { color: #789181; }
+
+html[data-theme="matrix"] .value-breakdown b,
+html[data-theme="matrix"] .benjamin-facts b,
+html[data-theme="matrix"] .health-card > div,
+html[data-theme="matrix"] .positions-card td,
+html[data-theme="matrix"] .positions-large td,
+html[data-theme="matrix"] .feed span,
+html[data-theme="matrix"] .strategy-list b,
+html[data-theme="matrix"] .alloc-list b,
+html[data-theme="matrix"] .risk-lines b,
+html[data-theme="matrix"] .timeline-list span,
+html[data-theme="matrix"] .surface-items strong { color: #cfe1d3; }
+
+html[data-theme="matrix"] .equity-chart line { stroke: #10301b; }
+html[data-theme="matrix"] .equity-chart polyline { stroke: #32ed65; filter: drop-shadow(0 0 2px rgba(50,237,101,.4)); }
+html[data-theme="matrix"] .ranges b { color: #68806f; background: #0b2615; }
+html[data-theme="matrix"] .ranges b.active { color: #eaffef; background: #18743a; }
+html[data-theme="matrix"] .axis { color: #57705e; }
+
+html[data-theme="matrix"] .positions-card th,
+html[data-theme="matrix"] .positions-card td,
+html[data-theme="matrix"] .positions-large th,
+html[data-theme="matrix"] .positions-large td,
+html[data-theme="matrix"] .feed > div,
+html[data-theme="matrix"] .timeline-list > div,
+html[data-theme="matrix"] .summary-list > div,
+html[data-theme="matrix"] .surface-items > div { border-color: #102f1b; }
+
+html[data-theme="matrix"] .strategy-donut,
+html[data-theme="matrix"] .allocation-donut {
+  background:
+    radial-gradient(circle, #05140a 0 48%, transparent 49%),
+    conic-gradient(#2fe963 0 62%, #6bbf78 62% 84%, #1c6031 84% 100%);
+}
+html[data-theme="matrix"] .allocation-donut {
+  background:
+    radial-gradient(circle, #05140a 0 48%, transparent 49%),
+    conic-gradient(#2fe963 0 20.5%, #39a65d 20.5% 91.5%, #687d6e 91.5% 100%);
+}
+html[data-theme="matrix"] .risk-circle { border-color: #102f1b; border-top-color: #2ee264; border-right-color: #2ee264; }
+
+html[data-theme="matrix"] .onboarding-screen,
+html[data-theme="matrix"] .stepper,
+html[data-theme="matrix"] .onboarding-footer { border-color: #143b21; }
+html[data-theme="matrix"] .step { color: #718778; }
+html[data-theme="matrix"] .step::after { background: #173824; }
+html[data-theme="matrix"] .step b { color: #91a999; border-color: #1b4829; background: #06170c; }
+html[data-theme="matrix"] .step.active b { color: #021006; border-color: #32e566; background: #32e566; }
+html[data-theme="matrix"] .step.active span { color: #46ee76; }
+html[data-theme="matrix"] .benefit-list b,
+html[data-theme="matrix"] .expect-card > div > b { color: #43ef72; border-color: #225d34; }
+html[data-theme="matrix"] .onboarding-footer .secondary { color: #a8baae; border-color: #1a4428; background: #07150b; }
+html[data-theme="matrix"] .onboarding-footer .primary { color: #021006; border-color: #35e969; background: #35e969; }
+
+html[data-theme="matrix"] .surface-actions button {
+  color: #55ef7c;
+  border-color: #1b4c2a;
+  background: #07180c;
+}
+html[data-theme="matrix"] .privacy-note { border-color: #2fe763; background: #071b0e; }
+html[data-theme="matrix"] .privacy-note strong { color: #4fec77; }
+
+/* Floating theme selector shared by both demos */
+.theme-control {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  border: 1px solid rgba(90, 129, 103, .45);
+  border-radius: 10px;
+  background: rgba(4, 13, 7, .92);
+  box-shadow: 0 12px 34px rgba(0,0,0,.28);
+  backdrop-filter: blur(14px);
+}
+.theme-control span {
+  padding: 0 7px;
+  color: #829689;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.theme-control button {
+  border: 0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: #91a298;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 800;
+}
+.theme-control button.active { color: #031007; background: #35eb69; }
+html[data-theme="light"] .theme-control {
+  border-color: #d3dfed;
+  background: rgba(255,255,255,.94);
+}
+html[data-theme="light"] .theme-control span { color: #6d7e91; }
+html[data-theme="light"] .theme-control button { color: #5e7086; }
+html[data-theme="light"] .theme-control button.active { color: #fff; background: #2365d4; }
+
+@media (min-width: 1900px) {
+  .client-app-shell { grid-template-columns: 260px minmax(0, 1fr); }
+  .client-sidebar { min-width: 260px; }
+  .client-page { padding: 26px 38px 60px; }
+  .client-sidebar nav button { min-height: 45px; }
+  .client-sidebar nav button span { font-size: 14px; }
+  .white-card { padding: 21px; }
+  .equity-chart { height: 335px; }
+  .client-metric { min-height: 118px; }
+}
+
+@media (max-width: 1200px) {
+  .onboarding-content { grid-template-columns: 1fr 300px; gap: 30px; padding: 34px; }
+}
+
+@media (max-width: 900px) {
+  .client-app-shell { grid-template-columns: 84px minmax(0,1fr); }
+  .client-sidebar { min-width: 84px; }
+  .client-sidebar nav button { grid-template-columns: 1fr; place-items: center; }
+  .client-sidebar nav button span { text-align: center; font-size: 9px; }
+}
+
+@media (max-width: 640px) {
+  .client-sidebar { min-width: 0; }
+  .client-page { padding: 14px; }
+  .theme-control { right: 10px; bottom: 10px; }
+}

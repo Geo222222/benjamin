@@ -1,6 +1,7 @@
 """Benjamin constitutional capital-management kernel."""
 
 from .authority import AuthorizationError, authorize
+from .candidate_path import CandidateEconomicPath, EconomicPathType, build_candidate_economic_path
 from .capital_state import (
     CapitalSourceRef,
     CapitalState,
@@ -60,6 +61,7 @@ __all__ = [
     "AuthorizationError",
     "AuthorizedExecutionRequest",
     "BenjaminControlPlane",
+    "CandidateEconomicPath",
     "CapitalEnvelope",
     "CapitalRequirement",
     "CapitalSourceRef",
@@ -70,6 +72,7 @@ __all__ = [
     "DecisionStatus",
     "DecisionValidityStatus",
     "DecisionValidityWatch",
+    "EconomicPathType",
     "EvidenceDraft",
     "EvidenceLineage",
     "EvidencePublisher",
@@ -97,6 +100,7 @@ __all__ = [
     "assess_capital_state",
     "assess_projected_capital_state",
     "authorize",
+    "build_candidate_economic_path",
     "build_capital_state",
     "build_projected_capital_state",
     "decide",

@@ -6,6 +6,7 @@ from typing import Protocol
 
 from .domain import AuthorizedExecutionRequest, InvestmentDecision, RiskDecision
 from .watchman_capital import WatchmanAssessment
+from .watchman_pre_action import PreActionWatchmanAssessment
 
 
 @dataclass(frozen=True)
@@ -104,12 +105,7 @@ def watchman_capital_assessment_draft(
     correlation_id: str,
     causation_receipt_id: str,
 ) -> EvidenceDraft:
-    """Minimum-necessary Book testimony for a material Watchman state change.
-
-    The payload binds the exact Capital State and Capital Envelope hashes used by
-    Watchman. It deliberately does not copy account credentials, provider raw
-    payloads, or ZLJ market histories into The Book.
-    """
+    """Minimum-necessary Book testimony for a material live Watchman state change."""
 
     wire = assessment.to_wire()
     payload = _canonical(
@@ -136,6 +132,57 @@ def watchman_capital_assessment_draft(
     )
     return EvidenceDraft(
         event_type="WATCHMAN.CAPITAL_ASSESSMENT",
+        evidence_class="ECONOMIC",
+        privacy_class="CONFIDENTIAL_EVIDENCE",
+        visibility_scope=("BENJAMIN_STEWARD", "BENJAMIN_WATCHMAN", "BENJAMIN_AUDITOR", "BOOK_AUDITOR"),
+        subject_id=assessment.assessment_id,
+        payload=payload,
+        payload_ref=None,
+        correlation_id=correlation_id,
+        causation_receipt_id=causation_receipt_id,
+    )
+
+
+def watchman_pre_action_assessment_draft(
+    assessment: PreActionWatchmanAssessment,
+    *,
+    correlation_id: str,
+    causation_receipt_id: str,
+) -> EvidenceDraft:
+    """Book testimony for the scenario that governed a pre-action safety result.
+
+    This payload proves capital-safety evaluation only. It is not execution
+    authorization and cannot be consumed by The Hand as an executable request.
+    """
+
+    wire = assessment.to_wire()
+    payload = _canonical(
+        {
+            "schema_version": wire["schema_version"],
+            "assessment_id": assessment.assessment_id,
+            "content_hash": assessment.content_hash,
+            "capital_structure_id": assessment.capital_structure_id,
+            "base_capital_state_id": assessment.base_capital_state_id,
+            "base_capital_state_hash": assessment.base_capital_state_hash,
+            "projection_id": assessment.projection_id,
+            "projection_hash": assessment.projection_hash,
+            "candidate_path_ref": assessment.candidate_path_ref,
+            "candidate_action_class": assessment.candidate_action_class.value,
+            "envelope_id": assessment.envelope_id,
+            "envelope_hash": assessment.envelope_hash,
+            "responsibility_ref": assessment.responsibility_ref,
+            "state": assessment.state.value,
+            "candidate_permitted": assessment.candidate_permitted,
+            "permitted_action_classes": [item.value for item in assessment.permitted_action_classes],
+            "reasons": list(assessment.reasons),
+            "requirements": [item.to_wire() for item in assessment.requirements],
+            "scenario_assessments": [item.to_wire() for item in assessment.scenario_assessments],
+            "assessed_at": assessment.assessed_at.isoformat(),
+            "truth_boundary": wire["truth_boundary"],
+        }
+    )
+    return EvidenceDraft(
+        event_type="WATCHMAN.PRE_ACTION_ASSESSMENT",
         evidence_class="ECONOMIC",
         privacy_class="CONFIDENTIAL_EVIDENCE",
         visibility_scope=("BENJAMIN_STEWARD", "BENJAMIN_WATCHMAN", "BENJAMIN_AUDITOR", "BOOK_AUDITOR"),

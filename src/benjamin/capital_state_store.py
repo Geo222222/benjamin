@@ -49,7 +49,6 @@ class CapitalStateProjectionStore:
         else:
             with snapshot_path.open("xb") as handle:
                 handle.write(snapshot_bytes)
-                handle.write(b"\n")
             created_snapshot = True
 
         current = self._read_current_index()

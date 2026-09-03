@@ -8,6 +8,7 @@ import { ResponsibilityCenter } from './ResponsibilityCenter';
 import { Participants } from './Participants';
 import { CapitalRouter } from './CapitalRouter';
 import { MarketRelationships } from './MarketRelationships';
+import { DecisionDesk } from './DecisionDesk';
 
 type PageKey = 'command' | 'relationships' | 'structures' | 'participants' | 'accounts' | 'responsibility' | 'router' | 'decisions' | 'markets' | 'watchman' | 'hand' | 'book' | 'reports' | 'operations';
 type NavItem = { key: PageKey; label: string; glyph: string; phase: number; group: string };
@@ -29,7 +30,7 @@ const navItems: NavItem[] = [
   { key: 'operations', label: 'Operations', glyph: '⚙', phase: 9, group: 'Operations' },
 ];
 
-const enabledPages = new Set<PageKey>(['command','relationships','structures','participants','accounts','responsibility','router','markets']);
+const enabledPages = new Set<PageKey>(['command','relationships','structures','participants','accounts','responsibility','router','decisions','markets']);
 
 export function Topbar({ title, description }: { title: string; description: string }) {
   return <header className="bc-topbar"><div><div className="bc-eyebrow">Benjamin Capital Management / Manager Console</div><h1>{title}</h1><p>{description}</p></div><div className="bc-top-actions"><span className="bc-badge good">FRONTEND CONTRACT</span><span className="bc-badge warn">NO LIVE CAPITAL AUTHORITY</span></div></header>;
@@ -59,6 +60,7 @@ export function App() {
   else if(page==='accounts') content=<Accounts Topbar={Topbar}/>;
   else if(page==='responsibility') content=<ResponsibilityCenter Topbar={Topbar} initialStructureId={responsibilityStructure}/>;
   else if(page==='router') content=<CapitalRouter Topbar={Topbar}/>;
+  else if(page==='decisions') content=<DecisionDesk Topbar={Topbar}/>;
   else if(page==='markets') content=<MarketRelationships Topbar={Topbar}/>;
   else content=<Placeholder page={page}/>;
 

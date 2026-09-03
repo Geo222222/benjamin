@@ -1,6 +1,8 @@
+import type { ComponentType } from 'react';
 import { capitalStructures, participants } from './company-model';
 
-type Props = { Topbar: (props: { title: string; description: string }) => JSX.Element };
+type TopbarProps = { title: string; description: string };
+type Props = { Topbar: ComponentType<TopbarProps> };
 
 export function Participants({ Topbar }: Props) {
   const pool = capitalStructures.find((item) => item.type === 'POOLED_PORTFOLIO') ?? capitalStructures[0];

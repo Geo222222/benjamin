@@ -1,6 +1,6 @@
 # Watchman — Continuous Capital-State Governance
 
-> **Status: LIVE + PROJECTED CAPITAL CONTRACTS IMPLEMENTED / NON-LIVE / NO HAND EXECUTION AUTHORITY**
+> **Status: LIVE + PROJECTED + PRE-ACTION CAPITAL CONTRACTS IMPLEMENTED / NON-LIVE / NO HAND EXECUTION AUTHORITY**
 >
 > This document refines the Benjamin HLDD definition of Watchman. Watchman is not a market forecaster, legal-policy engine, strategy selector, or general compliance service. Watchman is the institution's continuous capital governor: it watches the difference between the Capital State that exists, the Capital State a candidate action could create, and the Capital State permitted by the active Responsibility.
 
@@ -33,7 +33,7 @@ Watchman watches the money before, during, and after Benjamin acts.
                       |
                       v
                   BENJAMIN
-              capital decision
+              candidate path
                       |
                       v
           PROJECTED CAPITAL STATE
@@ -41,13 +41,17 @@ Watchman watches the money before, during, and after Benjamin acts.
                       |
                       v
                   WATCHMAN
-               pre-action watch
+          pre-action scenario governance
                       |
                +------+------+
                |             |
-          acceptable      constrain
+          permissible     constrain
                |             |
                v             `--> Benjamin reroutes
+          future governed
+           authorization
+               |
+               v
              HAND
                |
             execution
@@ -68,7 +72,7 @@ live capital watch   live market watch
         next decision
 ```
 
-The authoritative live Capital State contract and the non-authoritative Projected Capital State contract now both exist. Projected state must never masquerade as accounting truth.
+The authoritative live Capital State, non-authoritative Projected Capital State, and pre-action scenario-governance contracts now exist. None of them grants live Hand execution authority.
 
 ## Capital Envelope
 
@@ -125,7 +129,47 @@ requires_post_execution_reconciliation = true
 
 After The Hand acts, authoritative provider/accounting evidence must be reconciled into a new real Capital State. The projection remains historical decision evidence and may later be compared with what actually happened.
 
-The Book does not need a receipt for every candidate projection. A material `BENJAMIN.DECISION` and Watchman pre-action assessment should bind the selected projection ID/hash so the decision can be reconstructed without flooding The Book with every rejected candidate.
+## Pre-action scenario governance
+
+`WATCHMAN.PRE_ACTION_ASSESSMENT.v1` evaluates one exact Projected Capital State against one exact Capital Envelope.
+
+It answers:
+
+> **Does this candidate path remain capital-safe when the expected, adverse, and execution-stress consequences are all considered?**
+
+Every required scenario receives its own Watchman state and capital requirements. The aggregate pre-action state is the **worst justified required-scenario result**.
+
+Example:
+
+```text
+EXPECTED          HEALTHY
+ADVERSE           CORRECTION_REQUIRED
+EXECUTION_STRESS  HEALTHY
+
+OVERALL           CORRECTION_REQUIRED
+RISK_INCREASE     NOT PERMITTED AS PROJECTED
+```
+
+This prevents an attractive expected case from hiding an unacceptable downside or execution path.
+
+A required scenario that is `DEGRADED` or `UNAVAILABLE` becomes at least `CONSTRAINED`. That fails closed for `RISK_INCREASING` candidates while preserving `RISK_REDUCING` candidates as a separately governed action class.
+
+Pre-action assessment additionally requires:
+
+- the projection must still reference the exact current authoritative base Capital State ID/hash;
+- the projection and Capital Envelope must reference the same Capital Structure and Responsibility;
+- the projection must not be expired;
+- scenario evidence must already satisfy the projection's point-in-time knowability rules.
+
+A pre-action assessment is **not** execution authorization. Its truth boundary explicitly states:
+
+```text
+authoritative_capital_state = false
+execution_authorization     = false
+hand_instruction            = false
+```
+
+A later authorization contract must separately translate a permissible Benjamin decision into a bounded Hand authority.
 
 ## Watchman states
 
@@ -141,7 +185,7 @@ Capital is approaching a boundary or active-decision evidence has degraded. Watc
 
 ### `CONSTRAINED`
 
-Capital truth or remaining risk capacity does not support increasing risk. Risk-increasing actions are removed from the permitted action-class set, but risk-neutral and risk-reducing actions remain available.
+Capital truth, projection quality, or remaining risk capacity does not support increasing risk. Risk-increasing actions are removed from the permitted action-class set, but risk-neutral and risk-reducing actions remain available.
 
 Examples include:
 
@@ -294,26 +338,24 @@ It must never silently replace:
 
 Material Watchman state changes must be reconstructable.
 
-The first Book-bound draft is:
+Implemented Book-bound drafts are:
 
-`WATCHMAN.CAPITAL_ASSESSMENT`
+- `WATCHMAN.CAPITAL_ASSESSMENT` — live authoritative Capital State surveillance;
+- `WATCHMAN.PRE_ACTION_ASSESSMENT` — projected candidate-path scenario governance.
 
-It binds minimum-necessary evidence including:
+The pre-action event binds:
 
-- assessment/content hash;
-- Capital Structure;
-- exact Capital State ID/hash/as-of time;
+- exact authoritative base Capital State ID/hash;
+- exact Projected Capital State ID/hash;
+- candidate path/action class;
 - exact Capital Envelope ID/hash;
 - Responsibility reference;
-- Watchman state;
-- reasons;
-- required capital conditions;
-- permitted action classes;
-- emergency directives where present;
-- decision-validity reference/state where present;
-- assessed-at time.
-
-Future pre-action assessments will additionally bind the selected Projected Capital State ID/hash and scenario-level results.
+- each required scenario assessment;
+- worst justified aggregate state;
+- candidate-permitted result;
+- requirements and permitted action classes;
+- assessed-at time;
+- explicit non-authorization truth boundary.
 
 The Book does not need raw provider credentials, exchange payloads, or ZLJ market histories merely to prove that Watchman made an assessment.
 
@@ -328,9 +370,11 @@ BENJAMIN candidate path
       |
 PROJECTED CAPITAL STATE
       |
+WATCHMAN PRE-ACTION ASSESSMENT
+      |
 BENJAMIN.DECISION
       |
-WATCHMAN PRE-ACTION ASSESSMENT
+future governed authorization
       |
 HAND EXECUTION
       |
@@ -359,16 +403,21 @@ Implemented now:
 - decision-validity intake;
 - future-evidence rejection;
 - emergency directive vocabulary;
-- Book evidence draft;
+- live Watchman Book evidence draft;
 - content-addressed Projected Capital State;
 - expected/adverse/execution-stress scenario contract;
 - projection expiry and anti-lookahead boundaries;
-- explicit non-authoritative projection truth boundary.
+- explicit non-authoritative projection truth boundary;
+- pre-action scenario-by-scenario Watchman assessment;
+- worst-required-scenario aggregation;
+- risk-increasing fail-closed behavior for degraded/unavailable required scenarios;
+- exact current-base-state binding;
+- pre-action Watchman Book evidence draft.
 
 Not yet implemented/earned:
 
-- pre-action Watchman scenario assessment;
 - automatic candidate-path capital-effect/scenario projector;
+- final bounded Watchman authorization contract for Hand consumption;
 - event bus / continuous daemon;
 - trajectory/velocity/time-to-boundary analysis;
 - instrument-level and correlation concentration because Capital State does not yet expose all required normalized decomposition;
@@ -381,13 +430,14 @@ Not yet implemented/earned:
 ```text
 1. Live Capital-State Watchman contract          IMPLEMENTED
 2. Projected Capital State contract              IMPLEMENTED
-3. Pre-action Watchman scenario assessment       NEXT
-4. Candidate-path projection/compiler
-5. Event-driven surveillance + periodic reconcile
-6. Decision-validity event bridge from ZLJ
-7. Capital-trajectory / market-fragility context
-8. Hand action-class / emergency capability binding
-9. Book material-event delivery / replay
-10. Shadow/replay qualification
-11. Only then consider governed live authority
+3. Pre-action Watchman scenario assessment       IMPLEMENTED
+4. Candidate-path projection/compiler            NEXT
+5. Bounded Watchman -> Hand authorization
+6. Event-driven surveillance + periodic reconcile
+7. Decision-validity event bridge from ZLJ
+8. Capital-trajectory / market-fragility context
+9. Hand action-class / emergency capability binding
+10. Book material-event delivery / replay
+11. Shadow/replay qualification
+12. Only then consider governed live authority
 ```

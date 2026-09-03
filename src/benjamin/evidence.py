@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Protocol
 
 from .domain import AuthorizedExecutionRequest, InvestmentDecision, RiskDecision
+from .watchman_capital import WatchmanAssessment
 
 
 @dataclass(frozen=True)
@@ -90,6 +91,55 @@ def risk_draft(
         privacy_class="CONFIDENTIAL_EVIDENCE",
         visibility_scope=("BENJAMIN_WATCHMAN", "BENJAMIN_AUTHORITY", "BENJAMIN_AUDITOR"),
         subject_id=risk.risk_id,
+        payload=payload,
+        payload_ref=None,
+        correlation_id=correlation_id,
+        causation_receipt_id=causation_receipt_id,
+    )
+
+
+def watchman_capital_assessment_draft(
+    assessment: WatchmanAssessment,
+    *,
+    correlation_id: str,
+    causation_receipt_id: str,
+) -> EvidenceDraft:
+    """Minimum-necessary Book testimony for a material Watchman state change.
+
+    The payload binds the exact Capital State and Capital Envelope hashes used by
+    Watchman. It deliberately does not copy account credentials, provider raw
+    payloads, or ZLJ market histories into The Book.
+    """
+
+    wire = assessment.to_wire()
+    payload = _canonical(
+        {
+            "schema_version": wire["schema_version"],
+            "assessment_id": assessment.assessment_id,
+            "content_hash": assessment.content_hash,
+            "mode": assessment.mode.value,
+            "capital_structure_id": assessment.capital_structure_id,
+            "capital_state_id": assessment.capital_state_id,
+            "capital_state_hash": assessment.capital_state_hash,
+            "capital_state_as_of": assessment.capital_state_as_of.isoformat(),
+            "envelope_id": assessment.envelope_id,
+            "envelope_hash": assessment.envelope_hash,
+            "responsibility_ref": assessment.responsibility_ref,
+            "state": assessment.state.value,
+            "reasons": list(assessment.reasons),
+            "requirements": [item.to_wire() for item in assessment.requirements],
+            "permitted_action_classes": [item.value for item in assessment.permitted_action_classes],
+            "emergency_directives": list(assessment.emergency_directives),
+            "decision_validity": wire["decision_validity"],
+            "assessed_at": assessment.assessed_at.isoformat(),
+        }
+    )
+    return EvidenceDraft(
+        event_type="WATCHMAN.CAPITAL_ASSESSMENT",
+        evidence_class="ECONOMIC",
+        privacy_class="CONFIDENTIAL_EVIDENCE",
+        visibility_scope=("BENJAMIN_STEWARD", "BENJAMIN_WATCHMAN", "BENJAMIN_AUDITOR", "BOOK_AUDITOR"),
+        subject_id=assessment.assessment_id,
         payload=payload,
         payload_ref=None,
         correlation_id=correlation_id,

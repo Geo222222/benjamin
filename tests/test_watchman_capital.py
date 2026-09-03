@@ -137,12 +137,22 @@ def test_watch_state_warns_without_removing_normal_action_classes() -> None:
     assert ActionClass.RISK_INCREASING in result.permitted_action_classes
 
 
-def test_defensive_capital_state_constrains_new_risk() -> None:
-    result = assess(pending_redemptions=Decimal("30000"))
+def test_degraded_capital_truth_constrains_new_risk_without_implying_correction() -> None:
+    result = assess(
+        source_refs=(source(quality=SourceQuality.STALE),),
+        stale_fields=("cash_balance",),
+    )
     assert result.state is WatchmanState.CONSTRAINED
     assert "CAPITAL_STATE_DEFENSIVE_ONLY" in result.reasons
     assert ActionClass.RISK_INCREASING not in result.permitted_action_classes
     assert ActionClass.RISK_REDUCING in result.permitted_action_classes
+
+
+def test_redemption_can_move_capital_from_defensive_only_into_correction_required() -> None:
+    result = assess(pending_redemptions=Decimal("30000"))
+    assert result.state is WatchmanState.CORRECTION_REQUIRED
+    assert "CAPITAL_STATE_DEFENSIVE_ONLY" in result.reasons
+    assert "LIQUIDITY_COVERAGE_CORRECTION" in result.reasons
 
 
 def test_drawdown_correction_requires_return_inside_watch_boundary() -> None:

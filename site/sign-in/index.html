@@ -3,28 +3,43 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#050d09" />
+  <meta name="theme-color" content="#020805" />
   <meta name="robots" content="noindex,nofollow" />
   <title>Client Sign In — Benjamin</title>
+  <link rel="icon" href="../assets/benjamin-wolf-mark.svg" type="image/svg+xml" data-benjamin-icon />
   <link rel="stylesheet" href="../assets/styles.css" />
+  <link rel="stylesheet" href="../assets/brand.css" data-benjamin-brand />
+  <link rel="stylesheet" href="../assets/access-v3.css" />
   <script src="../assets/app.js" defer></script>
 </head>
-<body class="access-body">
-  <main class="signin-shell">
-    <a class="brand access-brand" href="../" aria-label="Benjamin home"><span class="brand-mark">B</span><span class="brand-copy"><strong>BENJAMIN</strong><small>AN EPINNOX SYSTEM</small></span></a>
-    <section class="signin-card" aria-labelledby="signin-title">
-      <div class="seal"><span>B</span></div>
-      <p class="eyebrow">PRIVATE CLIENT ACCESS</p>
-      <h1 id="signin-title">Return to your Benjamin account.</h1>
-      <p>Production access will open a client-specific view of your own managed account, mandate, activity, performance, documents, and proofs. It is not a filtered view of Epinnox principal capital or another client’s private account.</p>
-      <form data-prototype-form>
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" disabled aria-describedby="signin-note" />
-        <button class="button" type="submit" disabled>Continue securely</button>
-      </form>
-      <p class="form-note" id="signin-note">Sign-in is disabled on GitHub Pages. No credentials should ever be entered into this prototype. Production authentication will be delegated to Benjamin’s identity service.</p>
-      <div class="signin-links"><a href="../invitation/">Have a private invitation?</a><a href="../">Return to Benjamin</a></div>
+<body class="access-v3">
+  <main class="access-v3-shell">
+    <section class="access-v3-content">
+      <a class="access-v3-brand" href="../" aria-label="Benjamin home">
+        <img src="../assets/benjamin-wolf-mark.svg" width="54" height="54" alt="" aria-hidden="true" />
+        <span><strong>BENJAMIN</strong><small>A CODEREIGN COMPANY</small></span>
+      </a>
+
+      <div class="access-v3-main signin-v3-card">
+        <p class="access-kicker">PRIVATE CLIENT ACCESS</p>
+        <h1>Return to your Benjamin account.</h1>
+        <p class="access-lede">Your client experience is account-specific: capital, mandate, activity, performance, risk, documents, and historical records belong to your relationship—not another client and not Benjamin principal capital.</p>
+
+        <form data-prototype-form>
+          <label for="email">EMAIL ADDRESS</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" disabled aria-describedby="signin-note" />
+          <button type="submit" disabled>Continue securely</button>
+        </form>
+        <p class="access-boundary" id="signin-note"><strong>Prototype boundary.</strong> Authentication is disabled on GitHub Pages. Do not enter credentials here. Production sign-in will terminate at Benjamin’s identity service using secure server-managed sessions.</p>
+        <div class="signin-v3-links"><a href="../invitation/">Have a private invitation?</a><a href="../">Return to Benjamin</a></div>
+      </div>
+      <p class="access-note">Private client access. Investing involves risk, including possible loss of principal.</p>
     </section>
+
+    <aside class="access-v3-visual" aria-label="Benjamin private client access">
+      <img src="../assets/benjamin-hero-v4.avif" alt="" aria-hidden="true" />
+      <div class="visual-caption"><small>YOUR ACCOUNT · START TO PRESENT</small><strong>One private view of the capital Benjamin manages for you.</strong><span>See account equity, activity, mandate, risk boundaries, decisions, fees, and historical records from one relationship surface.</span></div>
+    </aside>
   </main>
 </body>
 </html>

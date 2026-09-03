@@ -44,6 +44,11 @@ from .watchman_capital import (
     WatchmanState,
     assess_capital_state,
 )
+from .watchman_pre_action import (
+    PreActionWatchmanAssessment,
+    ProjectedScenarioAssessment,
+    assess_projected_capital_state,
+)
 
 __all__ = [
     "ActionClass",
@@ -65,8 +70,10 @@ __all__ = [
     "EvidencePublisher",
     "InvestmentDecision",
     "OrderSide",
+    "PreActionWatchmanAssessment",
     "ProjectedCapitalScenario",
     "ProjectedCapitalState",
+    "ProjectedScenarioAssessment",
     "ProjectionEvidenceRef",
     "ProjectionReceipt",
     "ProjectionScenarioKind",
@@ -83,6 +90,7 @@ __all__ = [
     "WatchmanAssessment",
     "WatchmanState",
     "assess_capital_state",
+    "assess_projected_capital_state",
     "authorize",
     "build_capital_state",
     "build_projected_capital_state",

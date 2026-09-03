@@ -9,6 +9,7 @@ import { Participants } from './Participants';
 import { CapitalRouter } from './CapitalRouter';
 import { MarketRelationships } from './MarketRelationships';
 import { DecisionDesk } from './DecisionDesk';
+import { InstitutionalBridge } from './InstitutionalBridge';
 
 type PageKey = 'command' | 'relationships' | 'structures' | 'participants' | 'accounts' | 'responsibility' | 'router' | 'decisions' | 'markets' | 'watchman' | 'hand' | 'book' | 'reports' | 'operations';
 type NavItem = { key: PageKey; label: string; glyph: string; phase: number; group: string };
@@ -23,14 +24,14 @@ const navItems: NavItem[] = [
   { key: 'router', label: 'Capital Router', glyph: '⌁', phase: 5, group: 'Benjamin Authority' },
   { key: 'decisions', label: 'Decision Desk', glyph: '◉', phase: 7, group: 'Benjamin Authority' },
   { key: 'markets', label: 'Market Relationships', glyph: '⌗', phase: 6, group: 'Intelligence' },
-  { key: 'watchman', label: 'Watchman', glyph: '⬡', phase: 9, group: 'Institution' },
-  { key: 'hand', label: 'The Hand', glyph: '▣', phase: 9, group: 'Institution' },
-  { key: 'book', label: 'The Book', glyph: '▧', phase: 9, group: 'Institution' },
+  { key: 'watchman', label: 'Watchman Bridge', glyph: '⬡', phase: 9, group: 'Institution' },
+  { key: 'hand', label: 'The Hand Bridge', glyph: '▣', phase: 9, group: 'Institution' },
+  { key: 'book', label: 'The Book Bridge', glyph: '▧', phase: 9, group: 'Institution' },
   { key: 'reports', label: 'Client Reporting', glyph: '▥', phase: 8, group: 'Operations' },
-  { key: 'operations', label: 'Operations', glyph: '⚙', phase: 9, group: 'Operations' },
+  { key: 'operations', label: 'Operations', glyph: '⚙', phase: 10, group: 'Operations' },
 ];
 
-const enabledPages = new Set<PageKey>(['command','relationships','structures','participants','accounts','responsibility','router','decisions','markets']);
+const enabledPages = new Set<PageKey>(['command','relationships','structures','participants','accounts','responsibility','router','decisions','markets','watchman','hand','book']);
 
 export function Topbar({ title, description }: { title: string; description: string }) {
   return <header className="bc-topbar"><div><div className="bc-eyebrow">Benjamin Capital Management / Manager Console</div><h1>{title}</h1><p>{description}</p></div><div className="bc-top-actions"><span className="bc-badge good">FRONTEND CONTRACT</span><span className="bc-badge warn">NO LIVE CAPITAL AUTHORITY</span></div></header>;
@@ -62,6 +63,9 @@ export function App() {
   else if(page==='router') content=<CapitalRouter Topbar={Topbar}/>;
   else if(page==='decisions') content=<DecisionDesk Topbar={Topbar}/>;
   else if(page==='markets') content=<MarketRelationships Topbar={Topbar}/>;
+  else if(page==='watchman') content=<InstitutionalBridge kind="watchman" Topbar={Topbar}/>;
+  else if(page==='hand') content=<InstitutionalBridge kind="hand" Topbar={Topbar}/>;
+  else if(page==='book') content=<InstitutionalBridge kind="book" Topbar={Topbar}/>;
   else content=<Placeholder page={page}/>;
 
   return <div className="bc-shell"><Sidebar page={page} setPage={navigate}/><main className="bc-main">{content}</main></div>;

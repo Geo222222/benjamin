@@ -5,6 +5,7 @@ import { installProductPolish } from './polish';
 import './styles.css';
 import './theme.css';
 import './polish.css';
+import './capital-client.css';
 
 installProductPolish();
 

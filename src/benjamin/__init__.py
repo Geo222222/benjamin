@@ -11,6 +11,7 @@ from .capital_state import (
     ValuationPolicyRef,
     build_capital_state,
 )
+from .capital_state_store import CapitalStateProjectionStore, ProjectionReceipt
 from .control_plane import BenjaminControlPlane, ControlPlaneResult, EvidenceLineage
 from .domain import (
     AuthorizedExecutionRequest,
@@ -32,6 +33,7 @@ __all__ = [
     "CapitalSourceRef",
     "CapitalState",
     "CapitalStateInput",
+    "CapitalStateProjectionStore",
     "ControlPlaneResult",
     "DecisionStatus",
     "EvidenceDraft",
@@ -39,6 +41,7 @@ __all__ = [
     "EvidencePublisher",
     "InvestmentDecision",
     "OrderSide",
+    "ProjectionReceipt",
     "Recommendation",
     "ReconciliationStatus",
     "RiskDecision",

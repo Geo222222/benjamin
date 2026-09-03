@@ -1,6 +1,16 @@
 """Benjamin constitutional capital-management kernel."""
 
 from .authority import AuthorizationError, authorize
+from .capital_state import (
+    CapitalSourceRef,
+    CapitalState,
+    CapitalStateInput,
+    ReconciliationStatus,
+    RoutingReadiness,
+    SourceQuality,
+    ValuationPolicyRef,
+    build_capital_state,
+)
 from .control_plane import BenjaminControlPlane, ControlPlaneResult, EvidenceLineage
 from .domain import (
     AuthorizedExecutionRequest,
@@ -19,6 +29,9 @@ __all__ = [
     "AuthorizationError",
     "AuthorizedExecutionRequest",
     "BenjaminControlPlane",
+    "CapitalSourceRef",
+    "CapitalState",
+    "CapitalStateInput",
     "ControlPlaneResult",
     "DecisionStatus",
     "EvidenceDraft",
@@ -27,10 +40,15 @@ __all__ = [
     "InvestmentDecision",
     "OrderSide",
     "Recommendation",
+    "ReconciliationStatus",
     "RiskDecision",
     "RiskPolicy",
     "RiskStatus",
+    "RoutingReadiness",
+    "SourceQuality",
+    "ValuationPolicyRef",
     "authorize",
+    "build_capital_state",
     "decide",
     "evaluate",
 ]

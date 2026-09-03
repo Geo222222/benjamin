@@ -22,7 +22,7 @@ from .domain import (
     RiskDecision,
     RiskStatus,
 )
-from .evidence import EvidenceDraft, EvidencePublisher
+from .evidence import EvidenceDraft, EvidencePublisher, watchman_capital_assessment_draft
 from .steward import decide
 from .watchman import RiskPolicy, evaluate
 from .watchman_capital import (
@@ -74,4 +74,5 @@ __all__ = [
     "build_capital_state",
     "decide",
     "evaluate",
+    "watchman_capital_assessment_draft",
 ]

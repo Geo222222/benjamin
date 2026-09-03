@@ -37,6 +37,12 @@ from .projected_capital_state import (
     ProjectionStatus,
     build_projected_capital_state,
 )
+from .projection_compiler import (
+    ProjectionCompilerError,
+    ScenarioCapitalEffect,
+    build_scenario_capital_effect,
+    compile_projected_capital_state,
+)
 from .steward import decide
 from .watchman import RiskPolicy, evaluate
 from .watchman_capital import (
@@ -82,6 +88,7 @@ __all__ = [
     "ProjectedCapitalScenario",
     "ProjectedCapitalState",
     "ProjectedScenarioAssessment",
+    "ProjectionCompilerError",
     "ProjectionEvidenceRef",
     "ProjectionReceipt",
     "ProjectionScenarioKind",
@@ -92,6 +99,7 @@ __all__ = [
     "RiskPolicy",
     "RiskStatus",
     "RoutingReadiness",
+    "ScenarioCapitalEffect",
     "SourceQuality",
     "ValuationPolicyRef",
     "WatchMode",
@@ -103,6 +111,8 @@ __all__ = [
     "build_candidate_economic_path",
     "build_capital_state",
     "build_projected_capital_state",
+    "build_scenario_capital_effect",
+    "compile_projected_capital_state",
     "decide",
     "evaluate",
     "watchman_capital_assessment_draft",

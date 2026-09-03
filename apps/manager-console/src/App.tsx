@@ -10,6 +10,7 @@ import { CapitalRouter } from './CapitalRouter';
 import { MarketRelationships } from './MarketRelationships';
 import { DecisionDesk } from './DecisionDesk';
 import { InstitutionalBridge } from './InstitutionalBridge';
+import { ClientReporting, Operations } from './CompanyOperations';
 
 type PageKey = 'command' | 'relationships' | 'structures' | 'participants' | 'accounts' | 'responsibility' | 'router' | 'decisions' | 'markets' | 'watchman' | 'hand' | 'book' | 'reports' | 'operations';
 type NavItem = { key: PageKey; label: string; glyph: string; phase: number; group: string };
@@ -27,11 +28,11 @@ const navItems: NavItem[] = [
   { key: 'watchman', label: 'Watchman Bridge', glyph: '⬡', phase: 9, group: 'Institution' },
   { key: 'hand', label: 'The Hand Bridge', glyph: '▣', phase: 9, group: 'Institution' },
   { key: 'book', label: 'The Book Bridge', glyph: '▧', phase: 9, group: 'Institution' },
-  { key: 'reports', label: 'Client Reporting', glyph: '▥', phase: 8, group: 'Operations' },
+  { key: 'reports', label: 'Client Reporting', glyph: '▥', phase: 10, group: 'Operations' },
   { key: 'operations', label: 'Operations', glyph: '⚙', phase: 10, group: 'Operations' },
 ];
 
-const enabledPages = new Set<PageKey>(['command','relationships','structures','participants','accounts','responsibility','router','decisions','markets','watchman','hand','book']);
+const enabledPages = new Set<PageKey>(navItems.map((item) => item.key));
 
 export function Topbar({ title, description }: { title: string; description: string }) {
   return <header className="bc-topbar"><div><div className="bc-eyebrow">Benjamin Capital Management / Manager Console</div><h1>{title}</h1><p>{description}</p></div><div className="bc-top-actions"><span className="bc-badge good">FRONTEND CONTRACT</span><span className="bc-badge warn">NO LIVE CAPITAL AUTHORITY</span></div></header>;
@@ -39,12 +40,7 @@ export function Topbar({ title, description }: { title: string; description: str
 
 function Sidebar({ page, setPage }: { page: PageKey; setPage: (page: PageKey) => void }) {
   const groups=[...new Set(navItems.map((item)=>item.group))];
-  return <aside className="bc-sidebar"><div className="bc-brand"><div className="bc-brand-mark">B</div><div><strong>BENJAMIN</strong><small>Capital Management</small></div></div>{groups.map((group)=><div className="bc-nav-group" key={group}><div className="bc-nav-label">{group}</div>{navItems.filter((item)=>item.group===group).map((item)=>{const enabled=enabledPages.has(item.key);return <button key={item.key} className={`bc-nav-button ${page===item.key?'active':''} ${enabled?'':'disabled'}`} onClick={()=>enabled&&setPage(item.key)} disabled={!enabled} title={enabled?item.label:`Frontend phase ${item.phase}`}><span>{item.glyph}</span><span>{item.label}</span></button>;})}</div>)}<div className="bc-side-footer"><span>Product mode <b>{companyModelStatus.productMode}</b></span><span>Live execution <b>OFF</b></span><span>Custody authority <b>NONE</b></span></div></aside>;
-}
-
-function Placeholder({ page }: { page: PageKey }) {
-  const item=navItems.find((candidate)=>candidate.key===page)!;
-  return <><Topbar title={item.label} description="This area is represented in the company information architecture but remains intentionally unavailable until its dedicated frontend phase is defined and verified."/><section className="bc-card bc-placeholder"><div><span className="bc-status research">PHASE {item.phase}</span><strong>{item.label} is next in the governed build sequence.</strong><p>The UI will not imply capability before its data model, controls, authority, evidence, and client impact are defined.</p></div></section></>;
+  return <aside className="bc-sidebar"><div className="bc-brand"><div className="bc-brand-mark">B</div><div><strong>BENJAMIN</strong><small>Capital Management</small></div></div>{groups.map((group)=><div className="bc-nav-group" key={group}><div className="bc-nav-label">{group}</div>{navItems.filter((item)=>item.group===group).map((item)=>{const enabled=enabledPages.has(item.key);return <button key={item.key} className={`bc-nav-button ${page===item.key?'active':''} ${enabled?'':'disabled'}`} onClick={()=>enabled&&setPage(item.key)} disabled={!enabled}><span>{item.glyph}</span><span>{item.label}</span></button>;})}</div>)}<div className="bc-side-footer"><span>Product mode <b>{companyModelStatus.productMode}</b></span><span>Live execution <b>OFF</b></span><span>Custody authority <b>NONE</b></span></div></aside>;
 }
 
 export function App() {
@@ -66,7 +62,8 @@ export function App() {
   else if(page==='watchman') content=<InstitutionalBridge kind="watchman" Topbar={Topbar}/>;
   else if(page==='hand') content=<InstitutionalBridge kind="hand" Topbar={Topbar}/>;
   else if(page==='book') content=<InstitutionalBridge kind="book" Topbar={Topbar}/>;
-  else content=<Placeholder page={page}/>;
+  else if(page==='reports') content=<ClientReporting Topbar={Topbar}/>;
+  else content=<Operations Topbar={Topbar}/>;
 
   return <div className="bc-shell"><Sidebar page={page} setPage={navigate}/><main className="bc-main">{content}</main></div>;
 }

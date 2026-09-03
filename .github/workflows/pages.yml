@@ -50,6 +50,9 @@ jobs:
         run: |
           cat .generated-assets/benjamin-hero.part*.b64 | base64 --decode > site/assets/benjamin-wolf-cinematic.avif
           test -s site/assets/benjamin-wolf-cinematic.avif
+          base64 --decode site/assets/benjamin-hero-v4.avif.b64 > site/assets/benjamin-hero-v4.avif
+          test -s site/assets/benjamin-hero-v4.avif
+          rm site/assets/benjamin-hero-v4.avif.b64
 
       - name: Assemble Pages artifact
         run: |

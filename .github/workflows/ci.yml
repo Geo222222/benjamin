@@ -12,14 +12,19 @@ permissions:
 jobs:
   kernel:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.9', '3.12']
+    name: kernel-py${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: ${{ matrix.python-version }}
       - name: Install kernel
         run: python -m pip install -e '.[dev]'
-      - name: Test covenant invariants
+      - name: Test covenant and Capital State invariants
         run: python -m pytest -q
 
   consoles:

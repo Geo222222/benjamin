@@ -8,7 +8,7 @@ from uuid import uuid4
 from .domain import DecisionStatus, InvestmentDecision, RiskDecision, RiskStatus
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class RiskPolicy:
     """Minimal deterministic B0 policy.
 

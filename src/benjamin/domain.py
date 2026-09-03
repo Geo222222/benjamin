@@ -3,26 +3,26 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
-from enum import StrEnum
+from enum import Enum
 
 
-class OrderSide(StrEnum):
+class OrderSide(str, Enum):
     BUY = "BUY"
     SELL = "SELL"
 
 
-class DecisionStatus(StrEnum):
+class DecisionStatus(str, Enum):
     APPROVED = "APPROVED"
     MODIFIED = "MODIFIED"
     REJECTED = "REJECTED"
 
 
-class RiskStatus(StrEnum):
+class RiskStatus(str, Enum):
     PASS = "PASS"
     BLOCK = "BLOCK"
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Recommendation:
     recommendation_id: str
     fund_id: str
@@ -41,7 +41,7 @@ class Recommendation:
             raise ValueError("recommendation must reference evidence/thesis")
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class InvestmentDecision:
     decision_id: str
     recommendation_id: str
@@ -60,7 +60,7 @@ class InvestmentDecision:
             raise ValueError("decision reason is required")
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class RiskDecision:
     risk_id: str
     decision_id: str
@@ -73,7 +73,7 @@ class RiskDecision:
             raise ValueError("risk decision must contain at least one reason")
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class AuthorizedExecutionRequest:
     schema_version: str
     authorization_id: str

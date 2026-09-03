@@ -55,7 +55,6 @@ class CapitalStateProjectionStore:
         previous = current.get(state.capital_structure_id)
         advanced_current = self._should_advance_current(previous, state)
 
-        # Re-persisting the exact current state is idempotent: no duplicate event.
         if (
             not created_snapshot
             and previous is not None
@@ -130,7 +129,8 @@ class CapitalStateProjectionStore:
             expected_hash = hashlib.sha256(_canonical(body)).hexdigest()
             if claimed_hash != expected_hash:
                 errors.append(f"event {index} content hash mismatch")
-            previous_hash = str(claimed_hash)
+            # Advance from recomputed content, never from a potentially forged claim.
+            previous_hash = expected_hash
         return not errors, tuple(errors)
 
     def _append_event(self, state: CapitalState, *, advanced_current: bool) -> str:

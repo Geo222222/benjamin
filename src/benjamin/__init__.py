@@ -25,17 +25,33 @@ from .domain import (
 from .evidence import EvidenceDraft, EvidencePublisher
 from .steward import decide
 from .watchman import RiskPolicy, evaluate
+from .watchman_capital import (
+    ActionClass,
+    CapitalEnvelope,
+    CapitalRequirement,
+    DecisionValidityStatus,
+    DecisionValidityWatch,
+    WatchMode,
+    WatchmanAssessment,
+    WatchmanState,
+    assess_capital_state,
+)
 
 __all__ = [
+    "ActionClass",
     "AuthorizationError",
     "AuthorizedExecutionRequest",
     "BenjaminControlPlane",
+    "CapitalEnvelope",
+    "CapitalRequirement",
     "CapitalSourceRef",
     "CapitalState",
     "CapitalStateInput",
     "CapitalStateProjectionStore",
     "ControlPlaneResult",
     "DecisionStatus",
+    "DecisionValidityStatus",
+    "DecisionValidityWatch",
     "EvidenceDraft",
     "EvidenceLineage",
     "EvidencePublisher",
@@ -50,6 +66,10 @@ __all__ = [
     "RoutingReadiness",
     "SourceQuality",
     "ValuationPolicyRef",
+    "WatchMode",
+    "WatchmanAssessment",
+    "WatchmanState",
+    "assess_capital_state",
     "authorize",
     "build_capital_state",
     "decide",

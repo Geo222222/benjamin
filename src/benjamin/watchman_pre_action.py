@@ -112,7 +112,8 @@ def assess_projected_capital_state(
     The worst justified required-scenario result governs the candidate path.
     This is a capital-safety assessment, not execution authorization. Missing or
     degraded required scenarios fail closed against new risk while preserving
-    separately classified risk-reducing paths.
+    separately classified risk-reducing paths. A candidate's own declared hard
+    constraints remain hard regardless of action class.
     """
 
     _aware("pre-action assessed_at", assessed_at)
@@ -135,16 +136,12 @@ def assess_projected_capital_state(
     if not required:
         raise ValueError("pre-action assessment requires projected scenarios")
 
-    scenario_results = tuple(
-        _assess_scenario(projection.scenario(kind), envelope)
-        for kind in required
-    )
-    overall_state = max(
-        (item.state for item in scenario_results),
-        key=lambda item: _STATE_RANK[item],
-    )
+    scenario_objects = tuple(projection.scenario(kind) for kind in required)
+    scenario_results = tuple(_assess_scenario(scenario, envelope) for scenario in scenario_objects)
+    overall_state = max((item.state for item in scenario_results), key=lambda item: _STATE_RANK[item])
     permitted = _permitted_actions(overall_state)
-    candidate_permitted = candidate_action_class in permitted
+    has_path_constraint_breach = any(scenario.path_constraint_breaches for scenario in scenario_objects)
+    candidate_permitted = candidate_action_class in permitted and not has_path_constraint_breach
 
     reasons: list[str] = []
     requirements: list[CapitalRequirement] = []
@@ -152,6 +149,8 @@ def assess_projected_capital_state(
         for reason in item.reasons:
             reasons.append("%s:%s" % (item.scenario_kind.value, reason))
         requirements.extend(item.requirements)
+    if has_path_constraint_breach:
+        reasons.append("CANDIDATE_PATH_CONSTRAINT_BREACH")
     if not candidate_permitted:
         reasons.append("CANDIDATE_ACTION_CLASS_NOT_PERMITTED")
     reasons = list(dict.fromkeys(reasons)) or ["ALL_REQUIRED_SCENARIOS_INSIDE_CAPITAL_ENVELOPE"]
@@ -222,13 +221,18 @@ def _assess_scenario(
             state = target
         reasons.append(reason)
 
+    if scenario.path_constraint_breaches:
+        escalate(WatchmanState.CORRECTION_REQUIRED, "PROJECTED_PATH_CONSTRAINT_BREACH")
+        for breach in scenario.path_constraint_breaches:
+            reasons.append("PATH_CONSTRAINT:%s" % breach)
+
     if scenario.status is ProjectionStatus.UNAVAILABLE:
         escalate(WatchmanState.CONSTRAINED, "REQUIRED_SCENARIO_UNAVAILABLE")
         return ProjectedScenarioAssessment(
             scenario_kind=scenario.kind,
             projection_status=scenario.status,
             state=state,
-            reasons=tuple(reasons),
+            reasons=tuple(dict.fromkeys(reasons)),
             requirements=(),
         )
     if scenario.status is ProjectionStatus.DEGRADED:

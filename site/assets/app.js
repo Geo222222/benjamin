@@ -2,31 +2,11 @@
   'use strict';
   const scriptUrl = document.currentScript?.src || new URL('./assets/app.js', window.location.href).href;
   const asset = (name) => new URL(name, scriptUrl).href;
-  const demoHref = new URL('../demo/', scriptUrl).href;
 
   document.querySelectorAll('[data-year]').forEach((node) => { node.textContent = String(new Date().getFullYear()); });
 
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const mobileNav = document.querySelector('[data-mobile-nav]');
-  const headerActions = document.querySelector('.site-header .header-actions');
-
-  if (headerActions && !headerActions.querySelector('[data-demo-link]')) {
-    const demoLink = document.createElement('a');
-    demoLink.className = 'text-link';
-    demoLink.href = demoHref;
-    demoLink.textContent = 'Demo consoles';
-    demoLink.dataset.demoLink = 'true';
-    headerActions.prepend(demoLink);
-  }
-
-  if (mobileNav && !mobileNav.querySelector('[data-demo-link]')) {
-    const demoLink = document.createElement('a');
-    demoLink.href = demoHref;
-    demoLink.textContent = 'Demo consoles';
-    demoLink.dataset.demoLink = 'true';
-    mobileNav.appendChild(demoLink);
-  }
-
   if (menuToggle && mobileNav) {
     menuToggle.addEventListener('click', () => {
       const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
@@ -76,24 +56,11 @@
   }
   if (!document.querySelector('link[rel="icon"][data-benjamin-icon]')) {
     const icon = document.createElement('link');
-    icon.rel = 'icon'; icon.type = 'image/webp'; icon.href = asset('benjamin-favicon.webp'); icon.dataset.benjaminIcon = 'true';
+    icon.rel = 'icon';
+    icon.type = 'image/svg+xml';
+    icon.href = asset('benjamin-wolf-mark.svg');
+    icon.dataset.benjaminIcon = 'true';
     document.head.appendChild(icon);
   }
   document.querySelectorAll('.brand-copy small').forEach((node) => { node.textContent = 'A CODEREIGN COMPANY'; });
-
-  const addStory = (anchor, className, imageName, alt, caption) => {
-    const target = document.querySelector(anchor);
-    if (!target || document.querySelector(`.${className}`)) return;
-    const figure = document.createElement('figure');
-    figure.className = `brand-story ${className}`;
-    const image = document.createElement('img');
-    image.src = asset(imageName); image.alt = alt; image.loading = 'lazy'; image.decoding = 'async'; image.width = 640; image.height = 360;
-    const figcaption = document.createElement('figcaption');
-    figcaption.textContent = caption;
-    figure.append(image, figcaption);
-    target.after(figure);
-  };
-
-  addStory('#philosophy .account-model', 'brand-story-account', 'benjamin-account.webp', 'Benjamin wolf guardian behind separate client account vaults, illustrating individually owned and privately stewarded capital.', 'Your capital stays yours · individually managed · privately stewarded');
-  addStory('#governance .mandate-layout', 'brand-story-growth', 'benjamin-growth.webp', 'Benjamin robotic wolf beside an ascending market chart and protection shields, illustrating automated intelligence under disciplined risk controls.', 'Automated · intelligent · disciplined');
 })();

@@ -17,7 +17,7 @@ from .steward import decide
 from .watchman import RiskPolicy, evaluate
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class EvidenceLineage:
     recommendation_receipt_id: str
     decision_receipt_id: str
@@ -25,7 +25,7 @@ class EvidenceLineage:
     authorization_receipt_id: str | None
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class ControlPlaneResult:
     decision: InvestmentDecision
     risk: RiskDecision

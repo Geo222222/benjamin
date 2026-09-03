@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "benjamin-capital-kernel"
 version = "0.1.0"
 description = "Constitutional capital-management control plane for Benjamin"
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 dependencies = []
 
 [project.optional-dependencies]

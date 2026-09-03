@@ -1,0 +1,8 @@
+import { relationships } from './company-model';
+import type { ComponentType } from 'react';
+
+type TopbarProps = { title: string; description: string };
+
+export function Relationships({ Topbar }: { Topbar: ComponentType<TopbarProps> }) {
+  return <><Topbar title="Relationships" description="Manage the people, households, trusts, and entities that own, control, or participate in Benjamin-managed capital structures."/><div className="bc-actions" style={{marginBottom:16}}><button className="bc-button primary" disabled>+ New relationship — backend pending</button><button className="bc-button" disabled>Onboard participant — backend pending</button></div><section className="bc-card"><div className="bc-card-head"><div><h2>Relationship registry</h2><p>One relationship may own or participate in multiple capital structures.</p></div><span className="bc-status active">{relationships.length} PREVIEW RECORDS</span></div><table className="bc-authority-table"><thead><tr><th>Relationship</th><th>Type</th><th>Status</th><th>Structures</th></tr></thead><tbody>{relationships.map((relationship)=><tr key={relationship.relationshipId}><td><strong>{relationship.displayName}</strong><br/><span style={{color:'#6f7e97',fontSize:10}}>{relationship.relationshipId}</span></td><td>{relationship.relationshipType}</td><td><span className={`bc-status ${relationship.status==='ACTIVE'?'active':'research'}`}>{relationship.status}</span></td><td>{relationship.structureIds.length}</td></tr>)}</tbody></table></section><div className="bc-footer-note"><b>Privacy rule:</b> identity, beneficial ownership, reporting rights, and participant permissions remain distinct from the decision engine. Benjamin reasons over the authorized capital state it actually needs.</div></>;
+}

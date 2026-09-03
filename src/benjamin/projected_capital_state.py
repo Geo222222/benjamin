@@ -71,6 +71,7 @@ class ProjectedCapitalScenario:
     drawdown_fraction: Optional[Decimal]
     evidence_refs: Tuple[ProjectionEvidenceRef, ...]
     missing_metrics: Tuple[str, ...] = ()
+    path_constraint_breaches: Tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         metrics = self.metrics()
@@ -86,6 +87,8 @@ class ProjectedCapitalScenario:
             raise ValueError("projection scenario evidence refs must be unique")
         if self.status is not ProjectionStatus.UNAVAILABLE and not self.evidence_refs:
             raise ValueError("available projected scenario requires evidence refs")
+        _unique_strings(self.missing_metrics, "missing_metrics")
+        _unique_strings(self.path_constraint_breaches, "path_constraint_breaches")
 
         non_negative = {
             "available_cash": self.available_cash,
@@ -134,6 +137,7 @@ class ProjectedCapitalScenario:
             },
             "evidence_refs": [item.to_wire() for item in sorted(self.evidence_refs, key=lambda item: item.evidence_id)],
             "missing_metrics": list(sorted(set(self.missing_metrics))),
+            "path_constraint_breaches": list(sorted(set(self.path_constraint_breaches))),
         }
 
 
@@ -291,3 +295,8 @@ def _digest(value: str, name: str) -> None:
         int(value, 16)
     except ValueError as exc:
         raise ValueError("%s must be SHA-256 hex" % name) from exc
+
+
+def _unique_strings(values: Tuple[str, ...], name: str) -> None:
+    if any(not item for item in values) or len(set(values)) != len(values):
+        raise ValueError("%s must contain unique non-empty values" % name)

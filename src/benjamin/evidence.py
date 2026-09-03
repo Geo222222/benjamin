@@ -7,7 +7,7 @@ from typing import Protocol
 from .domain import AuthorizedExecutionRequest, InvestmentDecision, RiskDecision
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class EvidenceDraft:
     """Producer-side draft for the private Big Book evidence gateway.
 

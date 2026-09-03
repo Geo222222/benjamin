@@ -23,6 +23,14 @@ from .domain import (
     RiskStatus,
 )
 from .evidence import EvidenceDraft, EvidencePublisher, watchman_capital_assessment_draft
+from .projected_capital_state import (
+    ProjectedCapitalScenario,
+    ProjectedCapitalState,
+    ProjectionEvidenceRef,
+    ProjectionScenarioKind,
+    ProjectionStatus,
+    build_projected_capital_state,
+)
 from .steward import decide
 from .watchman import RiskPolicy, evaluate
 from .watchman_capital import (
@@ -57,7 +65,12 @@ __all__ = [
     "EvidencePublisher",
     "InvestmentDecision",
     "OrderSide",
+    "ProjectedCapitalScenario",
+    "ProjectedCapitalState",
+    "ProjectionEvidenceRef",
     "ProjectionReceipt",
+    "ProjectionScenarioKind",
+    "ProjectionStatus",
     "Recommendation",
     "ReconciliationStatus",
     "RiskDecision",
@@ -72,6 +85,7 @@ __all__ = [
     "assess_capital_state",
     "authorize",
     "build_capital_state",
+    "build_projected_capital_state",
     "decide",
     "evaluate",
     "watchman_capital_assessment_draft",

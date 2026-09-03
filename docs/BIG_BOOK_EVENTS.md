@@ -24,7 +24,7 @@ Default privacy: `CONFIDENTIAL_EVIDENCE`.
 
 ## `WATCHMAN.CAPITAL_ASSESSMENT`
 
-Proves that Watchman evaluated one exact content-addressed Capital State against one exact content-addressed Capital Envelope/Responsibility boundary.
+Proves that Watchman evaluated one exact content-addressed authoritative Capital State against one exact content-addressed Capital Envelope/Responsibility boundary.
 
 The minimum-necessary payload binds:
 
@@ -43,6 +43,34 @@ Raw account credentials, provider payloads, or ZLJ market histories are not copi
 
 Default privacy: `CONFIDENTIAL_EVIDENCE`.
 
+## `WATCHMAN.PRE_ACTION_ASSESSMENT`
+
+Proves that Watchman evaluated a candidate economic path against one exact `ProjectedCapitalState` before execution.
+
+The payload binds:
+
+- exact authoritative base Capital State ID/hash;
+- exact Projected Capital State ID/hash;
+- candidate-path reference and action class;
+- exact Capital Envelope ID/hash and Responsibility reference;
+- per-scenario results for required `EXPECTED`, `ADVERSE`, and `EXECUTION_STRESS` projections;
+- the worst justified aggregate Watchman state;
+- candidate-permitted result;
+- required capital conditions and permitted action classes;
+- assessed-at time.
+
+This event is **capital-safety evidence, not execution authority**. Its truth boundary explicitly states:
+
+```text
+authoritative_capital_state = false
+execution_authorization     = false
+hand_instruction            = false
+```
+
+The Hand must never accept this evidence event as an executable request.
+
+Default privacy: `CONFIDENTIAL_EVIDENCE`.
+
 ## `BENJAMIN.AUTHORIZATION` — legacy B1 name
 
 In the current foundation, this event proves that a bounded execution instruction reached the authorization stage after valid decision/risk lineage.
@@ -57,15 +85,18 @@ Future bridge semantics should converge toward something conceptually like:
 
 ```text
 ZLJ.INTELLIGENCE / ZLJ.PREDICTION
+        -> BENJAMIN candidate path / projection
+        -> WATCHMAN.PRE_ACTION_ASSESSMENT
         -> BENJAMIN.DECISION
-        -> WATCHMAN.CAPITAL_ASSESSMENT
-        -> WATCHMAN.AUTHORIZATION | WATCHMAN.CONSTRAINT | WATCHMAN.CORRECTION_REQUIRED | WATCHMAN.EMERGENCY
+        -> future WATCHMAN.AUTHORIZATION | WATCHMAN.CONSTRAINT
         -> HAND.EXECUTION / HAND.ACTION
         -> CAPITAL_STATE / RECONCILIATION
         -> WATCHMAN.CAPITAL_ASSESSMENT
+        -> WATCHMAN.CORRECTION_REQUIRED | WATCHMAN.EMERGENCY where needed
+        -> BENJAMIN corrective decision
         -> OUTCOME / LEARNING
 ```
 
-Exact event names beyond the implemented assessment event remain implementation-contract concerns. The important invariant is producer ownership and preserved historical meaning.
+Exact event names beyond implemented assessment events remain implementation-contract concerns. The important invariant is producer ownership and preserved historical meaning.
 
 The Hand should verify the exact governed authorization needed for its capability without receiving unrelated decision, portfolio, or model history.

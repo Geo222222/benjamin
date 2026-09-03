@@ -1,27 +1,15 @@
 import { useMemo, useState } from 'react';
 import {
+  accounts,
   capitalStructures,
   companyModelStatus,
+  relationships,
   responsibilities,
   type AuthorityState,
+  type CapitalStructure,
 } from './company-model';
 
-type PageKey =
-  | 'command'
-  | 'relationships'
-  | 'structures'
-  | 'participants'
-  | 'accounts'
-  | 'responsibility'
-  | 'router'
-  | 'decisions'
-  | 'markets'
-  | 'watchman'
-  | 'hand'
-  | 'book'
-  | 'reports'
-  | 'operations';
-
+type PageKey = 'command' | 'relationships' | 'structures' | 'participants' | 'accounts' | 'responsibility' | 'router' | 'decisions' | 'markets' | 'watchman' | 'hand' | 'book' | 'reports' | 'operations';
 type NavItem = { key: PageKey; label: string; glyph: string; phase: number; group: string };
 
 const navItems: NavItem[] = [
@@ -40,222 +28,60 @@ const navItems: NavItem[] = [
   { key: 'reports', label: 'Client Reporting', glyph: '▥', phase: 8, group: 'Operations' },
   { key: 'operations', label: 'Operations', glyph: '⚙', phase: 9, group: 'Operations' },
 ];
+const enabledPages = new Set<PageKey>(['command', 'relationships', 'structures', 'accounts', 'responsibility']);
 
-const enabledPages = new Set<PageKey>(['command', 'responsibility']);
-
-function AuthorityChip({ value }: { value: AuthorityState }) {
-  return <span className={`bc-authority-chip ${value}`}>{value.replace('_', ' ')}</span>;
-}
+function AuthorityChip({ value }: { value: AuthorityState }) { return <span className={`bc-authority-chip ${value}`}>{value.replace('_', ' ')}</span>; }
+function StatePill({ value }: { value: string }) { const cls = value === 'ACTIVE' || value === 'CONNECTED' ? 'active' : value === 'RESTRICTED' ? 'research' : 'research'; return <span className={`bc-status ${cls}`}>{value.replaceAll('_', ' ')}</span>; }
 
 function Sidebar({ page, setPage }: { page: PageKey; setPage: (page: PageKey) => void }) {
   const groups = [...new Set(navItems.map((item) => item.group))];
-  return (
-    <aside className="bc-sidebar">
-      <div className="bc-brand">
-        <div className="bc-brand-mark">B</div>
-        <div><strong>BENJAMIN</strong><small>Capital Management</small></div>
-      </div>
-      {groups.map((group) => (
-        <div className="bc-nav-group" key={group}>
-          <div className="bc-nav-label">{group}</div>
-          {navItems.filter((item) => item.group === group).map((item) => {
-            const enabled = enabledPages.has(item.key);
-            return (
-              <button
-                key={item.key}
-                className={`bc-nav-button ${page === item.key ? 'active' : ''} ${enabled ? '' : 'disabled'}`}
-                onClick={() => enabled && setPage(item.key)}
-                disabled={!enabled}
-                title={enabled ? item.label : `Frontend phase ${item.phase}`}
-              >
-                <span>{item.glyph}</span><span>{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
-      ))}
-      <div className="bc-side-footer">
-        <span>Product mode <b>{companyModelStatus.productMode}</b></span>
-        <span>Live execution <b>OFF</b></span>
-        <span>Custody authority <b>NONE</b></span>
-      </div>
-    </aside>
-  );
+  return <aside className="bc-sidebar"><div className="bc-brand"><div className="bc-brand-mark">B</div><div><strong>BENJAMIN</strong><small>Capital Management</small></div></div>{groups.map((group) => <div className="bc-nav-group" key={group}><div className="bc-nav-label">{group}</div>{navItems.filter((item) => item.group === group).map((item) => { const enabled = enabledPages.has(item.key); return <button key={item.key} className={`bc-nav-button ${page === item.key ? 'active' : ''} ${enabled ? '' : 'disabled'}`} onClick={() => enabled && setPage(item.key)} disabled={!enabled} title={enabled ? item.label : `Frontend phase ${item.phase}`}><span>{item.glyph}</span><span>{item.label}</span></button>; })}</div>)}<div className="bc-side-footer"><span>Product mode <b>{companyModelStatus.productMode}</b></span><span>Live execution <b>OFF</b></span><span>Custody authority <b>NONE</b></span></div></aside>;
 }
 
-function Topbar({ title, description }: { title: string; description: string }) {
-  return (
-    <header className="bc-topbar">
-      <div>
-        <div className="bc-eyebrow">Benjamin Capital Management / Manager Console</div>
-        <h1>{title}</h1>
-        <p>{description}</p>
-      </div>
-      <div className="bc-top-actions">
-        <span className="bc-badge good">FRONTEND CONTRACT</span>
-        <span className="bc-badge warn">NO LIVE CAPITAL AUTHORITY</span>
-      </div>
-    </header>
-  );
-}
+function Topbar({ title, description }: { title: string; description: string }) { return <header className="bc-topbar"><div><div className="bc-eyebrow">Benjamin Capital Management / Manager Console</div><h1>{title}</h1><p>{description}</p></div><div className="bc-top-actions"><span className="bc-badge good">FRONTEND CONTRACT</span><span className="bc-badge warn">NO LIVE CAPITAL AUTHORITY</span></div></header>; }
 
 function CompanyCommand() {
-  const totalStructures = capitalStructures.length;
-  const active = capitalStructures.filter((item) => item.status === 'ACTIVE').length;
-  const pooled = capitalStructures.filter((item) => item.type === 'POOLED_PORTFOLIO').length;
-  const responsibility = responsibilities[0];
-  return (
-    <>
-      <Topbar title="Company Command" description="Operate Benjamin as a capital-management company while keeping the Benjamin decision engine inside explicit account and portfolio responsibilities." />
-      <section className="bc-card bc-hero">
-        <div className="bc-hero-grid">
-          <div>
-            <div className="bc-eyebrow">THE MONEY MAN + THE MONEY LOGIC</div>
-            <h2>Define the responsibility. <em>Benjamin chooses the path.</em></h2>
-            <p className="bc-hero-copy">The company manages relationships, capital structures, participants, accounts, mandates, and reporting. The decision engine receives those governed structures and qualified market intelligence, evaluates permissible economic paths, and records the best justified capital decision for Watchman.</p>
-          </div>
-          <div className="bc-constitution">
-            <span>Institutional chain</span>
-            <strong>ZLJ <b>sees</b></strong>
-            <strong>Benjamin <b>decides</b></strong>
-            <strong>Watchman <b>governs</b></strong>
-            <strong>Hand <b>executes</b></strong>
-            <strong>Book <b>proves</b></strong>
-          </div>
-        </div>
-      </section>
-      <section className="bc-grid metrics">
-        <article className="bc-card bc-metric"><label>Capital structures</label><strong>{totalStructures}</strong><small>Individual, joint, entity, pool</small></article>
-        <article className="bc-card bc-metric"><label>Active structures</label><strong>{active}</strong><small>Preview domain state</small></article>
-        <article className="bc-card bc-metric"><label>Pooled structures</label><strong>{pooled}</strong><small>End-state model represented</small></article>
-        <article className="bc-card bc-metric"><label>Active responsibility</label><strong>{responsibility.name}</strong><small>Version {responsibility.version}</small></article>
-      </section>
-      <section className="bc-grid two">
-        <article className="bc-card">
-          <div className="bc-card-head"><div><h2>Company model</h2><p>What Benjamin Capital Management owns operationally.</p></div><span className="bc-status active">DEFINED</span></div>
-          <div className="bc-priority">
-            {[
-              ['Relationship', 'Who Benjamin has a governed capital-management relationship with.'],
-              ['Capital Structure', 'The economic container whose money Benjamin is responsible for.'],
-              ['Participant', 'Who has economic interest, beneficial ownership, permission, or reporting rights.'],
-              ['Account', 'The externally authoritative custody/broker/exchange connection.'],
-              ['Responsibility', 'What Benjamin must accomplish and which paths are permitted.'],
-              ['Decision', 'The selected economic path after comparing permissible alternatives.'],
-            ].map(([name, detail], index) => <div className="bc-priority-row" key={name}><b>{index + 1}</b><span><strong>{name}</strong> — {detail}</span></div>)}
-          </div>
-        </article>
-        <article className="bc-card">
-          <div className="bc-card-head"><div><h2>Current build boundary</h2><p>Capabilities are modeled before they are activated.</p></div><span className="bc-status research">PREVIEW</span></div>
-          <div className="bc-targets">
-            <div className="bc-target"><span>Capital custody</span><strong>NONE<small>NOT ACTIVATED</small></strong></div>
-            <div className="bc-target"><span>Live execution</span><strong>OFF<small>NOT ACTIVATED</small></strong></div>
-            <div className="bc-target"><span>Crypto futures understanding</span><strong>MODELED</strong></div>
-            <div className="bc-target"><span>Crypto futures execution</span><strong>DISABLED<small>RESPONSIBILITY GATE</small></strong></div>
-            <div className="bc-target"><span>Responsibility versioning</span><strong>DEFINED</strong></div>
-          </div>
-        </article>
-      </section>
-      <div className="bc-footer-note"><b>Product rule:</b> the owner defines Benjamin's responsibility and authority. Benjamin is not configured by manually forcing daily trades or hidden model weights through this console.</div>
-    </>
-  );
+  const totalNav = capitalStructures.reduce((sum, structure) => sum + Number(structure.nav.replace(/[$,]/g, '')), 0);
+  return <><Topbar title="Company Command" description="Operate Benjamin as a capital-management company while keeping the Benjamin decision engine inside explicit account and portfolio responsibilities."/><section className="bc-card bc-hero"><div className="bc-hero-grid"><div><div className="bc-eyebrow">THE MONEY MAN + THE MONEY LOGIC</div><h2>Define the responsibility. <em>Benjamin chooses the path.</em></h2><p className="bc-hero-copy">The company manages relationships, capital structures, participants, accounts, mandates, and reporting. The decision engine receives those governed structures and qualified market intelligence, evaluates permissible economic paths, and records the best justified capital decision for Watchman.</p></div><div className="bc-constitution"><span>Institutional chain</span><strong>ZLJ <b>sees</b></strong><strong>Benjamin <b>decides</b></strong><strong>Watchman <b>governs</b></strong><strong>Hand <b>executes</b></strong><strong>Book <b>proves</b></strong></div></div></section><section className="bc-grid metrics"><article className="bc-card bc-metric"><label>Capital structures</label><strong>{capitalStructures.length}</strong><small>Across four economic container types</small></article><article className="bc-card bc-metric"><label>Relationships</label><strong>{relationships.length}</strong><small>People, households, entities</small></article><article className="bc-card bc-metric"><label>Preview NAV</label><strong>${totalNav.toLocaleString(undefined,{maximumFractionDigits:0})}</strong><small>Synthetic frontend-contract data</small></article><article className="bc-card bc-metric"><label>Responsibility templates</label><strong>{responsibilities.length}</strong><small>Versioned owner authority</small></article></section><section className="bc-grid two"><article className="bc-card"><div className="bc-card-head"><div><h2>Company model</h2><p>What Benjamin Capital Management owns operationally.</p></div><span className="bc-status active">DEFINED</span></div><div className="bc-priority">{[['Relationship','Who Benjamin has a governed capital-management relationship with.'],['Capital Structure','The economic container whose money Benjamin is responsible for.'],['Participant','Who has economic interest, ownership, permission, or reporting rights.'],['Account','The externally authoritative custody/broker/exchange connection.'],['Responsibility','What Benjamin must accomplish and which paths are permitted.'],['Decision','The selected economic path after comparing permissible alternatives.']].map(([name,detail],index)=><div className="bc-priority-row" key={name}><b>{index+1}</b><span><strong>{name}</strong> — {detail}</span></div>)}</div></article><article className="bc-card"><div className="bc-card-head"><div><h2>Current build boundary</h2><p>Capabilities are modeled before they are activated.</p></div><span className="bc-status research">PREVIEW</span></div><div className="bc-targets"><div className="bc-target"><span>Capital custody</span><strong>NONE<small>NOT ACTIVATED</small></strong></div><div className="bc-target"><span>Live execution</span><strong>OFF<small>NOT ACTIVATED</small></strong></div><div className="bc-target"><span>Futures understanding</span><strong>MODELED</strong></div><div className="bc-target"><span>Futures execution</span><strong>DISABLED<small>RESPONSIBILITY GATE</small></strong></div><div className="bc-target"><span>Capital-structure model</span><strong>DEFINED</strong></div></div></article></section><div className="bc-footer-note"><b>Product rule:</b> a relationship is not an account, and an account is not the capital structure. Benjamin manages the economic container through explicit responsibility while custody remains externally authoritative.</div></>;
 }
 
-function ResponsibilityCenter() {
-  const [structureId, setStructureId] = useState('CAP-POOL-001');
-  const structure = useMemo(() => capitalStructures.find((item) => item.structureId === structureId) ?? capitalStructures[0], [structureId]);
-  const responsibility = responsibilities.find((item) => item.structureId === structure.structureId) ?? responsibilities[0];
-  return (
-    <>
-      <Topbar title="Responsibility Center" description="Set what Benjamin is responsible for achieving, what it may understand, what it may execute, and how much risk or liquidity authority exists for each capital structure." />
-      <section className="bc-card bc-hero">
-        <div className="bc-hero-grid">
-          <div>
-            <div className="bc-eyebrow">OWNER DEFINED / VERSIONED AUTHORITY</div>
-            <h2>{responsibility.name} <em>v{responsibility.version}</em></h2>
-            <p className="bc-hero-copy">{responsibility.mission}</p>
-            <div className="bc-actions">
-              <select className="bc-button" value={structure.structureId} onChange={(event) => setStructureId(event.target.value)}>
-                {capitalStructures.map((item) => <option value={item.structureId} key={item.structureId}>{item.name}</option>)}
-              </select>
-              <button className="bc-button gold" disabled>Edit responsibility — backend pending</button>
-              <button className="bc-button" disabled>Version history — backend pending</button>
-            </div>
-          </div>
-          <div className="bc-constitution">
-            <span>Capital structure</span><strong>{structure.name}</strong>
-            <span>Structure type</span><strong>{structure.type.replaceAll('_', ' ')}</strong>
-            <span>Autonomy</span><strong>{responsibility.autonomy.replaceAll('_', ' ')}</strong>
-            <span>Effective</span><strong>{responsibility.effectiveAt.slice(0, 10)}</strong>
-          </div>
-        </div>
-      </section>
-
-      <section className="bc-grid metrics">
-        <article className="bc-card bc-metric"><label>Primary objective</label><strong>{responsibility.primaryObjective.replaceAll('_', ' ')}</strong><small>Targets do not imply guarantees</small></article>
-        <article className="bc-card bc-metric"><label>Max drawdown</label><strong>{responsibility.maxDrawdownPct}%</strong><small>Hard risk boundary</small></article>
-        <article className="bc-card bc-metric"><label>Minimum liquidity</label><strong>{responsibility.minLiquidityPct}%</strong><small>Reserve requirement</small></article>
-        <article className="bc-card bc-metric"><label>Max instrument exposure</label><strong>{responsibility.maxInstrumentExposurePct}%</strong><small>Per economic instrument</small></article>
-      </section>
-
-      <section className="bc-grid two">
-        <article className="bc-card">
-          <div className="bc-card-head"><div><h2>Objective precedence</h2><p>Hard priorities are evaluated before return optimization.</p></div><span className="bc-status active">ACTIVE</span></div>
-          <div className="bc-priority">
-            {responsibility.objectivePrecedence.map((item, index) => <div className="bc-priority-row" key={item}><b>{index + 1}</b><span>{item.replaceAll('_', ' ')}</span></div>)}
-          </div>
-        </article>
-        <article className="bc-card">
-          <div className="bc-card-head"><div><h2>Targets</h2><p>Desired outcomes and hard boundaries attached to this responsibility.</p></div></div>
-          <div className="bc-targets">
-            {responsibility.targets.map((target) => <div className="bc-target" key={target.targetId}><span>{target.label}</span><strong>{target.value}{target.hardBoundary && <small>HARD BOUNDARY</small>}</strong></div>)}
-          </div>
-        </article>
-      </section>
-
-      <section className="bc-grid two" style={{ marginTop: 16 }}>
-        <article className="bc-card">
-          <div className="bc-card-head"><div><h2>Market authority</h2><p>Benjamin may understand a market without being permitted to express exposure in it.</p></div></div>
-          <table className="bc-authority-table">
-            <thead><tr><th>Market</th><th>Understand</th><th>Execute</th></tr></thead>
-            <tbody>{responsibility.marketAuthority.map((item) => <tr key={item.market}><td>{item.market}</td><td><AuthorityChip value={item.understand} /></td><td><AuthorityChip value={item.execute} /></td></tr>)}</tbody>
-          </table>
-        </article>
-        <article className="bc-card">
-          <div className="bc-card-head"><div><h2>Economic action authority</h2><p>What transformations the router may consider for this capital structure.</p></div></div>
-          <table className="bc-authority-table">
-            <thead><tr><th>Action</th><th>Authority</th></tr></thead>
-            <tbody>{responsibility.actionAuthority.map((item) => <tr key={item.action}><td>{item.action}</td><td><AuthorityChip value={item.state} /></td></tr>)}</tbody>
-          </table>
-        </article>
-      </section>
-
-      <section className="bc-card" style={{ marginTop: 16 }}>
-        <div className="bc-card-head"><div><h2>Risk & capital envelope</h2><p>The router must reason inside this feasible set before comparing expected economic outcomes.</p></div><span className="bc-status active">OWNER CONTROLLED</span></div>
-        <div className="bc-risk-grid">
-          <div className="bc-risk"><span>Max drawdown</span><strong>{responsibility.maxDrawdownPct}%</strong></div>
-          <div className="bc-risk"><span>Min liquidity</span><strong>{responsibility.minLiquidityPct}%</strong></div>
-          <div className="bc-risk"><span>Max instrument</span><strong>{responsibility.maxInstrumentExposurePct}%</strong></div>
-          <div className="bc-risk"><span>Max correlated</span><strong>{responsibility.maxCorrelatedExposurePct}%</strong></div>
-        </div>
-      </section>
-      <div className="bc-footer-note"><b>Authority rule:</b> changing a Responsibility creates a new effective version for future decisions. Prior decisions remain bound to the version that existed when they were made.</div>
-    </>
-  );
+function Relationships() {
+  return <><Topbar title="Relationships" description="Manage the people, households, trusts, and entities that own, control, or participate in Benjamin-managed capital structures."/><div className="bc-actions" style={{marginBottom:16}}><button className="bc-button primary" disabled>+ New relationship — backend pending</button><button className="bc-button" disabled>Onboard participant — backend pending</button></div><section className="bc-card"><div className="bc-card-head"><div><h2>Relationship registry</h2><p>One relationship may own or participate in multiple capital structures.</p></div><span className="bc-status active">{relationships.length} PREVIEW RECORDS</span></div><table className="bc-authority-table"><thead><tr><th>Relationship</th><th>Type</th><th>Status</th><th>Structures</th></tr></thead><tbody>{relationships.map((relationship)=><tr key={relationship.relationshipId}><td><strong>{relationship.displayName}</strong><br/><span style={{color:'#6f7e97',fontSize:10}}>{relationship.relationshipId}</span></td><td>{relationship.relationshipType}</td><td><StatePill value={relationship.status}/></td><td>{relationship.structureIds.length}</td></tr>)}</tbody></table></section><div className="bc-footer-note"><b>Privacy rule:</b> Relationship identity, beneficial ownership, reporting rights, and participant permissions remain distinct from the decision engine. Benjamin reasons over authorized capital state, not private identity data it does not need.</div></>;
 }
 
-function Placeholder({ page }: { page: PageKey }) {
-  const item = navItems.find((nav) => nav.key === page)!;
-  return <><Topbar title={item.label} description="This area is represented in the company information architecture but remains intentionally unimplemented until its dedicated frontend phase is defined and verified." /><section className="bc-card bc-placeholder"><div><span className="bc-status research">PHASE {item.phase}</span><strong>{item.label} is next in the governed build sequence.</strong><p>Keeping the surface explicit but unavailable prevents the frontend from implying capability before its data model, controls, authority, and evidence expectations are defined.</p></div></section></>;
+function StructureCard({ structure, onOpen }: { structure: CapitalStructure; onOpen: () => void }) {
+  return <article className="bc-card"><div className="bc-card-head"><div><div className="bc-eyebrow">{structure.type.replaceAll('_',' ')}</div><h2 style={{marginTop:7}}>{structure.name}</h2><p>{structure.structureId}</p></div><StatePill value={structure.status}/></div><div className="bc-grid two" style={{gridTemplateColumns:'1fr 1fr',gap:10}}><div className="bc-risk"><span>Net asset value</span><strong>{structure.nav}</strong></div><div className="bc-risk"><span>Participants</span><strong>{structure.participantCount}</strong></div><div className="bc-risk"><span>Cash</span><strong>{structure.cash}</strong></div><div className="bc-risk"><span>Deployed</span><strong>{structure.deployed}</strong></div></div><div className="bc-actions" style={{marginTop:14}}><button className="bc-button" onClick={onOpen}>View responsibility</button><button className="bc-button" disabled>Edit structure</button></div></article>;
 }
 
-export function App() {
-  const [page, setPage] = useState<PageKey>('command');
-  return (
-    <div className="bc-shell">
-      <Sidebar page={page} setPage={setPage} />
-      <main className="bc-main">
-        {page === 'command' ? <CompanyCommand /> : page === 'responsibility' ? <ResponsibilityCenter /> : <Placeholder page={page} />}
-      </main>
-    </div>
-  );
+function CapitalStructures({ openResponsibility }: { openResponsibility: (id: string) => void }) {
+  const [filter,setFilter]=useState<'ALL'|'ACTIVE'|'ONBOARDING'>('ALL');
+  const visible=capitalStructures.filter((item)=>filter==='ALL'||item.status===filter);
+  return <><Topbar title="Capital Structures" description="The economic containers Benjamin is responsible for managing: individually owned accounts, household/joint portfolios, entities/treasuries, and pooled portfolios."/><div className="bc-actions" style={{marginBottom:16}}><button className="bc-button primary" disabled>+ Create capital structure — backend pending</button>{(['ALL','ACTIVE','ONBOARDING'] as const).map((item)=><button key={item} className={`bc-button ${filter===item?'gold':''}`} onClick={()=>setFilter(item)}>{item}</button>)}</div><section className="bc-grid two">{visible.map((structure)=><StructureCard key={structure.structureId} structure={structure} onOpen={()=>openResponsibility(structure.structureId)}/>)}</section><div className="bc-footer-note"><b>Container rule:</b> each Capital Structure owns one active Responsibility version even when it spans several accounts or participants. The router makes decisions for the structure, not for whichever API account happens to execute them.</div></>;
+}
+
+function Accounts() {
+  return <><Topbar title="Accounts" description="Inspect the externally authoritative brokerage, exchange, custodian, and future on-chain account connections attached to Benjamin capital structures."/><div className="bc-actions" style={{marginBottom:16}}><button className="bc-button primary" disabled>+ Connect account — backend pending</button><button className="bc-button" disabled>Reconcile all — backend pending</button></div><section className="bc-card"><div className="bc-card-head"><div><h2>Account connections</h2><p>Connections are execution/custody surfaces; they do not define the economic responsibility by themselves.</p></div></div><table className="bc-authority-table"><thead><tr><th>Account</th><th>Provider</th><th>Type</th><th>Custody</th><th>Status</th></tr></thead><tbody>{accounts.map((account)=><tr key={account.accountId}><td><strong>{account.accountId}</strong></td><td>{account.provider}</td><td>{account.accountType}</td><td>{account.custody.replaceAll('_',' ')}</td><td><StatePill value={account.status}/></td></tr>)}</tbody></table></section><div className="bc-footer-note"><b>Custody rule:</b> the frontend models external/client-controlled custody. Benjamin's decision authority must not silently imply unrestricted withdrawal authority or beneficial ownership of client assets.</div></>;
+}
+
+function ResponsibilityCenter({ initialStructureId }: { initialStructureId?: string }) {
+  const [structureId,setStructureId]=useState(initialStructureId ?? 'CAP-POOL-001');
+  const structure=useMemo(()=>capitalStructures.find((item)=>item.structureId===structureId)??capitalStructures[0],[structureId]);
+  const responsibility=responsibilities.find((item)=>item.structureId===structure.structureId)??responsibilities[0];
+  return <><Topbar title="Responsibility Center" description="Set what Benjamin is responsible for achieving, what it may understand, what it may execute, and how much risk or liquidity authority exists for each capital structure."/><section className="bc-card bc-hero"><div className="bc-hero-grid"><div><div className="bc-eyebrow">OWNER DEFINED / VERSIONED AUTHORITY</div><h2>{responsibility.name} <em>v{responsibility.version}</em></h2><p className="bc-hero-copy">{responsibility.mission}</p><div className="bc-actions"><select className="bc-button" value={structure.structureId} onChange={(event)=>setStructureId(event.target.value)}>{capitalStructures.map((item)=><option value={item.structureId} key={item.structureId}>{item.name}</option>)}</select><button className="bc-button gold" disabled>Edit responsibility — backend pending</button><button className="bc-button" disabled>Version history — backend pending</button></div></div><div className="bc-constitution"><span>Capital structure</span><strong>{structure.name}</strong><span>Structure type</span><strong>{structure.type.replaceAll('_',' ')}</strong><span>Autonomy</span><strong>{responsibility.autonomy.replaceAll('_',' ')}</strong><span>Effective</span><strong>{responsibility.effectiveAt.slice(0,10)}</strong></div></div></section><section className="bc-grid metrics"><article className="bc-card bc-metric"><label>Primary objective</label><strong>{responsibility.primaryObjective.replaceAll('_',' ')}</strong><small>Targets do not imply guarantees</small></article><article className="bc-card bc-metric"><label>Max drawdown</label><strong>{responsibility.maxDrawdownPct}%</strong><small>Hard risk boundary</small></article><article className="bc-card bc-metric"><label>Minimum liquidity</label><strong>{responsibility.minLiquidityPct}%</strong><small>Reserve requirement</small></article><article className="bc-card bc-metric"><label>Max instrument exposure</label><strong>{responsibility.maxInstrumentExposurePct}%</strong><small>Per economic instrument</small></article></section><section className="bc-grid two"><article className="bc-card"><div className="bc-card-head"><div><h2>Objective precedence</h2><p>Hard priorities are evaluated before return optimization.</p></div><span className="bc-status active">ACTIVE</span></div><div className="bc-priority">{responsibility.objectivePrecedence.map((item,index)=><div className="bc-priority-row" key={item}><b>{index+1}</b><span>{item.replaceAll('_',' ')}</span></div>)}</div></article><article className="bc-card"><div className="bc-card-head"><div><h2>Targets</h2><p>Desired outcomes and hard boundaries attached to this responsibility.</p></div></div><div className="bc-targets">{responsibility.targets.map((target)=><div className="bc-target" key={target.targetId}><span>{target.label}</span><strong>{target.value}{target.hardBoundary&&<small>HARD BOUNDARY</small>}</strong></div>)}</div></article></section><section className="bc-grid two" style={{marginTop:16}}><article className="bc-card"><div className="bc-card-head"><div><h2>Market authority</h2><p>Understanding and execution are separate permissions.</p></div></div><table className="bc-authority-table"><thead><tr><th>Market</th><th>Understand</th><th>Execute</th></tr></thead><tbody>{responsibility.marketAuthority.map((item)=><tr key={item.market}><td>{item.market}</td><td><AuthorityChip value={item.understand}/></td><td><AuthorityChip value={item.execute}/></td></tr>)}</tbody></table></article><article className="bc-card"><div className="bc-card-head"><div><h2>Economic action authority</h2><p>What transformations the router may consider.</p></div></div><table className="bc-authority-table"><thead><tr><th>Action</th><th>Authority</th></tr></thead><tbody>{responsibility.actionAuthority.map((item)=><tr key={item.action}><td>{item.action}</td><td><AuthorityChip value={item.state}/></td></tr>)}</tbody></table></article></section><section className="bc-card" style={{marginTop:16}}><div className="bc-card-head"><div><h2>Risk & capital envelope</h2><p>The router must reason inside this feasible set before comparing expected economic outcomes.</p></div><span className="bc-status active">OWNER CONTROLLED</span></div><div className="bc-risk-grid"><div className="bc-risk"><span>Max drawdown</span><strong>{responsibility.maxDrawdownPct}%</strong></div><div className="bc-risk"><span>Min liquidity</span><strong>{responsibility.minLiquidityPct}%</strong></div><div className="bc-risk"><span>Max instrument</span><strong>{responsibility.maxInstrumentExposurePct}%</strong></div><div className="bc-risk"><span>Max correlated</span><strong>{responsibility.maxCorrelatedExposurePct}%</strong></div></div></section><div className="bc-footer-note"><b>Authority rule:</b> changing a Responsibility creates a new effective version for future decisions. Prior decisions remain bound to the version that existed when they were made.</div></>;
+}
+
+function Placeholder({ page }: { page: PageKey }) { const item=navItems.find((nav)=>nav.key===page)!; return <><Topbar title={item.label} description="This area is represented in the company information architecture but remains intentionally unimplemented until its dedicated frontend phase is defined and verified."/><section className="bc-card bc-placeholder"><div><span className="bc-status research">PHASE {item.phase}</span><strong>{item.label} is next in the governed build sequence.</strong><p>Keeping the surface explicit but unavailable prevents the frontend from implying capability before its data model, controls, authority, and evidence expectations are defined.</p></div></section></>; }
+
+export function App(){
+  const [page,setPage]=useState<PageKey>('command');
+  const [responsibilityStructure,setResponsibilityStructure]=useState<string|undefined>();
+  const openResponsibility=(id:string)=>{setResponsibilityStructure(id);setPage('responsibility');};
+  let content;
+  if(page==='command') content=<CompanyCommand/>;
+  else if(page==='relationships') content=<Relationships/>;
+  else if(page==='structures') content=<CapitalStructures openResponsibility={openResponsibility}/>;
+  else if(page==='accounts') content=<Accounts/>;
+  else if(page==='responsibility') content=<ResponsibilityCenter initialStructureId={responsibilityStructure}/>;
+  else content=<Placeholder page={page}/>;
+  return <div className="bc-shell"><Sidebar page={page} setPage={(next)=>{setResponsibilityStructure(undefined);setPage(next);}}/><main className="bc-main">{content}</main></div>;
 }
